@@ -5,19 +5,10 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 
 /**
  * Hello world!
@@ -78,8 +69,22 @@ public class App {
 
     // Iterate over the selected elements and print their text content
     for (Element element : elements) {
-      System.out.println(element.text());
+      //System.out.println(element.text());
     }
+
+    Elements trElements = doc.select("tr");
+
+    for (Element trElement : trElements) {
+      System.out.println(trElement.text());
+    }
+
+    Elements tdElements = doc.select("td");
+
+    for (Element tdElement : tdElements) {
+      System.out.println(tdElement.text());
+    }
+
+
 
 
     // Close the browser
