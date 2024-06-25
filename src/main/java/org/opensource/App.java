@@ -61,15 +61,20 @@ public class App {
     // Navigate to the financials page of BNP Paribas on Yahoo Finance
     driver.get("https://finance.yahoo.com/quote/BNP.PA/key-statistics/");
 
-    String pageSource = driver.getPageSource();
+    //String pageSource = driver.getPageSource();
 
-    Document doc = Jsoup.parse(pageSource);
+    Document doc = Jsoup.parse(driver.getPageSource());
+    Elements title = doc.select("tr");
+    Element container = doc.selectFirst("div.container.svelte-mgkamr");
 
-    Elements elements = doc.select("td.svelte-104jbnt");
+    // Select all span elements within the specific container
+    if (container != null) {
+      Elements spans = container.select("span");
 
-    // Iterate over the selected elements and print their text content
-    for (Element element : elements) {
-      //System.out.println(element.text());
+      // Iterate through the spans and print their text content
+      for (Element span : spans) {
+        System.out.println(span.text());
+      }
     }
 
     Elements trElements = doc.select("tr");
@@ -84,50 +89,35 @@ public class App {
       System.out.println(tdElement.text());
     }
 
+    System.out.println("---------------------------------------------------");
 
+    driver.get("https://finance.yahoo.com/quote/BNP.PA/financials/");
 
+    String pageSourceFinancials = driver.getPageSource();
+
+    Document docFinancials = Jsoup.parse(pageSourceFinancials);
+
+    Elements divFinancials = docFinancials.select("div.column.svelte-1xjz32c, div.column.svelte-1xjz32c.alt");
+
+    for (Element div : divFinancials) {
+      System.out.println(div.text());
+    }
+
+    System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+
+    driver.get("https://finance.yahoo.com/quote/BNP.PA/balance-sheet/");
+
+    String pageSourceBalanceSheet = driver.getPageSource();
+
+    Document docBalanceSheet = Jsoup.parse(pageSourceBalanceSheet);
+
+    Elements divBalanceSheet = docBalanceSheet.select("div.column.svelte-1xjz32c, div.column.svelte-1xjz32c.alt");
+
+    for (Element div : divBalanceSheet) {
+      System.out.println(div.text());
+    }
 
     // Close the browser
     driver.quit();
   }
-
-
-
-//    WebDriverWait wait = new WebDriverWait(driver, 30);
-//    wait.until((ExpectedCondition<Boolean>) wd ->
-//        ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
-//
-//    WebElement dynamicElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("dynamicElementId")));
-//
-//    // Example: Waiting for all rows of a table to be present
-//    List<WebElement> rows = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(".table.svelte-104jbnt tbody tr")));
-//
-//    // Now you can proceed with your actions after the page has fully loaded
-//    System.out.println("Page and dynamic content have fully loaded");
-//
-//
-//    WebElement table = driver.findElement(By.xpath("//table[contains(@class, 'table svelte-104jbnt')]"));
-//
-//    // Locate table header
-//    WebElement thead = table.findElement(By.tagName("thead"));
-//    List<WebElement> headers = thead.findElements(By.tagName("th"));
-//
-//    // Print table headers
-//    for (WebElement header : headers) {
-//      System.out.print(header.getText() + "\t");
-//    }
-//    System.out.println();
-//
-//    // Locate table body
-//    WebElement tbody = table.findElement(By.tagName("tbody"));
-//    //List<WebElement> rows = tbody.findElements(By.tagName("tr"));
-//
-//    // Iterate through each row
-//    for (WebElement row : rows) {
-//      List<WebElement> cells = row.findElements(By.tagName("td"));
-//      for (WebElement cell : cells) {
-//        System.out.print(cell.getText() + "\t");
-//      }
-//      System.out.println();
-//    }
 }

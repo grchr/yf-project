@@ -68,36 +68,36 @@ public class CompanyKeyStatistics {
 
   // Static Builder class
   public static class Builder {
-    private String companyName;
-    private String companyTicker;
-    private double currentPrice;
-    private String marketCap;
-    private String enterpriseValue;
-    private double trailingPE;
-    private double forwardPE;
-    private double pegRatio; // (5 yr expected)
-    private double ratioPS;
-    private double ratioPB;
-    private double evToRevenue;
-    private double evToEBITDA;
-    private String profitMargin;
-    private String operatingMargin;
-    private String returnOnAssets;
-    private String returnOnEquity;
-    private String revenue;
-    private String quarterlyRevenueGrowth;
-    private String grossProfit;
-    private String EBITDA;
-    private double dilutedEPS;
-    private String quartEarningsGrowth;
-    private String totalCash;
-    private double totalCashPerShare;
-    private String totalDebt;
-    private String totalDebtToEquity;
-    private double beta;
-    private String forwardAnnualDividendYield;
-    private String payoutRatio;
-    private String currentRatio;
+    private String companyName = "--";
+    private String companyTicker = "--";
+    private double currentPrice = 0.0;
+    private String marketCap = "--";
+    private String enterpriseValue = "--";
+    private double trailingPE  = 0.0;
+    private double forwardPE  = 0.0;
+    private double pegRatio  = 0.0; // (5 yr expected)
+    private double ratioPS  = 0.0;
+    private double ratioPB  = 0.0;
+    private double evToRevenue  = 0.0;
+    private double evToEBITDA  = 0.0;
+    private String profitMargin = "--";
+    private String operatingMargin = "--";
+    private String returnOnAssets = "--";
+    private String returnOnEquity = "--";
+    private String revenue = "--";
+    private String quarterlyRevenueGrowth = "--";
+    private String grossProfit = "--";
+    private String EBITDA = "--";
+    private double dilutedEPS  = 0.0;
+    private String quartEarningsGrowth = "--";
+    private String totalCash = "--";
+    private double totalCashPerShare  = 0.0;
+    private String totalDebt = "--";
+    private String totalDebtToEquity = "--";
+    private double beta  = 0.0;
+    private String forwardAnnualDividendYield = "--";
+    private String payoutRatio = "--";
+    private String currentRatio = "--";
 
     public Builder withCompanyName(String companyName) {
       this.companyName = companyName;
