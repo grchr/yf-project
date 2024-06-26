@@ -65,6 +65,7 @@ public class App {
 
     Document doc = Jsoup.parse(driver.getPageSource());
     Elements title = doc.select("tr");
+    System.out.println("Title: " + title.text());
     Element container = doc.selectFirst("div.container.svelte-mgkamr");
 
     // Select all span elements within the specific container
@@ -89,7 +90,7 @@ public class App {
       System.out.println(tdElement.text());
     }
 
-    System.out.println("---------------------------------------------------");
+    System.out.println("------------------FINANCIALS----------------------");
 
     driver.get("https://finance.yahoo.com/quote/BNP.PA/financials/");
 
@@ -103,7 +104,7 @@ public class App {
       System.out.println(div.text());
     }
 
-    System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+    System.out.println("++++++++++++++++++BALANCE SHEET+++++++++++++++++++");
 
     driver.get("https://finance.yahoo.com/quote/BNP.PA/balance-sheet/");
 
@@ -114,6 +115,20 @@ public class App {
     Elements divBalanceSheet = docBalanceSheet.select("div.column.svelte-1xjz32c, div.column.svelte-1xjz32c.alt");
 
     for (Element div : divBalanceSheet) {
+      System.out.println(div.text());
+    }
+
+    System.out.println("===================CASH FLOWS===================");
+
+    driver.get("https://finance.yahoo.com/quote/BNP.PA/cash-flow/");
+
+    String pageSourceCashFlow = driver.getPageSource();
+
+    Document docCashFlow = Jsoup.parse(pageSourceCashFlow);
+
+    Elements divCashFlow = docCashFlow.select("div.column.svelte-1xjz32c, div.column.svelte-1xjz32c.alt");
+
+    for (Element div : divCashFlow) {
       System.out.println(div.text());
     }
 
