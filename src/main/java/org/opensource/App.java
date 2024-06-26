@@ -15,53 +15,17 @@ import java.util.Map;
  *
  */
 public class App {
-    private static final String YAHOO_FINANCE_URL = "https://finance.yahoo.com/quote/%s/key-statistics";
 
     public static void main( String[] args ) {
-      //jsoupTest();
 
       seleniumTest();
     }
-
-  private static void jsoupTest() {
-    String symbol = "ASML";
-    String url = String.format(YAHOO_FINANCE_URL, symbol);
-    try {
-      Connection.Response initialResponse = Jsoup.connect(url)
-          .method(Connection.Method.GET)
-          .execute();
-
-      // Extract cookies from the initial response
-      Map<String, String> cookies = initialResponse.cookies();
-
-      // Add the necessary cookies to indicate acceptance
-      cookies.put("cookie-consent", "accepted"); // Adjust the cookie name and value as needed
-
-      // Second request with the cookies to bypass the prompt
-      Document document = Jsoup.connect(url)
-          .cookies(cookies)
-          .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
-          .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9")
-          .header("Accept-Language", "en-US,en;q=0.9")
-          .header("Connection", "keep-alive")
-          .header("Upgrade-Insecure-Requests", "1")
-          .header("DNT", "1")
-          .get();
-
-      // Output the document title
-      System.out.println(document.body());
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-  }
 
   private static void seleniumTest() {
     HtmlUnitDriver driver = new HtmlUnitDriver();
 
     // Navigate to the financials page of BNP Paribas on Yahoo Finance
     driver.get("https://finance.yahoo.com/quote/BNP.PA/key-statistics/");
-
-    //String pageSource = driver.getPageSource();
 
     Document doc = Jsoup.parse(driver.getPageSource());
     Elements title = doc.select("tr");
