@@ -285,35 +285,35 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
   }
 
   public static class Builder extends AbstractCompanyInfoBuilder{
-    private String companyName;
-    private String companyTicker;
-    private String currentPrice;
-    private String marketCap;
-    private String enterpriseValue;
-    private String trailingPE;
-    private String forwardPE;
-    private String pegRatio;
-    private String ratioPS;
-    private String ratioPB;
-    private String evToRevenue;
-    private String evToEBITDA;
-    private String profitMargin;
-    private String operatingMargin;
-    private String returnOnAssets;
-    private String returnOnEquity;
-    private String revenue;
-    private String revenuePerShare;
-    private String quarterlyRevenueGrowth;
-    private String grossProfit;
-    private String EBITDA;
-    private String netIncomeAviToCommon;
-    private String dilutedEPS;
-    private String quartEarningsGrowth;
-    private String totalCash;
-    private String totalCashPerShare;
-    private String totalDebt;
-    private String totalDebtToEquity;
-    private CompanyTradingInformation tradingInformation;
+    private String companyName = "--";
+    private String companyTicker = "--";
+    private String currentPrice = "--";
+    private String marketCap = "--";
+    private String enterpriseValue = "--";
+    private String trailingPE = "--";
+    private String forwardPE = "--";
+    private String pegRatio = "--";
+    private String ratioPS = "--";
+    private String ratioPB = "--";
+    private String evToRevenue = "--";
+    private String evToEBITDA = "--";
+    private String profitMargin = "--";
+    private String operatingMargin = "--";
+    private String returnOnAssets = "--";
+    private String returnOnEquity = "--";
+    private String revenue = "--";
+    private String revenuePerShare = "--";
+    private String quarterlyRevenueGrowth = "--";
+    private String grossProfit = "--";
+    private String EBITDA = "--";
+    private String netIncomeAviToCommon = "--";
+    private String dilutedEPS = "--";
+    private String quartEarningsGrowth = "--";
+    private String totalCash = "--";
+    private String totalCashPerShare = "--";
+    private String totalDebt = "--";
+    private String totalDebtToEquity = "--";
+    private CompanyTradingInformation tradingInformation = new CompanyTradingInformation.Builder().build();
 
     public Builder withCompanyName(String companyName) {
       this.companyName = companyName;

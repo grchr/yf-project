@@ -8,13 +8,16 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.opensource.model.CompanyKeyStatistics;
 import org.opensource.service.GetKeyStatisticsService;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+
 /**
  * Hello world!
  *
  */
 public class App {
 
-    public static void main( String[] args ) {
+    public static void main( String[] args ) throws ExecutionException, InterruptedException {
 
       seleniumTest();
 
@@ -34,7 +37,7 @@ public class App {
     return false;
   }
 
-  private static void seleniumTest() {
+  private static void seleniumTest() throws ExecutionException, InterruptedException {
     System.out.println("------------------KEY STATISTICS----------------------");
     HtmlUnitDriver driver = new HtmlUnitDriver();
     // Navigate to the financials page of BNP Paribas on Yahoo Finance
@@ -46,6 +49,25 @@ public class App {
     GetKeyStatisticsService getKeyStatisticsService = new GetKeyStatisticsService();
 
     CompanyKeyStatistics companyKeyStatistics = getKeyStatisticsService.execute("BNP.PA");
+    CompletableFuture<CompanyKeyStatistics> companyKeyStatisticsCompletableFuture = getKeyStatisticsService.executeAsync("BNP.PA");
+
+//    CompanyKeyStatistics companyKeyStatistics1 = companyKeyStatisticsCompletableFuture.get();
+//    getKeyStatisticsService.shutdown();
+//
+//    boolean equals = companyKeyStatistics.equals(companyKeyStatistics1);
+//    System.out.println("Equality achieved: " + equals);
+
+    CompletableFuture<CompanyKeyStatistics> futureStats = getKeyStatisticsService.executeAsync("AAPL");
+
+    // Handle the completion of the async task
+    futureStats.thenAccept(stats -> {
+      System.out.println("Received key statistics: " + stats);
+      getKeyStatisticsService.shutdown(); // Shutdown executor when done
+    }).exceptionally(ex -> {
+      System.err.println("Error fetching key statistics: " + ex.getMessage());
+      getKeyStatisticsService.shutdown(); // Shutdown executor on error
+      return null;
+    });
 
     // Select all span elements within the specific container
     if (container != null) {

@@ -105,15 +105,15 @@ public class CompanyTradingInformation extends AbstractCompanyInformation{
   }
 
   public static class Builder extends AbstractCompanyInfoBuilder{
-    private String beta;
-    private String forwardAnnualDividendYield;
-    private String payoutRatio;
-    private String currentRatio;
-    private String week52Range;
-    private String week52High;
-    private String week52Low;
-    private String day50MovingAvg;
-    private String day200MovingAverage;
+    private String beta = "--";
+    private String forwardAnnualDividendYield = "--";
+    private String payoutRatio = "--";
+    private String currentRatio = "--";
+    private String week52Range = "--";
+    private String week52High = "--";
+    private String week52Low = "--";
+    private String day50MovingAvg = "--";
+    private String day200MovingAverage = "--";
 
     public Builder withBeta(String beta) {
       this.beta = beta;
