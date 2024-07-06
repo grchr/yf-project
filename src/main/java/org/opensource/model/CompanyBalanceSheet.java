@@ -1,5 +1,5 @@
 package org.opensource.model;
 
-public class CompanyBalanceSheet {
+public class CompanyBalanceSheet extends AbstractCompanyInformation{
 
 }

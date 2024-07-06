@@ -1,5 +1,5 @@
 package org.opensource.model;
 
-public class CompanyFinancials {
+public class CompanyFinancials extends AbstractCompanyInformation{
 
 }

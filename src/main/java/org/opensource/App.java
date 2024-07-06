@@ -1,14 +1,12 @@
 package org.opensource;
 
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-
-import java.io.IOException;
-import java.util.Map;
+import org.opensource.model.CompanyKeyStatistics;
+import org.opensource.service.GetKeyStatisticsService;
 
 /**
  * Hello world!
@@ -19,18 +17,35 @@ public class App {
     public static void main( String[] args ) {
 
       seleniumTest();
+
+      System.out.println(wrongTickerTest());
     }
 
-  private static void seleniumTest() {
+  private static boolean wrongTickerTest() {
     HtmlUnitDriver driver = new HtmlUnitDriver();
 
+    // Navigate to the financials page of BNP Paribas on Yahoo Finance
+    driver.get("https://finance.yahoo.com/quote/xx/key-statistics/");
+    if (driver.getCurrentUrl().contains("lookup")) return true;
+    Document doc = Jsoup.parse(driver.getPageSource());
+
+    Elements title = doc.select("tr");
+
+    return false;
+  }
+
+  private static void seleniumTest() {
+    System.out.println("------------------KEY STATISTICS----------------------");
+    HtmlUnitDriver driver = new HtmlUnitDriver();
     // Navigate to the financials page of BNP Paribas on Yahoo Finance
     driver.get("https://finance.yahoo.com/quote/BNP.PA/key-statistics/");
 
     Document doc = Jsoup.parse(driver.getPageSource());
-    Elements title = doc.select("tr");
-    System.out.println("Title: " + title.text());
     Element container = doc.selectFirst("div.container.svelte-mgkamr");
+
+    GetKeyStatisticsService getKeyStatisticsService = new GetKeyStatisticsService();
+
+    CompanyKeyStatistics companyKeyStatistics = getKeyStatisticsService.execute("BNP.PA");
 
     // Select all span elements within the specific container
     if (container != null) {
@@ -61,6 +76,18 @@ public class App {
     String pageSourceFinancials = driver.getPageSource();
 
     Document docFinancials = Jsoup.parse(pageSourceFinancials);
+
+    Element containerFinancials = docFinancials.selectFirst("div.container.svelte-mgkamr");
+
+    // Select all span elements within the specific container
+    if (containerFinancials != null) {
+      Elements spans = containerFinancials.select("span");
+
+      // Iterate through the spans and print their text content
+      for (Element span : spans) {
+        System.out.println(span.text());
+      }
+    }
 
     Elements divFinancials = docFinancials.select("div.column.svelte-1xjz32c, div.column.svelte-1xjz32c.alt");
 
