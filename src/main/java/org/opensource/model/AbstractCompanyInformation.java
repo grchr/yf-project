@@ -9,6 +9,8 @@ public abstract class AbstractCompanyInformation {
 
     // Abstract build method to be implemented by concrete builders
     public abstract AbstractCompanyInformation build();
+
+    public abstract AbstractCompanyInfoBuilder<T> self();
   }
 
 }

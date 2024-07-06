@@ -464,6 +464,11 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
     public CompanyKeyStatistics build() {
       return new CompanyKeyStatistics(this);
     }
+
+    @Override
+    public CompanyKeyStatistics.Builder self(){
+      return this;
+    }
   }
 }
 

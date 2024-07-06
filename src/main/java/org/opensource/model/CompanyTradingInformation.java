@@ -212,8 +212,14 @@ public class CompanyTradingInformation extends AbstractCompanyInformation {
       return this;
     }
 
+    @Override
     public CompanyTradingInformation build() {
       return new CompanyTradingInformation(this);
+    }
+
+    @Override
+    public CompanyTradingInformation.Builder self() {
+      return this;
     }
   }
 }

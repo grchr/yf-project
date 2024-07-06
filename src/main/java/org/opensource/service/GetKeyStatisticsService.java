@@ -39,37 +39,19 @@ public class GetKeyStatisticsService implements SeleniumExecutableService<Compan
       if (driver.getCurrentUrl().contains(EXIT_CONDITION)) {
         return builder.build();
       }
+      Elements tdElements = pageDocument.select(KEY_STATISTICS_SELECTOR);
+      if (CollectionUtils.isNotEmpty(tdElements)) {
+        builder = populateBuilderWithMainInfo(tdElements);
+      }
 
       builder.withCompanyName(getCompanyName(pageDocument));
       builder.withCurrentPrice(getCurrentPrice(pageDocument));
+      builder.withCompanyTicker(tickerCaps);
 
-      Elements tdElements = pageDocument.select(KEY_STATISTICS_SELECTOR);
-
-      if (CollectionUtils.isNotEmpty(tdElements)) {
-        populateBuilderWithMainInfo(tickerCaps, builder, tdElements);
-      }
     } finally {
       driver.quit();
     }
 
-    return builder.build();
-  }
-
-  private CompanyTradingInformation getCompanyTradingInformation(Elements tdElements) {
-    CompanyTradingInformation.Builder builder = new CompanyTradingInformation.Builder();
-    builder.withBeta(getValueFromElements(tdElements, KeyStatisticsPositions.BETA.getValue()))
-            .withCurrentRatio(getValueFromElements(tdElements, KeyStatisticsPositions.CURRENT_RATIO.getValue()))
-            .withWeek52Range(getValueFromElements(tdElements, KeyStatisticsPositions.WEEK_52_RANGE.getValue()))
-            .withWeek52High(getValueFromElements(tdElements, KeyStatisticsPositions.WEEK_52_HIGH.getValue()))
-            .withWeek52Low(getValueFromElements(tdElements, KeyStatisticsPositions.WEEK_52_LOW.getValue()))
-            .withDay50MovingAvg(getValueFromElements(tdElements, KeyStatisticsPositions.DAY_50_MOVING_AVG.getValue()))
-            .withDay200MovingAverage(getValueFromElements(tdElements, KeyStatisticsPositions.DAY_200_MOVING_AVG.getValue()))
-            .withForwardAnnualDividendYield(getValueFromElements(tdElements, KeyStatisticsPositions.DIVIDEND_YIELD_FWD_ANNUAL.getValue()))
-            .withForwardAnnualDividendRate(getValueFromElements(tdElements, KeyStatisticsPositions.DIVIDEND_RATE_FWD_ANNUAL.getValue()))
-            .withDividendYield5YearAvg(getValueFromElements(tdElements, KeyStatisticsPositions.DIVIDEND_YIELD_5_YEAR_AVG.getValue()))
-            .withTrailingAnnualDividendRate(getValueFromElements(tdElements, KeyStatisticsPositions.DIVIDEND_RATE_TRAILING_ANNUAL.getValue()))
-            .withTrailingAnnualDividendYield(getValueFromElements(tdElements, KeyStatisticsPositions.DIVIDEND_YIELD_TRAILING_ANNUAL.getValue()))
-            .withPayoutRatio(getValueFromElements(tdElements, KeyStatisticsPositions.PAYOUT_RATIO.getValue()));
     return builder.build();
   }
 
@@ -105,14 +87,15 @@ public class GetKeyStatisticsService implements SeleniumExecutableService<Compan
         if (driver.getCurrentUrl().contains(EXIT_CONDITION)) {
           return builder.build();
         }
+        Elements tdElements = pageDocument.select(KEY_STATISTICS_SELECTOR);
+        if (CollectionUtils.isNotEmpty(tdElements)) {
+          builder = populateBuilderWithMainInfo(tdElements);
+        }
 
         builder.withCompanyName(getCompanyName(pageDocument));
         builder.withCurrentPrice(getCurrentPrice(pageDocument));
+        builder.withCompanyTicker(tickerCaps);
 
-        Elements tdElements = pageDocument.select(KEY_STATISTICS_SELECTOR);
-        if (CollectionUtils.isNotEmpty(tdElements)) {
-          populateBuilderWithMainInfo(tickerCaps, builder, tdElements);
-        }
       } finally {
         driver.quit();
       }
@@ -136,9 +119,8 @@ public class GetKeyStatisticsService implements SeleniumExecutableService<Compan
     return "--";
   }
 
-  private void populateBuilderWithMainInfo(String tickerCaps, CompanyKeyStatistics.Builder builder, Elements tdElements) {
-    builder.withCompanyTicker(tickerCaps)
-            .withMarketCap(getValueFromElements(tdElements, KeyStatisticsPositions.MARKET_CAP.getValue()))
+  private CompanyKeyStatistics.Builder populateBuilderWithMainInfo(Elements tdElements) {
+    return new CompanyKeyStatistics.Builder().withMarketCap(getValueFromElements(tdElements, KeyStatisticsPositions.MARKET_CAP.getValue()))
             .withEnterpriseValue(getValueFromElements(tdElements, KeyStatisticsPositions.ENTERPRISE_VALUE.getValue()))
             .withTrailingPE(getValueFromElements(tdElements, KeyStatisticsPositions.TRAILING_PE.getValue()))
             .withForwardPE(getValueFromElements(tdElements, KeyStatisticsPositions.FORWARD_PE.getValue()))
@@ -164,5 +146,23 @@ public class GetKeyStatisticsService implements SeleniumExecutableService<Compan
             .withTotalDebt(getValueFromElements(tdElements, KeyStatisticsPositions.TOTAL_DEBT.getValue()))
             .withTotalDebtToEquity(getValueFromElements(tdElements, KeyStatisticsPositions.TOTAL_DEBT_TO_EQUITY.getValue()))
             .withTradingInformation(getCompanyTradingInformation(tdElements));
+  }
+
+  private CompanyTradingInformation getCompanyTradingInformation(Elements tdElements) {
+    CompanyTradingInformation.Builder builder = new CompanyTradingInformation.Builder();
+    builder.withBeta(getValueFromElements(tdElements, KeyStatisticsPositions.BETA.getValue()))
+            .withCurrentRatio(getValueFromElements(tdElements, KeyStatisticsPositions.CURRENT_RATIO.getValue()))
+            .withWeek52Range(getValueFromElements(tdElements, KeyStatisticsPositions.WEEK_52_RANGE.getValue()))
+            .withWeek52High(getValueFromElements(tdElements, KeyStatisticsPositions.WEEK_52_HIGH.getValue()))
+            .withWeek52Low(getValueFromElements(tdElements, KeyStatisticsPositions.WEEK_52_LOW.getValue()))
+            .withDay50MovingAvg(getValueFromElements(tdElements, KeyStatisticsPositions.DAY_50_MOVING_AVG.getValue()))
+            .withDay200MovingAverage(getValueFromElements(tdElements, KeyStatisticsPositions.DAY_200_MOVING_AVG.getValue()))
+            .withForwardAnnualDividendYield(getValueFromElements(tdElements, KeyStatisticsPositions.DIVIDEND_YIELD_FWD_ANNUAL.getValue()))
+            .withForwardAnnualDividendRate(getValueFromElements(tdElements, KeyStatisticsPositions.DIVIDEND_RATE_FWD_ANNUAL.getValue()))
+            .withDividendYield5YearAvg(getValueFromElements(tdElements, KeyStatisticsPositions.DIVIDEND_YIELD_5_YEAR_AVG.getValue()))
+            .withTrailingAnnualDividendRate(getValueFromElements(tdElements, KeyStatisticsPositions.DIVIDEND_RATE_TRAILING_ANNUAL.getValue()))
+            .withTrailingAnnualDividendYield(getValueFromElements(tdElements, KeyStatisticsPositions.DIVIDEND_YIELD_TRAILING_ANNUAL.getValue()))
+            .withPayoutRatio(getValueFromElements(tdElements, KeyStatisticsPositions.PAYOUT_RATIO.getValue()));
+    return builder.build();
   }
 }
