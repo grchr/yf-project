@@ -49,6 +49,7 @@ public class App {
     GetKeyStatisticsService getKeyStatisticsService = new GetKeyStatisticsService();
 
     CompanyKeyStatistics companyKeyStatistics = getKeyStatisticsService.execute("BNP.PA");
+    System.out.println(companyKeyStatistics);
     CompletableFuture<CompanyKeyStatistics> companyKeyStatisticsCompletableFuture = getKeyStatisticsService.executeAsync("BNP.PA");
 
 //    CompanyKeyStatistics companyKeyStatistics1 = companyKeyStatisticsCompletableFuture.get();

@@ -2,9 +2,13 @@ package org.opensource.model;
 
 import java.util.Objects;
 
-public class CompanyTradingInformation extends AbstractCompanyInformation{
+public class CompanyTradingInformation extends AbstractCompanyInformation {
   private String beta;
   private String forwardAnnualDividendYield;
+  private String forwardAnnualDividendRate;
+  private String dividendYield5YearAvg;
+  private String trailingAnnualDividendYield;
+  private String trailingAnnualDividendRate;
   private String payoutRatio;
   private String currentRatio;
   private String week52Range;
@@ -16,6 +20,10 @@ public class CompanyTradingInformation extends AbstractCompanyInformation{
   private CompanyTradingInformation(Builder builder) {
     this.beta = builder.beta;
     this.forwardAnnualDividendYield = builder.forwardAnnualDividendYield;
+    this.forwardAnnualDividendRate = builder.forwardAnnualDividendRate;
+    this.dividendYield5YearAvg = builder.dividendYield5YearAvg;
+    this.trailingAnnualDividendYield = builder.trailingAnnualDividendYield;
+    this.trailingAnnualDividendRate = builder.trailingAnnualDividendRate;
     this.payoutRatio = builder.payoutRatio;
     this.currentRatio = builder.currentRatio;
     this.week52Range = builder.week52Range;
@@ -31,6 +39,22 @@ public class CompanyTradingInformation extends AbstractCompanyInformation{
 
   public String getForwardAnnualDividendYield() {
     return forwardAnnualDividendYield;
+  }
+
+  public String getForwardAnnualDividendRate() {
+    return forwardAnnualDividendRate;
+  }
+
+  public String getDividendYield5YearAvg() {
+    return dividendYield5YearAvg;
+  }
+
+  public String getTrailingAnnualDividendYield() {
+    return trailingAnnualDividendYield;
+  }
+
+  public String getTrailingAnnualDividendRate() {
+    return trailingAnnualDividendRate;
   }
 
   public String getPayoutRatio() {
@@ -66,6 +90,10 @@ public class CompanyTradingInformation extends AbstractCompanyInformation{
     return "CompanyTradingInformation{" +
             "beta='" + beta + '\'' +
             ", forwardAnnualDividendYield='" + forwardAnnualDividendYield + '\'' +
+            ", forwardAnnualDividendRate='" + forwardAnnualDividendRate + '\'' +
+            ", dividendYield5YearAvg='" + dividendYield5YearAvg + '\'' +
+            ", trailingAnnualDividendYield='" + trailingAnnualDividendYield + '\'' +
+            ", trailingAnnualDividendRate='" + trailingAnnualDividendRate + '\'' +
             ", payoutRatio='" + payoutRatio + '\'' +
             ", currentRatio='" + currentRatio + '\'' +
             ", week52Range='" + week52Range + '\'' +
@@ -79,34 +107,38 @@ public class CompanyTradingInformation extends AbstractCompanyInformation{
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof CompanyTradingInformation that)) return false;
-    return Objects.equals(getBeta(), that.getBeta())
-            && Objects.equals(getForwardAnnualDividendYield(), that.getForwardAnnualDividendYield())
-            && Objects.equals(getPayoutRatio(), that.getPayoutRatio())
-            && Objects.equals(getCurrentRatio(), that.getCurrentRatio())
-            && Objects.equals(getWeek52Range(), that.getWeek52Range())
-            && Objects.equals(getWeek52High(), that.getWeek52High())
-            && Objects.equals(getWeek52Low(), that.getWeek52Low())
-            && Objects.equals(getDay50MovingAvg(), that.getDay50MovingAvg())
-            && Objects.equals(getDay200MovingAverage(), that.getDay200MovingAverage());
+    if (!(o instanceof CompanyTradingInformation)) return false;
+    CompanyTradingInformation that = (CompanyTradingInformation) o;
+    return Objects.equals(getBeta(), that.getBeta()) &&
+            Objects.equals(getForwardAnnualDividendYield(), that.getForwardAnnualDividendYield()) &&
+            Objects.equals(getForwardAnnualDividendRate(), that.getForwardAnnualDividendRate()) &&
+            Objects.equals(getDividendYield5YearAvg(), that.getDividendYield5YearAvg()) &&
+            Objects.equals(getTrailingAnnualDividendYield(), that.getTrailingAnnualDividendYield()) &&
+            Objects.equals(getTrailingAnnualDividendRate(), that.getTrailingAnnualDividendRate()) &&
+            Objects.equals(getPayoutRatio(), that.getPayoutRatio()) &&
+            Objects.equals(getCurrentRatio(), that.getCurrentRatio()) &&
+            Objects.equals(getWeek52Range(), that.getWeek52Range()) &&
+            Objects.equals(getWeek52High(), that.getWeek52High()) &&
+            Objects.equals(getWeek52Low(), that.getWeek52Low()) &&
+            Objects.equals(getDay50MovingAvg(), that.getDay50MovingAvg()) &&
+            Objects.equals(getDay200MovingAverage(), that.getDay200MovingAverage());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getBeta(),
-            getForwardAnnualDividendYield(),
-            getPayoutRatio(),
-            getCurrentRatio(),
-            getWeek52Range(),
-            getWeek52High(),
-            getWeek52Low(),
-            getDay50MovingAvg(),
-            getDay200MovingAverage());
+    return Objects.hash(getBeta(), getForwardAnnualDividendYield(), getForwardAnnualDividendRate(),
+            getDividendYield5YearAvg(), getTrailingAnnualDividendYield(), getTrailingAnnualDividendRate(),
+            getPayoutRatio(), getCurrentRatio(), getWeek52Range(), getWeek52High(), getWeek52Low(),
+            getDay50MovingAvg(), getDay200MovingAverage());
   }
 
-  public static class Builder extends AbstractCompanyInfoBuilder{
+  public static class Builder extends AbstractCompanyInfoBuilder {
     private String beta = "--";
     private String forwardAnnualDividendYield = "--";
+    private String forwardAnnualDividendRate = "--";
+    private String dividendYield5YearAvg = "--";
+    private String trailingAnnualDividendYield = "--";
+    private String trailingAnnualDividendRate = "--";
     private String payoutRatio = "--";
     private String currentRatio = "--";
     private String week52Range = "--";
@@ -122,6 +154,26 @@ public class CompanyTradingInformation extends AbstractCompanyInformation{
 
     public Builder withForwardAnnualDividendYield(String forwardAnnualDividendYield) {
       this.forwardAnnualDividendYield = forwardAnnualDividendYield;
+      return this;
+    }
+
+    public Builder withForwardAnnualDividendRate(String forwardAnnualDividendRate) {
+      this.forwardAnnualDividendRate = forwardAnnualDividendRate;
+      return this;
+    }
+
+    public Builder withDividendYield5YearAvg(String dividendYield5YearAvg) {
+      this.dividendYield5YearAvg = dividendYield5YearAvg;
+      return this;
+    }
+
+    public Builder withTrailingAnnualDividendYield(String trailingAnnualDividendYield) {
+      this.trailingAnnualDividendYield = trailingAnnualDividendYield;
+      return this;
+    }
+
+    public Builder withTrailingAnnualDividendRate(String trailingAnnualDividendRate) {
+      this.trailingAnnualDividendRate = trailingAnnualDividendRate;
       return this;
     }
 
@@ -165,4 +217,3 @@ public class CompanyTradingInformation extends AbstractCompanyInformation{
     }
   }
 }
-
