@@ -14,14 +14,23 @@ public enum BalanceSheetTitles {
   SHARE_ISSUED("Share Issued"),
   ORDINARY_SHARES_NUMBER("Ordinary Shares Number");
 
-  private final String description;
+  private final String title;
 
-  BalanceSheetTitles(String description) {
-    this.description = description;
+  BalanceSheetTitles(String title) {
+    this.title = title;
   }
 
-  public String getDescription() {
-    return description;
+  public String getTitle() {
+    return title;
+  }
+
+  public static BalanceSheetTitles fromTitle(String title) {
+    for (BalanceSheetTitles balanceSheetTitle : values()) {
+      if (balanceSheetTitle.getTitle().equalsIgnoreCase(title)) {
+        return balanceSheetTitle;
+      }
+    }
+    return null;
   }
 }
 

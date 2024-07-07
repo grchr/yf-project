@@ -12,14 +12,23 @@ public enum IncomeStatementTitles {
   NET_INCOME_FROM_CONTINUING_DISCONTINUED_OPERATION("Net Income from Continuing & Discontinued Operation"),
   NORMALIZED_INCOME("Normalized Income");
 
-  private final String description;
+  private final String title;
 
-  IncomeStatementTitles(String description) {
-    this.description = description;
+  IncomeStatementTitles(String title) {
+    this.title = title;
   }
 
-  public String getDescription() {
-    return description;
+  public String getTitle() {
+    return title;
+  }
+
+  public static IncomeStatementTitles fromTitle(String title) {
+    for (IncomeStatementTitles balanceSheetTitle : values()) {
+      if (balanceSheetTitle.getTitle().equalsIgnoreCase(title)) {
+        return balanceSheetTitle;
+      }
+    }
+    return null;
   }
 }
 

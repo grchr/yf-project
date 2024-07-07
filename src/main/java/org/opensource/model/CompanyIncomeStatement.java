@@ -1,6 +1,8 @@
 package org.opensource.model;
 
-public class CompanyFinancials extends AbstractCompanyInformation {
+import java.util.Objects;
+
+public class CompanyIncomeStatement extends AbstractCompanyInformation {
 
   // Total Revenue
   private final String totalRevenueTTM;
@@ -42,7 +44,7 @@ public class CompanyFinancials extends AbstractCompanyInformation {
   private final String normalizedIncomeTTM;
   private final String normalizedIncomeLastUpdate;
 
-  private CompanyFinancials(Builder builder) {
+  private CompanyIncomeStatement(Builder builder) {
     super(builder);
     this.totalRevenueTTM = builder.totalRevenueTTM;
     this.totalRevenueLastUpdate = builder.totalRevenueLastUpdate;
@@ -147,8 +149,83 @@ public class CompanyFinancials extends AbstractCompanyInformation {
     return normalizedIncomeLastUpdate;
   }
 
+  @Override
+  public String toString() {
+    return "CompanyIncomeStatement{" +
+            "companyName='" + getCompanyName() + '\'' +
+            ", companyTicker='" + getCompanyTicker() + '\'' +
+            ", currentPrice='" + getCurrentPrice() + '\'' +
+            ", totalRevenueTTM='" + totalRevenueTTM + '\'' +
+            ", totalRevenueLastUpdate='" + totalRevenueLastUpdate + '\'' +
+            ", pretaxIncomeTTM='" + pretaxIncomeTTM + '\'' +
+            ", pretaxIncomeLastUpdate='" + pretaxIncomeLastUpdate + '\'' +
+            ", taxProvisionTTM='" + taxProvisionTTM + '\'' +
+            ", taxProvisionLastUpdate='" + taxProvisionLastUpdate + '\'' +
+            ", netIncomeCommonStockholdersTTM='" + netIncomeCommonStockholdersTTM + '\'' +
+            ", netIncomeCommonStockholdersLastUpdate='" + netIncomeCommonStockholdersLastUpdate + '\'' +
+            ", basicEPSTTM='" + basicEPSTTM + '\'' +
+            ", basicEPSLastUpdate='" + basicEPSLastUpdate + '\'' +
+            ", dilutedEPSTTM='" + dilutedEPSTTM + '\'' +
+            ", dilutedEPSLastUpdate='" + dilutedEPSLastUpdate + '\'' +
+            ", basicAvgSharesTTM='" + basicAvgSharesTTM + '\'' +
+            ", basicAvgSharesLastUpdate='" + basicAvgSharesLastUpdate + '\'' +
+            ", dilutedAvgSharesTTM='" + dilutedAvgSharesTTM + '\'' +
+            ", dilutedAvgSharesLastUpdate='" + dilutedAvgSharesLastUpdate + '\'' +
+            ", netIncomeContinuingDiscontinuedOpsTTM='" + netIncomeContinuingDiscontinuedOpsTTM + '\'' +
+            ", netIncomeContinuingDiscontinuedOpsLastUpdate='" + netIncomeContinuingDiscontinuedOpsLastUpdate + '\'' +
+            ", normalizedIncomeTTM='" + normalizedIncomeTTM + '\'' +
+            ", normalizedIncomeLastUpdate='" + normalizedIncomeLastUpdate + '\'' +
+            '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof CompanyIncomeStatement that)) return false;
+    return Objects.equals(getTotalRevenueTTM(), that.getTotalRevenueTTM())
+            && Objects.equals(getTotalRevenueLastUpdate(), that.getTotalRevenueLastUpdate())
+            && Objects.equals(getPretaxIncomeTTM(), that.getPretaxIncomeTTM())
+            && Objects.equals(getPretaxIncomeLastUpdate(), that.getPretaxIncomeLastUpdate())
+            && Objects.equals(getTaxProvisionTTM(), that.getTaxProvisionTTM())
+            && Objects.equals(getTaxProvisionLastUpdate(), that.getTaxProvisionLastUpdate())
+            && Objects.equals(getNetIncomeCommonStockholdersTTM(), that.getNetIncomeCommonStockholdersTTM())
+            && Objects.equals(getNetIncomeCommonStockholdersLastUpdate(), that.getNetIncomeCommonStockholdersLastUpdate())
+            && Objects.equals(getBasicEPSTTM(), that.getBasicEPSTTM()) && Objects.equals(getBasicEPSLastUpdate(), that.getBasicEPSLastUpdate())
+            && Objects.equals(getDilutedEPSTTM(), that.getDilutedEPSTTM()) && Objects.equals(getDilutedEPSLastUpdate(), that.getDilutedEPSLastUpdate())
+            && Objects.equals(getBasicAvgSharesTTM(), that.getBasicAvgSharesTTM()) && Objects.equals(getBasicAvgSharesLastUpdate(), that.getBasicAvgSharesLastUpdate())
+            && Objects.equals(getDilutedAvgSharesTTM(), that.getDilutedAvgSharesTTM()) && Objects.equals(getDilutedAvgSharesLastUpdate(), that.getDilutedAvgSharesLastUpdate())
+            && Objects.equals(getNetIncomeContinuingDiscontinuedOpsTTM(), that.getNetIncomeContinuingDiscontinuedOpsTTM())
+            && Objects.equals(getNetIncomeContinuingDiscontinuedOpsLastUpdate(), that.getNetIncomeContinuingDiscontinuedOpsLastUpdate())
+            && Objects.equals(getNormalizedIncomeTTM(), that.getNormalizedIncomeTTM())
+            && Objects.equals(getNormalizedIncomeLastUpdate(), that.getNormalizedIncomeLastUpdate());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getTotalRevenueTTM(),
+            getTotalRevenueLastUpdate(),
+            getPretaxIncomeTTM(),
+            getPretaxIncomeLastUpdate(),
+            getTaxProvisionTTM(),
+            getTaxProvisionLastUpdate(),
+            getNetIncomeCommonStockholdersTTM(),
+            getNetIncomeCommonStockholdersLastUpdate(),
+            getBasicEPSTTM(),
+            getBasicEPSLastUpdate(),
+            getDilutedEPSTTM(),
+            getDilutedEPSLastUpdate(),
+            getBasicAvgSharesTTM(),
+            getBasicAvgSharesLastUpdate(),
+            getDilutedAvgSharesTTM(),
+            getDilutedAvgSharesLastUpdate(),
+            getNetIncomeContinuingDiscontinuedOpsTTM(),
+            getNetIncomeContinuingDiscontinuedOpsLastUpdate(),
+            getNormalizedIncomeTTM(),
+            getNormalizedIncomeLastUpdate());
+  }
+
   // Builder class
-  public static class Builder extends AbstractCompanyInformation.Builder<CompanyFinancials.Builder>{
+  public static class Builder extends AbstractCompanyInformation.Builder<CompanyIncomeStatement.Builder>{
     private String totalRevenueTTM = DEFAULT;
     private String totalRevenueLastUpdate = DEFAULT;
     private String pretaxIncomeTTM = DEFAULT;
@@ -271,12 +348,12 @@ public class CompanyFinancials extends AbstractCompanyInformation {
     }
 
     @Override
-    public CompanyFinancials build() {
-      return new CompanyFinancials(this);
+    public CompanyIncomeStatement build() {
+      return new CompanyIncomeStatement(this);
     }
 
     @Override
-    public CompanyFinancials.Builder self() {
+    public CompanyIncomeStatement.Builder self() {
       return this;
     }
   }

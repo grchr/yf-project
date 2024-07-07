@@ -15,10 +15,13 @@ public interface IWebExecutableService<T extends AbstractCompanyInformation> {
   static final String CURRENT_PRICE_FIRST_SELECTOR = "div.container.svelte-mgkamr";
   static final String CURRENT_PRICE_SECOND_SELECTOR = "span";
   static final int CURRENT_PRICE_POSITION = 0;
+  String DEFAULT = "--";
 
   T execute(String ticker);
 
   CompletableFuture<T> executeAsync(String ticker);
+
+  void shutdown();
 
   default String getValueFromElements(Elements elements, int position) {
     if (elements.size() > position) {

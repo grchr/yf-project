@@ -1,82 +1,82 @@
 package org.opensource.model;
 
 public class CompanyCashFlow extends AbstractCompanyInformation {
-  private String operatingCashFlow;
-  private String investingCashFlow;
-  private String financingCashFlow;
-  private String endCashPosition;
-  private String capitalExpenditure;
-  private String freeCashFlow;
+  private String operatingCashFlowTTM;
+  private String investingCashFlowTTM;
+  private String financingCashFlowTTM;
+  private String endCashPositionTTM;
+  private String capitalExpenditureTTM;
+  private String freeCashFlowTTM;
 
   private CompanyCashFlow(Builder builder) {
     super(builder); // Calling the parent class constructor
-    this.operatingCashFlow = builder.operatingCashFlow;
-    this.investingCashFlow = builder.investingCashFlow;
-    this.financingCashFlow = builder.financingCashFlow;
-    this.endCashPosition = builder.endCashPosition;
-    this.capitalExpenditure = builder.capitalExpenditure;
-    this.freeCashFlow = builder.freeCashFlow;
+    this.operatingCashFlowTTM = builder.operatingCashFlowTTM;
+    this.investingCashFlowTTM = builder.investingCashFlowTTM;
+    this.financingCashFlowTTM = builder.financingCashFlowTTM;
+    this.endCashPositionTTM = builder.endCashPositionTTM;
+    this.capitalExpenditureTTM = builder.capitalExpenditureTTM;
+    this.freeCashFlowTTM = builder.freeCashFlowTTM;
   }
 
-  public String getOperatingCashFlow() {
-    return operatingCashFlow;
+  public String getOperatingCashFlowTTM() {
+    return operatingCashFlowTTM;
   }
 
-  public String getInvestingCashFlow() {
-    return investingCashFlow;
+  public String getInvestingCashFlowTTM() {
+    return investingCashFlowTTM;
   }
 
-  public String getFinancingCashFlow() {
-    return financingCashFlow;
+  public String getFinancingCashFlowTTM() {
+    return financingCashFlowTTM;
   }
 
-  public String getEndCashPosition() {
-    return endCashPosition;
+  public String getEndCashPositionTTM() {
+    return endCashPositionTTM;
   }
 
-  public String getCapitalExpenditure() {
-    return capitalExpenditure;
+  public String getCapitalExpenditureTTM() {
+    return capitalExpenditureTTM;
   }
 
-  public String getFreeCashFlow() {
-    return freeCashFlow;
+  public String getFreeCashFlowTTM() {
+    return freeCashFlowTTM;
   }
 
   public static class Builder extends AbstractCompanyInformation.Builder<Builder> {
-    private String operatingCashFlow = DEFAULT;
-    private String investingCashFlow = DEFAULT;
-    private String financingCashFlow = DEFAULT;
-    private String endCashPosition = DEFAULT;
-    private String capitalExpenditure = DEFAULT;
-    private String freeCashFlow = DEFAULT;
+    private String operatingCashFlowTTM = DEFAULT;
+    private String investingCashFlowTTM = DEFAULT;
+    private String financingCashFlowTTM = DEFAULT;
+    private String endCashPositionTTM = DEFAULT;
+    private String capitalExpenditureTTM = DEFAULT;
+    private String freeCashFlowTTM = DEFAULT;
 
-    public Builder withOperatingCashFlow(String operatingCashFlow) {
-      this.operatingCashFlow = operatingCashFlow;
+    public Builder withOperatingCashFlowTTM(String operatingCashFlowTTM) {
+      this.operatingCashFlowTTM = operatingCashFlowTTM;
       return this;
     }
 
-    public Builder withInvestingCashFlow(String investingCashFlow) {
-      this.investingCashFlow = investingCashFlow;
+    public Builder withInvestingCashFlowTTM(String investingCashFlowTTM) {
+      this.investingCashFlowTTM = investingCashFlowTTM;
       return this;
     }
 
-    public Builder withFinancingCashFlow(String financingCashFlow) {
-      this.financingCashFlow = financingCashFlow;
+    public Builder withFinancingCashFlowTTM(String financingCashFlowTTM) {
+      this.financingCashFlowTTM = financingCashFlowTTM;
       return this;
     }
 
-    public Builder withEndCashPosition(String endCashPosition) {
-      this.endCashPosition = endCashPosition;
+    public Builder withEndCashPositionTTM(String endCashPositionTTM) {
+      this.endCashPositionTTM = endCashPositionTTM;
       return this;
     }
 
-    public Builder withCapitalExpenditure(String capitalExpenditure) {
-      this.capitalExpenditure = capitalExpenditure;
+    public Builder withCapitalExpenditureTTM(String capitalExpenditureTTM) {
+      this.capitalExpenditureTTM = capitalExpenditureTTM;
       return this;
     }
 
-    public Builder withFreeCashFlow(String freeCashFlow) {
-      this.freeCashFlow = freeCashFlow;
+    public Builder withFreeCashFlowTTM(String freeCashFlowTTM) {
+      this.freeCashFlowTTM = freeCashFlowTTM;
       return this;
     }
 

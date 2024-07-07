@@ -4,7 +4,6 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.opensource.enums.KeyStatisticsPositions;
@@ -19,7 +18,6 @@ public class GetKeyStatisticsService implements IWebExecutableService<CompanyKey
 
   private static final String URL = "https://finance.yahoo.com/quote/%s/key-statistics/";
   private static final String KEY_STATISTICS_SELECTOR = "td";
-  private static final String EXIT_CONDITION = "lookup";
 
   private final ExecutorService executor = Executors.newCachedThreadPool();
 
@@ -29,14 +27,15 @@ public class GetKeyStatisticsService implements IWebExecutableService<CompanyKey
     HtmlUnitDriver driver = new HtmlUnitDriver();
     String tickerCaps = StringUtils.capitalize(ticker);
     try {
-      driver.get(createURL(tickerCaps));
-      Document pageDocument = Jsoup.parse(driver.getPageSource());
-      if (driver.getCurrentUrl().contains(EXIT_CONDITION)) {
+      String tickerURL = createURL(tickerCaps);
+      driver.get(tickerURL);
+      if (!tickerURL.equals(driver.getCurrentUrl())) {
         return builder.build();
       }
-      Elements tdElements = pageDocument.select(KEY_STATISTICS_SELECTOR);
-      if (CollectionUtils.isNotEmpty(tdElements)) {
-        builder = populateBuilderWithMainInfo(tdElements);
+      Document pageDocument = Jsoup.parse(driver.getPageSource());
+      Elements dataElements = pageDocument.select(KEY_STATISTICS_SELECTOR);
+      if (CollectionUtils.isNotEmpty(dataElements)) {
+        builder = populateBuilderWithMainInfo(dataElements);
       }
 
       builder.withCompanyName(getCompanyName(pageDocument));
@@ -53,18 +52,19 @@ public class GetKeyStatisticsService implements IWebExecutableService<CompanyKey
   @Override
   public CompletableFuture<CompanyKeyStatistics> executeAsync(String ticker) {
     return CompletableFuture.supplyAsync(() -> {
-      String tickerCaps = StringUtils.capitalize(ticker);
       CompanyKeyStatistics.Builder builder = new CompanyKeyStatistics.Builder();
+      String tickerCaps = StringUtils.capitalize(ticker);
       HtmlUnitDriver driver = new HtmlUnitDriver();
       try {
-        driver.get(createURL(tickerCaps));
-        Document pageDocument = Jsoup.parse(driver.getPageSource());
-        if (driver.getCurrentUrl().contains(EXIT_CONDITION)) {
+        String tickerURL = createURL(tickerCaps);
+        driver.get(tickerURL);
+        if (!tickerURL.equals(driver.getCurrentUrl())) {
           return builder.build();
         }
-        Elements tdElements = pageDocument.select(KEY_STATISTICS_SELECTOR);
-        if (CollectionUtils.isNotEmpty(tdElements)) {
-          builder = populateBuilderWithMainInfo(tdElements);
+        Document pageDocument = Jsoup.parse(driver.getPageSource());
+        Elements dataElements = pageDocument.select(KEY_STATISTICS_SELECTOR);
+        if (CollectionUtils.isNotEmpty(dataElements)) {
+          builder = populateBuilderWithMainInfo(dataElements);
         }
 
         builder.withCompanyName(getCompanyName(pageDocument));
@@ -78,6 +78,7 @@ public class GetKeyStatisticsService implements IWebExecutableService<CompanyKey
     }, executor);
   }
 
+  @Override
   public void shutdown() {
     // Shutdown the executor service
     executor.shutdown();
