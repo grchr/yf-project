@@ -1,5 +1,5 @@
 package org.opensource.model;
 
-public class CompanyCashFlow extends AbstractCompanyInformation {
+public class CompanyCashFlow{
 
 }

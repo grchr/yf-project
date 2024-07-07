@@ -3,9 +3,6 @@ package org.opensource.model;
 import java.util.Objects;
 
 public class CompanyKeyStatistics extends AbstractCompanyInformation {
-  private String companyName;
-  private String companyTicker;
-  private String currentPrice;
   private String marketCap;
   private String enterpriseValue;
   private String trailingPE;
@@ -34,9 +31,7 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
   private CompanyTradingInformation tradingInformation;
 
   private CompanyKeyStatistics(Builder builder) {
-    this.companyName = builder.companyName;
-    this.companyTicker = builder.companyTicker;
-    this.currentPrice = builder.currentPrice;
+    super(builder); // Call to the parent builder
     this.marketCap = builder.marketCap;
     this.enterpriseValue = builder.enterpriseValue;
     this.trailingPE = builder.trailingPE;
@@ -63,18 +58,6 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
     this.totalDebt = builder.totalDebt;
     this.totalDebtToEquity = builder.totalDebtToEquity;
     this.tradingInformation = builder.tradingInformation;
-  }
-
-  public String getCompanyName() {
-    return companyName;
-  }
-
-  public String getCompanyTicker() {
-    return companyTicker;
-  }
-
-  public String getCurrentPrice() {
-    return currentPrice;
   }
 
   public String getMarketCap() {
@@ -184,9 +167,9 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
   @Override
   public String toString() {
     return "CompanyKeyStatistics{" +
-            "companyName='" + companyName + '\'' +
-            ", companyTicker='" + companyTicker + '\'' +
-            ", currentPrice='" + currentPrice + '\'' +
+            "companyName='" + getCompanyName() + '\'' +
+            ", companyTicker='" + getCompanyTicker() + '\'' +
+            ", currentPrice='" + getCurrentPrice() + '\'' +
             ", marketCap='" + marketCap + '\'' +
             ", enterpriseValue='" + enterpriseValue + '\'' +
             ", trailingPE='" + trailingPE + '\'' +
@@ -284,51 +267,33 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
             getTradingInformation());
   }
 
-  public static class Builder extends AbstractCompanyInfoBuilder{
-    private String companyName = "--";
-    private String companyTicker = "--";
-    private String currentPrice = "--";
-    private String marketCap = "--";
-    private String enterpriseValue = "--";
-    private String trailingPE = "--";
-    private String forwardPE = "--";
-    private String pegRatio = "--";
-    private String ratioPS = "--";
-    private String ratioPB = "--";
-    private String evToRevenue = "--";
-    private String evToEBITDA = "--";
-    private String profitMargin = "--";
-    private String operatingMargin = "--";
-    private String returnOnAssets = "--";
-    private String returnOnEquity = "--";
-    private String revenue = "--";
-    private String revenuePerShare = "--";
-    private String quarterlyRevenueGrowth = "--";
-    private String grossProfit = "--";
-    private String EBITDA = "--";
-    private String netIncomeAviToCommon = "--";
-    private String dilutedEPS = "--";
-    private String quartEarningsGrowth = "--";
-    private String totalCash = "--";
-    private String totalCashPerShare = "--";
-    private String totalDebt = "--";
-    private String totalDebtToEquity = "--";
+  public static class Builder extends AbstractCompanyInformation.Builder<CompanyKeyStatistics.Builder> {
+    private String marketCap = DEFAULT;
+    private String enterpriseValue = DEFAULT;
+    private String trailingPE = DEFAULT;
+    private String forwardPE = DEFAULT;
+    private String pegRatio = DEFAULT;
+    private String ratioPS = DEFAULT;
+    private String ratioPB = DEFAULT;
+    private String evToRevenue = DEFAULT;
+    private String evToEBITDA = DEFAULT;
+    private String profitMargin = DEFAULT;
+    private String operatingMargin = DEFAULT;
+    private String returnOnAssets = DEFAULT;
+    private String returnOnEquity = DEFAULT;
+    private String revenue = DEFAULT;
+    private String revenuePerShare = DEFAULT;
+    private String quarterlyRevenueGrowth = DEFAULT;
+    private String grossProfit = DEFAULT;
+    private String EBITDA = DEFAULT;
+    private String netIncomeAviToCommon = DEFAULT;
+    private String dilutedEPS = DEFAULT;
+    private String quartEarningsGrowth = DEFAULT;
+    private String totalCash = DEFAULT;
+    private String totalCashPerShare = DEFAULT;
+    private String totalDebt = DEFAULT;
+    private String totalDebtToEquity = DEFAULT;
     private CompanyTradingInformation tradingInformation = new CompanyTradingInformation.Builder().build();
-
-    public Builder withCompanyName(String companyName) {
-      this.companyName = companyName;
-      return this;
-    }
-
-    public Builder withCompanyTicker(String companyTicker) {
-      this.companyTicker = companyTicker;
-      return this;
-    }
-
-    public Builder withCurrentPrice(String currentPrice) {
-      this.currentPrice = currentPrice;
-      return this;
-    }
 
     public Builder withMarketCap(String marketCap) {
       this.marketCap = marketCap;
@@ -466,9 +431,8 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
     }
 
     @Override
-    public CompanyKeyStatistics.Builder self(){
+    protected Builder self() {
       return this;
     }
   }
 }
-

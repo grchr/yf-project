@@ -1,4 +1,8 @@
 package org.opensource.service;
 
-public class GetFinancialsService {
+import org.opensource.model.CompanyFinancials;
+
+public class GetFinancialsService{
+
+  private static final String URL = "https://finance.yahoo.com/quote/%s/key-statistics/";
 }

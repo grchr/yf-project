@@ -15,15 +15,10 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class GetKeyStatisticsService implements SeleniumExecutableService<CompanyKeyStatistics>{
+public class GetKeyStatisticsService implements IWebExecutableService<CompanyKeyStatistics>{
 
   private static final String URL = "https://finance.yahoo.com/quote/%s/key-statistics/";
   private static final String KEY_STATISTICS_SELECTOR = "td";
-  private static final String COMPANY_NAME_SELECTOR = "h1";
-  private static final int COMPANY_NAME_POSITION = 1;
-  private static final String CURRENT_PRICE_FIRST_SELECTOR = "div.container.svelte-mgkamr";
-  private static final String CURRENT_PRICE_SECOND_SELECTOR = "span";
-  private static final int CURRENT_PRICE_POSITION = 0;
   private static final String EXIT_CONDITION = "lookup";
 
   private final ExecutorService executor = Executors.newCachedThreadPool();
@@ -53,26 +48,6 @@ public class GetKeyStatisticsService implements SeleniumExecutableService<Compan
     }
 
     return builder.build();
-  }
-
-  private String getCompanyName(Document pageDocument) {
-    Elements headTitles = pageDocument.select(COMPANY_NAME_SELECTOR);
-    if (CollectionUtils.isNotEmpty(headTitles)) {
-      return getValueFromElements(headTitles, COMPANY_NAME_POSITION);
-    }
-    return "--";
-  }
-
-  private String getCurrentPrice(Document pageDocument) {
-    Element container = pageDocument.selectFirst(CURRENT_PRICE_FIRST_SELECTOR);
-    // Select all span elements within the specific container
-    if (container != null) {
-      Elements spans = container.select(CURRENT_PRICE_SECOND_SELECTOR);
-      if (CollectionUtils.isNotEmpty(spans)) {
-        return getValueFromElements(spans, CURRENT_PRICE_POSITION);
-      }
-    }
-    return "--";
   }
 
   @Override
@@ -110,13 +85,6 @@ public class GetKeyStatisticsService implements SeleniumExecutableService<Compan
 
   private String createURL(String ticker) {
     return String.format(URL, ticker);
-  }
-
-  private String getValueFromElements(Elements elements, int position) {
-    if (elements.size() > position) {
-      return elements.get(position).text();
-    }
-    return "--";
   }
 
   private CompanyKeyStatistics.Builder populateBuilderWithMainInfo(Elements tdElements) {

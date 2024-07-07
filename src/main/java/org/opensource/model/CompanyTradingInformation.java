@@ -18,6 +18,7 @@ public class CompanyTradingInformation extends AbstractCompanyInformation {
   private String day200MovingAverage;
 
   private CompanyTradingInformation(Builder builder) {
+    super(builder);
     this.beta = builder.beta;
     this.forwardAnnualDividendYield = builder.forwardAnnualDividendYield;
     this.forwardAnnualDividendRate = builder.forwardAnnualDividendRate;
@@ -107,8 +108,7 @@ public class CompanyTradingInformation extends AbstractCompanyInformation {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof CompanyTradingInformation)) return false;
-    CompanyTradingInformation that = (CompanyTradingInformation) o;
+    if (!(o instanceof CompanyTradingInformation that)) return false;
     return Objects.equals(getBeta(), that.getBeta()) &&
             Objects.equals(getForwardAnnualDividendYield(), that.getForwardAnnualDividendYield()) &&
             Objects.equals(getForwardAnnualDividendRate(), that.getForwardAnnualDividendRate()) &&
@@ -132,20 +132,20 @@ public class CompanyTradingInformation extends AbstractCompanyInformation {
             getDay50MovingAvg(), getDay200MovingAverage());
   }
 
-  public static class Builder extends AbstractCompanyInfoBuilder {
-    private String beta = "--";
-    private String forwardAnnualDividendYield = "--";
-    private String forwardAnnualDividendRate = "--";
-    private String dividendYield5YearAvg = "--";
-    private String trailingAnnualDividendYield = "--";
-    private String trailingAnnualDividendRate = "--";
-    private String payoutRatio = "--";
-    private String currentRatio = "--";
-    private String week52Range = "--";
-    private String week52High = "--";
-    private String week52Low = "--";
-    private String day50MovingAvg = "--";
-    private String day200MovingAverage = "--";
+  public static class Builder extends AbstractCompanyInformation.Builder {
+    private String beta = DEFAULT;
+    private String forwardAnnualDividendYield = DEFAULT;
+    private String forwardAnnualDividendRate = DEFAULT;
+    private String dividendYield5YearAvg = DEFAULT;
+    private String trailingAnnualDividendYield = DEFAULT;
+    private String trailingAnnualDividendRate = DEFAULT;
+    private String payoutRatio = DEFAULT;
+    private String currentRatio = DEFAULT;
+    private String week52Range = DEFAULT;
+    private String week52High = DEFAULT;
+    private String week52Low = DEFAULT;
+    private String day50MovingAvg = DEFAULT;
+    private String day200MovingAverage = DEFAULT;
 
     public Builder withBeta(String beta) {
       this.beta = beta;
