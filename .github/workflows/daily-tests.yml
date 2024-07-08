@@ -2,7 +2,7 @@ name: Daily Tests
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Runs every day at midnight UTC (adjust as needed)
+    - cron: '0 21 * * *'  # Runs every day at midnight UTC (adjust as needed)
 
 jobs:
   test:
