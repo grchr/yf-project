@@ -2,7 +2,7 @@ name: Daily Tests
 
 on:
   schedule:
-    - cron: '0 21 * * *'  # Runs every day at midnight UTC (adjust as needed)
+    - cron: '0 4 * * *'  # Runs every day at 21:00 UTC
 
 jobs:
   test:
@@ -16,6 +16,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '17'
+          distribution: 'temurin'  # You can use 'adopt', 'zulu', or 'temurin' based on your preference
 
       - name: Cache Maven dependencies
         uses: actions/cache@v2
