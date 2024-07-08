@@ -16,10 +16,12 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class GetIncomeStatementService implements IWebExecutableService<CompanyIncomeStatement>, IWebTitleIterableService<IncomeStatementTitles> {
+import static org.opensource.service.ReaderHelpers.getCompanyName;
+import static org.opensource.service.ReaderHelpers.getCurrentPrice;
+
+public class GetIncomeStatementService extends AbstractWebTitleIterableService<IncomeStatementTitles> implements IWebExecutableService<CompanyIncomeStatement> {
 
   private static final String URL = "https://finance.yahoo.com/quote/%s/financials/";
-  private static final String FINANCIALS_SELECTOR = "div.column.svelte-1xjz32c, div.column.svelte-1xjz32c.alt";
   private final ExecutorService executor = Executors.newCachedThreadPool();
 
   @Override
@@ -34,7 +36,7 @@ public class GetIncomeStatementService implements IWebExecutableService<CompanyI
         return builder.build();
       }
       Document pageDocument = Jsoup.parse(driver.getPageSource());
-      Elements dataElements = pageDocument.select(FINANCIALS_SELECTOR);
+      Elements dataElements = pageDocument.select(TITLES_SELECTOR);
       if (CollectionUtils.isNotEmpty(dataElements)) {
         builder = populateBuilderWithMainInfo(dataElements);
       }
@@ -49,7 +51,8 @@ public class GetIncomeStatementService implements IWebExecutableService<CompanyI
     return builder.build();
   }
 
-  private CompanyIncomeStatement.Builder populateBuilderWithMainInfo(Elements dataElements) {
+  @Override
+  protected CompanyIncomeStatement.Builder populateBuilderWithMainInfo(Elements dataElements) {
     CompanyIncomeStatement.Builder builder = new CompanyIncomeStatement.Builder();
     Map<IncomeStatementTitles, String> incomeStatementTTMMap = fillMap(dataElements, 1);
     Map<IncomeStatementTitles, String> incomeStatementLastUpdateMap = fillMap(dataElements, 2);
@@ -95,7 +98,8 @@ public class GetIncomeStatementService implements IWebExecutableService<CompanyI
     return map;
   }
 
-  private String getTitleValue(Map<IncomeStatementTitles, String> incomeStatementMap, IncomeStatementTitles title) {
+  @Override
+  protected String getTitleValue(Map<IncomeStatementTitles, String> incomeStatementMap, IncomeStatementTitles title) {
     if (incomeStatementMap.containsKey(title)) {
       return incomeStatementMap.get(title);
     }
@@ -115,7 +119,7 @@ public class GetIncomeStatementService implements IWebExecutableService<CompanyI
           return builder.build();
         }
         Document pageDocument = Jsoup.parse(driver.getPageSource());
-        Elements dataElements = pageDocument.select(FINANCIALS_SELECTOR);
+        Elements dataElements = pageDocument.select(TITLES_SELECTOR);
         if (CollectionUtils.isNotEmpty(dataElements)) {
           builder = populateBuilderWithMainInfo(dataElements);
         }

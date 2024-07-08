@@ -8,14 +8,23 @@ public enum CashFlowTitles {
   CAPITAL_EXPENDITURE("Capital Expenditure"),
   FREE_CASH_FLOW("Free Cash Flow");
 
-  private final String description;
+  private final String title;
 
-  CashFlowTitles(String description) {
-    this.description = description;
+  CashFlowTitles(String title) {
+    this.title = title;
   }
 
-  public String getDescription() {
-    return description;
+  public String getTitle() {
+    return title;
+  }
+
+  public static CashFlowTitles fromTitle(String title) {
+    for (CashFlowTitles balanceSheetTitle : values()) {
+      if (balanceSheetTitle.getTitle().equalsIgnoreCase(title)) {
+        return balanceSheetTitle;
+      }
+    }
+    return null;
   }
 }
 

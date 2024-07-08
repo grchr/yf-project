@@ -14,6 +14,10 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static org.opensource.service.ReaderHelpers.getCompanyName;
+import static org.opensource.service.ReaderHelpers.getCurrentPrice;
+import static org.opensource.service.ReaderHelpers.getValueFromElements;
+
 public class GetKeyStatisticsService implements IWebExecutableService<CompanyKeyStatistics>{
 
   private static final String URL = "https://finance.yahoo.com/quote/%s/key-statistics/";

@@ -7,6 +7,8 @@ import org.jsoup.select.Elements;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.opensource.model.CompanyIncomeStatement;
 import org.opensource.model.CompanyKeyStatistics;
+import org.opensource.service.GetBalanceSheetService;
+import org.opensource.service.GetCashFlowService;
 import org.opensource.service.GetIncomeStatementService;
 import org.opensource.service.GetKeyStatisticsService;
 
@@ -60,17 +62,17 @@ public class App {
 //    boolean equals = companyKeyStatistics.equals(companyKeyStatistics1);
 //    System.out.println("Equality achieved: " + equals);
 
-//    CompletableFuture<CompanyKeyStatistics> futureStats = getKeyStatisticsService.executeAsync("AAPL");
-//
-//    // Handle the completion of the async task
-//    futureStats.thenAccept(stats -> {
-//      System.out.println("Received key statistics: " + stats);
-//      getKeyStatisticsService.shutdown(); // Shutdown executor when done
-//    }).exceptionally(ex -> {
-//      System.err.println("Error fetching key statistics: " + ex.getMessage());
-//      getKeyStatisticsService.shutdown(); // Shutdown executor on error
-//      return null;
-//    });
+    CompletableFuture<CompanyKeyStatistics> futureStats = getKeyStatisticsService.executeAsync("AAPL");
+
+    // Handle the completion of the async task
+    futureStats.thenAccept(stats -> {
+      System.out.println("Received key statistics: " + stats);
+      getKeyStatisticsService.shutdown(); // Shutdown executor when done
+    }).exceptionally(ex -> {
+      System.err.println("Error fetching key statistics: " + ex.getMessage());
+      getKeyStatisticsService.shutdown(); // Shutdown executor on error
+      return null;
+    });
 
     // Select all span elements within the specific container
     if (container != null) {
@@ -102,58 +104,21 @@ public class App {
 
 //    CompanyIncomeStatement companyFinancials = getFinancialsService.execute("BNP.PA");
 //    System.out.println(companyFinancials);
-    CompanyIncomeStatement companyFinancials2 = getFinancialsService.execute("APPL");
+    CompanyIncomeStatement companyFinancials2 = getFinancialsService.execute("AAPL");
     System.out.println(companyFinancials2);
-
-//    String pageSourceFinancials = driver.getPageSource();
-//
-//    Document docFinancials = Jsoup.parse(pageSourceFinancials);
-//
-//    Element containerFinancials = docFinancials.selectFirst("div.container.svelte-mgkamr");
-//
-//    // Select all span elements within the specific container
-//    if (containerFinancials != null) {
-//      Elements spans = containerFinancials.select("span");
-//
-//      // Iterate through the spans and print their text content
-//      for (Element span : spans) {
-//        System.out.println(span.text());
-//      }
-//    }
-//
-//    Elements divFinancials = docFinancials.select("div.column.svelte-1xjz32c, div.column.svelte-1xjz32c.alt");
-//
-//    for (Element div : divFinancials) {
-//      System.out.println(div.text());
-//    }
 
     System.out.println("++++++++++++++++++BALANCE SHEET+++++++++++++++++++");
 
-    driver.get("https://finance.yahoo.com/quote/BNP.PA/balance-sheet/");
+    GetBalanceSheetService getBalanceSheetService = new GetBalanceSheetService();
 
-    String pageSourceBalanceSheet = driver.getPageSource();
 
-    Document docBalanceSheet = Jsoup.parse(pageSourceBalanceSheet);
-
-    Elements divBalanceSheet = docBalanceSheet.select("div.column.svelte-1xjz32c, div.column.svelte-1xjz32c.alt");
-
-    for (Element div : divBalanceSheet) {
-      System.out.println(div.text());
-    }
+    System.out.println(getBalanceSheetService.execute("BNP.PA"));
 
     System.out.println("===================CASH FLOWS===================");
 
-    driver.get("https://finance.yahoo.com/quote/BNP.PA/cash-flow/");
+    GetCashFlowService getCashFlowService = new GetCashFlowService();
 
-    String pageSourceCashFlow = driver.getPageSource();
-
-    Document docCashFlow = Jsoup.parse(pageSourceCashFlow);
-
-    Elements divCashFlow = docCashFlow.select("div.column.svelte-1xjz32c, div.column.svelte-1xjz32c.alt");
-
-    for (Element div : divCashFlow) {
-      System.out.println(div.text());
-    }
+    System.out.println(getCashFlowService.execute("AAPL"));
 
     // Close the browser
     driver.quit();

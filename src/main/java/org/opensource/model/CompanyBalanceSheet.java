@@ -1,5 +1,7 @@
 package org.opensource.model;
 
+import java.util.Objects;
+
 public class CompanyBalanceSheet extends AbstractCompanyInformation {
   private String totalAssets;
   private String totalLiabilitiesNetMinorityInterest;
@@ -82,6 +84,64 @@ public class CompanyBalanceSheet extends AbstractCompanyInformation {
 
   public String getOrdinarySharesNumber() {
     return ordinarySharesNumber;
+  }
+
+  @Override
+  public String toString() {
+    return "CompanyBalanceSheet{" +
+            "companyName='" + getCompanyName() + '\'' +
+            ", companyTicker='" + getCompanyTicker() + '\'' +
+            ", currentPrice='" + getCurrentPrice() + '\'' +
+            ", totalAssets='" + totalAssets + '\'' +
+            ", totalLiabilitiesNetMinorityInterest='" + totalLiabilitiesNetMinorityInterest + '\'' +
+            ", totalEquityGrossMinorityInterest='" + totalEquityGrossMinorityInterest + '\'' +
+            ", totalCapitalization='" + totalCapitalization + '\'' +
+            ", commonStockEquity='" + commonStockEquity + '\'' +
+            ", netTangibleAssets='" + netTangibleAssets + '\'' +
+            ", workingCapital='" + workingCapital + '\'' +
+            ", investedCapital='" + investedCapital + '\'' +
+            ", tangibleBookValue='" + tangibleBookValue + '\'' +
+            ", totalDebt='" + totalDebt + '\'' +
+            ", netDebt='" + netDebt + '\'' +
+            ", sharesIssued='" + sharesIssued + '\'' +
+            ", ordinarySharesNumber='" + ordinarySharesNumber + '\'' +
+            '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof CompanyBalanceSheet that)) return false;
+    return Objects.equals(getTotalAssets(), that.getTotalAssets())
+            && Objects.equals(getTotalLiabilitiesNetMinorityInterest(), that.getTotalLiabilitiesNetMinorityInterest())
+            && Objects.equals(getTotalEquityGrossMinorityInterest(), that.getTotalEquityGrossMinorityInterest())
+            && Objects.equals(getTotalCapitalization(), that.getTotalCapitalization())
+            && Objects.equals(getCommonStockEquity(), that.getCommonStockEquity())
+            && Objects.equals(getNetTangibleAssets(), that.getNetTangibleAssets())
+            && Objects.equals(getWorkingCapital(), that.getWorkingCapital())
+            && Objects.equals(getInvestedCapital(), that.getInvestedCapital())
+            && Objects.equals(getTangibleBookValue(), that.getTangibleBookValue())
+            && Objects.equals(getTotalDebt(), that.getTotalDebt())
+            && Objects.equals(getNetDebt(), that.getNetDebt())
+            && Objects.equals(getSharesIssued(), that.getSharesIssued())
+            && Objects.equals(getOrdinarySharesNumber(), that.getOrdinarySharesNumber());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getTotalAssets(),
+            getTotalLiabilitiesNetMinorityInterest(),
+            getTotalEquityGrossMinorityInterest(),
+            getTotalCapitalization(),
+            getCommonStockEquity(),
+            getNetTangibleAssets(),
+            getWorkingCapital(),
+            getInvestedCapital(),
+            getTangibleBookValue(),
+            getTotalDebt(),
+            getNetDebt(),
+            getSharesIssued(),
+            getOrdinarySharesNumber());
   }
 
   public static class Builder extends AbstractCompanyInformation.Builder<Builder> {
