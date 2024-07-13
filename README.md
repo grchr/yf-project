@@ -19,3 +19,20 @@ details on your rights to use the actual data downloaded.**
 **yf-project** offers a way to download market data from [Yahoo!Ⓡ finance](https://finance.yahoo.com) in your Java project.
 It offers synchronous and asynchronous methods. For the moment it does not offer historical data. It offers access to current values (key statistics and trading information, cash flows, balance sheets, income statements) as well as TTM values in some cases.
 
+To use in your project add jitpack in your project:
+```xml
+<repositories>
+  <repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+  </repository>
+</repositories>
+```
+ Then add the dependency itself:
+```xml
+<dependency>
+  <groupId>com.github.grchr</groupId>
+  <artifactId>yf-project</artifactId>
+  <version>release version</version>
+</dependency>
+```
