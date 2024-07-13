@@ -61,7 +61,7 @@ public class GetKeyStatisticsService implements IWebExecutableService<CompanyKey
       String tickerCaps = StringUtils.capitalize(ticker);
       HtmlUnitDriver driver = new HtmlUnitDriver();
       try {
-        String tickerURL = createURL(this.URL, tickerCaps);
+        String tickerURL = createURL(URL, tickerCaps);
         driver.get(tickerURL);
         if (!tickerURL.equals(driver.getCurrentUrl())) {
           return builder.build();
