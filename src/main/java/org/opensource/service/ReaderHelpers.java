@@ -14,6 +14,10 @@ public class ReaderHelpers {
   static final int CURRENT_PRICE_POSITION = 0;
   static String DEFAULT = "--";
 
+  private ReaderHelpers() {
+    // keep constructor private
+  }
+
   static String getValueFromElements(Elements elements, int position) {
     if (elements.size() > position) {
       return elements.get(position).text();
