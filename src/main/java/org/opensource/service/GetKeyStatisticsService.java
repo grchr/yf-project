@@ -14,6 +14,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static org.opensource.service.ReaderHelpers.createURL;
 import static org.opensource.service.ReaderHelpers.getCompanyName;
 import static org.opensource.service.ReaderHelpers.getCurrentPrice;
 import static org.opensource.service.ReaderHelpers.getValueFromElements;
@@ -31,7 +32,7 @@ public class GetKeyStatisticsService implements IWebExecutableService<CompanyKey
     HtmlUnitDriver driver = new HtmlUnitDriver();
     String tickerCaps = StringUtils.capitalize(ticker);
     try {
-      String tickerURL = createURL(tickerCaps);
+      String tickerURL = createURL(URL, tickerCaps);
       driver.get(tickerURL);
       if (!tickerURL.equals(driver.getCurrentUrl())) {
         return builder.build();
@@ -60,7 +61,7 @@ public class GetKeyStatisticsService implements IWebExecutableService<CompanyKey
       String tickerCaps = StringUtils.capitalize(ticker);
       HtmlUnitDriver driver = new HtmlUnitDriver();
       try {
-        String tickerURL = createURL(tickerCaps);
+        String tickerURL = createURL(this.URL, tickerCaps);
         driver.get(tickerURL);
         if (!tickerURL.equals(driver.getCurrentUrl())) {
           return builder.build();
@@ -86,10 +87,6 @@ public class GetKeyStatisticsService implements IWebExecutableService<CompanyKey
   public void shutdown() {
     // Shutdown the executor service
     executor.shutdown();
-  }
-
-  private String createURL(String ticker) {
-    return String.format(URL, ticker);
   }
 
   private CompanyKeyStatistics.Builder populateBuilderWithMainInfo(Elements tdElements) {

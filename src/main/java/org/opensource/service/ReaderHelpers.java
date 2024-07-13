@@ -40,4 +40,8 @@ public class ReaderHelpers {
     }
     return DEFAULT;
   }
+
+  static String createURL(String URL, String ticker) {
+    return String.format(URL, ticker);
+  }
 }

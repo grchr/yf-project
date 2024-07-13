@@ -16,6 +16,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static org.opensource.service.ReaderHelpers.createURL;
 import static org.opensource.service.ReaderHelpers.getCompanyName;
 import static org.opensource.service.ReaderHelpers.getCurrentPrice;
 
@@ -30,7 +31,7 @@ public class GetIncomeStatementService extends AbstractWebTitleIterableService<I
     HtmlUnitDriver driver = new HtmlUnitDriver();
     String tickerCaps = StringUtils.capitalize(ticker);
     try {
-      String tickerURL = createURL(tickerCaps);
+      String tickerURL = createURL(URL, tickerCaps);
       driver.get(tickerURL);
       if (!tickerURL.equals(driver.getCurrentUrl())) {
         return builder.build();
@@ -113,7 +114,7 @@ public class GetIncomeStatementService extends AbstractWebTitleIterableService<I
       HtmlUnitDriver driver = new HtmlUnitDriver();
       String tickerCaps = StringUtils.capitalize(ticker);
       try {
-        String tickerURL = createURL(tickerCaps);
+        String tickerURL = createURL(URL, tickerCaps);
         driver.get(tickerURL);
         if (!tickerURL.equals(driver.getCurrentUrl())) {
           return builder.build();
@@ -141,7 +142,4 @@ public class GetIncomeStatementService extends AbstractWebTitleIterableService<I
     executor.shutdown();
   }
 
-  private String createURL(String ticker) {
-    return String.format(URL, ticker);
-  }
 }
