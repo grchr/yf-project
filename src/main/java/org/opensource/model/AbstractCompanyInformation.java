@@ -4,7 +4,7 @@ public abstract class AbstractCompanyInformation {
 
   private String companyName;
   private String companyTicker;
-  private String currentPrice;
+  private double currentPrice;
 
   protected AbstractCompanyInformation(Builder<?> builder) {
     this.companyName = builder.companyName;
@@ -20,16 +20,18 @@ public abstract class AbstractCompanyInformation {
     return companyTicker;
   }
 
-  public String getCurrentPrice() {
+  public double getCurrentPrice() {
     return currentPrice;
   }
 
   public abstract static class Builder<T extends Builder<T>> {
 
     protected static final String DEFAULT = "--";
+
+    protected static double DEFAULT_DOUBLE = Double.NaN;
     private String companyName = DEFAULT;
     private String companyTicker = DEFAULT;
-    private String currentPrice = DEFAULT;
+    private double currentPrice = DEFAULT_DOUBLE;
 
     public T withCompanyName(String companyName) {
       this.companyName = companyName;
@@ -41,7 +43,7 @@ public abstract class AbstractCompanyInformation {
       return self();
     }
 
-    public T withCurrentPrice(String currentPrice) {
+    public T withCurrentPrice(double currentPrice) {
       this.currentPrice = currentPrice;
       return self();
     }

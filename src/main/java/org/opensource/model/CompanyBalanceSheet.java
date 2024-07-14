@@ -3,19 +3,19 @@ package org.opensource.model;
 import java.util.Objects;
 
 public class CompanyBalanceSheet extends AbstractCompanyInformation {
-  private String totalAssets;
-  private String totalLiabilitiesNetMinorityInterest;
-  private String totalEquityGrossMinorityInterest;
-  private String totalCapitalization;
-  private String commonStockEquity;
-  private String netTangibleAssets;
-  private String workingCapital;
-  private String investedCapital;
-  private String tangibleBookValue;
-  private String totalDebt;
-  private String netDebt;
-  private String sharesIssued;
-  private String ordinarySharesNumber;
+  private double totalAssets;
+  private double totalLiabilitiesNetMinorityInterest;
+  private double totalEquityGrossMinorityInterest;
+  private double totalCapitalization;
+  private double commonStockEquity;
+  private double netTangibleAssets;
+  private double workingCapital;
+  private double investedCapital;
+  private double tangibleBookValue;
+  private double totalDebt;
+  private double netDebt;
+  private double sharesIssued;
+  private double ordinarySharesNumber;
 
   private CompanyBalanceSheet(Builder builder) {
     super(builder); // Calling the parent class constructor
@@ -34,55 +34,55 @@ public class CompanyBalanceSheet extends AbstractCompanyInformation {
     this.ordinarySharesNumber = builder.ordinarySharesNumber;
   }
 
-  public String getTotalAssets() {
+  public double getTotalAssets() {
     return totalAssets;
   }
 
-  public String getTotalLiabilitiesNetMinorityInterest() {
+  public double getTotalLiabilitiesNetMinorityInterest() {
     return totalLiabilitiesNetMinorityInterest;
   }
 
-  public String getTotalEquityGrossMinorityInterest() {
+  public double getTotalEquityGrossMinorityInterest() {
     return totalEquityGrossMinorityInterest;
   }
 
-  public String getTotalCapitalization() {
+  public double getTotalCapitalization() {
     return totalCapitalization;
   }
 
-  public String getCommonStockEquity() {
+  public double getCommonStockEquity() {
     return commonStockEquity;
   }
 
-  public String getNetTangibleAssets() {
+  public double getNetTangibleAssets() {
     return netTangibleAssets;
   }
 
-  public String getWorkingCapital() {
+  public double getWorkingCapital() {
     return workingCapital;
   }
 
-  public String getInvestedCapital() {
+  public double getInvestedCapital() {
     return investedCapital;
   }
 
-  public String getTangibleBookValue() {
+  public double getTangibleBookValue() {
     return tangibleBookValue;
   }
 
-  public String getTotalDebt() {
+  public double getTotalDebt() {
     return totalDebt;
   }
 
-  public String getNetDebt() {
+  public double getNetDebt() {
     return netDebt;
   }
 
-  public String getSharesIssued() {
+  public double getSharesIssued() {
     return sharesIssued;
   }
 
-  public String getOrdinarySharesNumber() {
+  public double getOrdinarySharesNumber() {
     return ordinarySharesNumber;
   }
 
@@ -92,19 +92,19 @@ public class CompanyBalanceSheet extends AbstractCompanyInformation {
             "companyName='" + getCompanyName() + '\'' +
             ", companyTicker='" + getCompanyTicker() + '\'' +
             ", currentPrice='" + getCurrentPrice() + '\'' +
-            ", totalAssets='" + totalAssets + '\'' +
-            ", totalLiabilitiesNetMinorityInterest='" + totalLiabilitiesNetMinorityInterest + '\'' +
-            ", totalEquityGrossMinorityInterest='" + totalEquityGrossMinorityInterest + '\'' +
-            ", totalCapitalization='" + totalCapitalization + '\'' +
-            ", commonStockEquity='" + commonStockEquity + '\'' +
-            ", netTangibleAssets='" + netTangibleAssets + '\'' +
-            ", workingCapital='" + workingCapital + '\'' +
-            ", investedCapital='" + investedCapital + '\'' +
-            ", tangibleBookValue='" + tangibleBookValue + '\'' +
-            ", totalDebt='" + totalDebt + '\'' +
-            ", netDebt='" + netDebt + '\'' +
-            ", sharesIssued='" + sharesIssued + '\'' +
-            ", ordinarySharesNumber='" + ordinarySharesNumber + '\'' +
+            ", totalAssets=" + totalAssets +
+            ", totalLiabilitiesNetMinorityInterest=" + totalLiabilitiesNetMinorityInterest +
+            ", totalEquityGrossMinorityInterest=" + totalEquityGrossMinorityInterest +
+            ", totalCapitalization=" + totalCapitalization +
+            ", commonStockEquity=" + commonStockEquity +
+            ", netTangibleAssets=" + netTangibleAssets +
+            ", workingCapital=" + workingCapital +
+            ", investedCapital=" + investedCapital +
+            ", tangibleBookValue=" + tangibleBookValue +
+            ", totalDebt=" + totalDebt +
+            ", netDebt=" + netDebt +
+            ", sharesIssued=" + sharesIssued +
+            ", ordinarySharesNumber=" + ordinarySharesNumber +
             '}';
   }
 
@@ -112,114 +112,104 @@ public class CompanyBalanceSheet extends AbstractCompanyInformation {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof CompanyBalanceSheet that)) return false;
-    return Objects.equals(getTotalAssets(), that.getTotalAssets())
-            && Objects.equals(getTotalLiabilitiesNetMinorityInterest(), that.getTotalLiabilitiesNetMinorityInterest())
-            && Objects.equals(getTotalEquityGrossMinorityInterest(), that.getTotalEquityGrossMinorityInterest())
-            && Objects.equals(getTotalCapitalization(), that.getTotalCapitalization())
-            && Objects.equals(getCommonStockEquity(), that.getCommonStockEquity())
-            && Objects.equals(getNetTangibleAssets(), that.getNetTangibleAssets())
-            && Objects.equals(getWorkingCapital(), that.getWorkingCapital())
-            && Objects.equals(getInvestedCapital(), that.getInvestedCapital())
-            && Objects.equals(getTangibleBookValue(), that.getTangibleBookValue())
-            && Objects.equals(getTotalDebt(), that.getTotalDebt())
-            && Objects.equals(getNetDebt(), that.getNetDebt())
-            && Objects.equals(getSharesIssued(), that.getSharesIssued())
-            && Objects.equals(getOrdinarySharesNumber(), that.getOrdinarySharesNumber());
+    return Double.compare(that.totalAssets, totalAssets) == 0 &&
+            Double.compare(that.totalLiabilitiesNetMinorityInterest, totalLiabilitiesNetMinorityInterest) == 0 &&
+            Double.compare(that.totalEquityGrossMinorityInterest, totalEquityGrossMinorityInterest) == 0 &&
+            Double.compare(that.totalCapitalization, totalCapitalization) == 0 &&
+            Double.compare(that.commonStockEquity, commonStockEquity) == 0 &&
+            Double.compare(that.netTangibleAssets, netTangibleAssets) == 0 &&
+            Double.compare(that.workingCapital, workingCapital) == 0 &&
+            Double.compare(that.investedCapital, investedCapital) == 0 &&
+            Double.compare(that.tangibleBookValue, tangibleBookValue) == 0 &&
+            Double.compare(that.totalDebt, totalDebt) == 0 &&
+            Double.compare(that.netDebt, netDebt) == 0 &&
+            Double.compare(that.sharesIssued, sharesIssued) == 0 &&
+            Double.compare(that.ordinarySharesNumber, ordinarySharesNumber) == 0;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getTotalAssets(),
-            getTotalLiabilitiesNetMinorityInterest(),
-            getTotalEquityGrossMinorityInterest(),
-            getTotalCapitalization(),
-            getCommonStockEquity(),
-            getNetTangibleAssets(),
-            getWorkingCapital(),
-            getInvestedCapital(),
-            getTangibleBookValue(),
-            getTotalDebt(),
-            getNetDebt(),
-            getSharesIssued(),
-            getOrdinarySharesNumber());
+    return Objects.hash(totalAssets, totalLiabilitiesNetMinorityInterest, totalEquityGrossMinorityInterest,
+            totalCapitalization, commonStockEquity, netTangibleAssets, workingCapital, investedCapital,
+            tangibleBookValue, totalDebt, netDebt, sharesIssued, ordinarySharesNumber);
   }
 
   public static class Builder extends AbstractCompanyInformation.Builder<Builder> {
-    private String totalAssets = DEFAULT;
-    private String totalLiabilitiesNetMinorityInterest = DEFAULT;
-    private String totalEquityGrossMinorityInterest = DEFAULT;
-    private String totalCapitalization = DEFAULT;
-    private String commonStockEquity = DEFAULT;
-    private String netTangibleAssets = DEFAULT;
-    private String workingCapital = DEFAULT;
-    private String investedCapital = DEFAULT;
-    private String tangibleBookValue = DEFAULT;
-    private String totalDebt = DEFAULT;
-    private String netDebt = DEFAULT;
-    private String sharesIssued = DEFAULT;
-    private String ordinarySharesNumber = DEFAULT;
+    private double totalAssets = DEFAULT_DOUBLE;
+    private double totalLiabilitiesNetMinorityInterest = DEFAULT_DOUBLE;
+    private double totalEquityGrossMinorityInterest = DEFAULT_DOUBLE;
+    private double totalCapitalization = DEFAULT_DOUBLE;
+    private double commonStockEquity = DEFAULT_DOUBLE;
+    private double netTangibleAssets = DEFAULT_DOUBLE;
+    private double workingCapital = DEFAULT_DOUBLE;
+    private double investedCapital = DEFAULT_DOUBLE;
+    private double tangibleBookValue = DEFAULT_DOUBLE;
+    private double totalDebt = DEFAULT_DOUBLE;
+    private double netDebt = DEFAULT_DOUBLE;
+    private double sharesIssued = DEFAULT_DOUBLE;
+    private double ordinarySharesNumber = DEFAULT_DOUBLE;
 
-    public Builder withTotalAssets(String totalAssets) {
+    public Builder withTotalAssets(double totalAssets) {
       this.totalAssets = totalAssets;
       return this;
     }
 
-    public Builder withTotalLiabilitiesNetMinorityInterest(String totalLiabilitiesNetMinorityInterest) {
+    public Builder withTotalLiabilitiesNetMinorityInterest(double totalLiabilitiesNetMinorityInterest) {
       this.totalLiabilitiesNetMinorityInterest = totalLiabilitiesNetMinorityInterest;
       return this;
     }
 
-    public Builder withTotalEquityGrossMinorityInterest(String totalEquityGrossMinorityInterest) {
+    public Builder withTotalEquityGrossMinorityInterest(double totalEquityGrossMinorityInterest) {
       this.totalEquityGrossMinorityInterest = totalEquityGrossMinorityInterest;
       return this;
     }
 
-    public Builder withTotalCapitalization(String totalCapitalization) {
+    public Builder withTotalCapitalization(double totalCapitalization) {
       this.totalCapitalization = totalCapitalization;
       return this;
     }
 
-    public Builder withCommonStockEquity(String commonStockEquity) {
+    public Builder withCommonStockEquity(double commonStockEquity) {
       this.commonStockEquity = commonStockEquity;
       return this;
     }
 
-    public Builder withNetTangibleAssets(String netTangibleAssets) {
+    public Builder withNetTangibleAssets(double netTangibleAssets) {
       this.netTangibleAssets = netTangibleAssets;
       return this;
     }
 
-    public Builder withWorkingCapital(String workingCapital) {
+    public Builder withWorkingCapital(double workingCapital) {
       this.workingCapital = workingCapital;
       return this;
     }
 
-    public Builder withInvestedCapital(String investedCapital) {
+    public Builder withInvestedCapital(double investedCapital) {
       this.investedCapital = investedCapital;
       return this;
     }
 
-    public Builder withTangibleBookValue(String tangibleBookValue) {
+    public Builder withTangibleBookValue(double tangibleBookValue) {
       this.tangibleBookValue = tangibleBookValue;
       return this;
     }
 
-    public Builder withTotalDebt(String totalDebt) {
+    public Builder withTotalDebt(double totalDebt) {
       this.totalDebt = totalDebt;
       return this;
     }
 
-    public Builder withNetDebt(String netDebt) {
+    public Builder withNetDebt(double netDebt) {
       this.netDebt = netDebt;
       return this;
     }
 
-    public Builder withSharesIssued(String sharesIssued) {
+    public Builder withSharesIssued(double sharesIssued) {
       this.sharesIssued = sharesIssued;
       return this;
     }
 
-    public Builder withOrdinarySharesNumber(String ordinarySharesNumber) {
+    public Builder withOrdinarySharesNumber(double ordinarySharesNumber) {
       this.ordinarySharesNumber = ordinarySharesNumber;
       return this;
     }

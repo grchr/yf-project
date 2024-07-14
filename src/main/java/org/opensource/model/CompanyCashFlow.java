@@ -4,23 +4,19 @@ import java.util.Objects;
 
 public class CompanyCashFlow extends AbstractCompanyInformation {
 
-  private String operatingCashFlowTTM;
-  private String operatingCashFlowLastUpdate;
+  private double operatingCashFlowTTM;
+  private double investingCashFlowTTM;
+  private double financingCashFlowTTM;
+  private double endCashPositionTTM;
+  private double capitalExpenditureTTM;
+  private double freeCashFlowTTM;
 
-  private String investingCashFlowTTM;
-  private String investingCashFlowLastUpdate;
-
-  private String financingCashFlowTTM;
-  private String financingCashFlowLastUpdate;
-
-  private String endCashPositionTTM;
-  private String endCashPositionLastUpdate;
-
-  private String capitalExpenditureTTM;
-  private String capitalExpenditureLastUpdate;
-
-  private String freeCashFlowTTM;
-  private String freeCashFlowLastUpdate;
+  private double operatingCashFlowLastUpdate;
+  private double investingCashFlowLastUpdate;
+  private double financingCashFlowLastUpdate;
+  private double endCashPositionLastUpdate;
+  private double capitalExpenditureLastUpdate;
+  private double freeCashFlowLastUpdate;
 
   private CompanyCashFlow(Builder builder) {
     super(builder); // Calling the parent class constructor
@@ -39,51 +35,51 @@ public class CompanyCashFlow extends AbstractCompanyInformation {
     this.freeCashFlowLastUpdate = builder.freeCashFlowLastUpdate;
   }
 
-  public String getOperatingCashFlowTTM() {
+  public double getOperatingCashFlowTTM() {
     return operatingCashFlowTTM;
   }
 
-  public String getInvestingCashFlowTTM() {
+  public double getInvestingCashFlowTTM() {
     return investingCashFlowTTM;
   }
 
-  public String getFinancingCashFlowTTM() {
+  public double getFinancingCashFlowTTM() {
     return financingCashFlowTTM;
   }
 
-  public String getEndCashPositionTTM() {
+  public double getEndCashPositionTTM() {
     return endCashPositionTTM;
   }
 
-  public String getCapitalExpenditureTTM() {
+  public double getCapitalExpenditureTTM() {
     return capitalExpenditureTTM;
   }
 
-  public String getFreeCashFlowTTM() {
+  public double getFreeCashFlowTTM() {
     return freeCashFlowTTM;
   }
 
-  public String getOperatingCashFlowLastUpdate() {
+  public double getOperatingCashFlowLastUpdate() {
     return operatingCashFlowLastUpdate;
   }
 
-  public String getInvestingCashFlowLastUpdate() {
+  public double getInvestingCashFlowLastUpdate() {
     return investingCashFlowLastUpdate;
   }
 
-  public String getFinancingCashFlowLastUpdate() {
+  public double getFinancingCashFlowLastUpdate() {
     return financingCashFlowLastUpdate;
   }
 
-  public String getEndCashPositionLastUpdate() {
+  public double getEndCashPositionLastUpdate() {
     return endCashPositionLastUpdate;
   }
 
-  public String getCapitalExpenditureLastUpdate() {
+  public double getCapitalExpenditureLastUpdate() {
     return capitalExpenditureLastUpdate;
   }
 
-  public String getFreeCashFlowLastUpdate() {
+  public double getFreeCashFlowLastUpdate() {
     return freeCashFlowLastUpdate;
   }
 
@@ -93,18 +89,18 @@ public class CompanyCashFlow extends AbstractCompanyInformation {
             "companyName='" + getCompanyName() + '\'' +
             ", companyTicker='" + getCompanyTicker() + '\'' +
             ", currentPrice='" + getCurrentPrice() + '\'' +
-            ", operatingCashFlowTTM='" + operatingCashFlowTTM + '\'' +
-            ", investingCashFlowTTM='" + investingCashFlowTTM + '\'' +
-            ", financingCashFlowTTM='" + financingCashFlowTTM + '\'' +
-            ", endCashPositionTTM='" + endCashPositionTTM + '\'' +
-            ", capitalExpenditureTTM='" + capitalExpenditureTTM + '\'' +
-            ", freeCashFlowTTM='" + freeCashFlowTTM + '\'' +
-            ", operatingCashFlowLastUpdate='" + operatingCashFlowLastUpdate + '\'' +
-            ", investingCashFlowLastUpdate='" + investingCashFlowLastUpdate + '\'' +
-            ", financingCashFlowLastUpdate='" + financingCashFlowLastUpdate + '\'' +
-            ", endCashPositionLastUpdate='" + endCashPositionLastUpdate + '\'' +
-            ", capitalExpenditureLastUpdate='" + capitalExpenditureLastUpdate + '\'' +
-            ", freeCashFlowLastUpdate='" + freeCashFlowLastUpdate + '\'' +
+            ", operatingCashFlowTTM=" + operatingCashFlowTTM +
+            ", investingCashFlowTTM=" + investingCashFlowTTM +
+            ", financingCashFlowTTM=" + financingCashFlowTTM +
+            ", endCashPositionTTM=" + endCashPositionTTM +
+            ", capitalExpenditureTTM=" + capitalExpenditureTTM +
+            ", freeCashFlowTTM=" + freeCashFlowTTM +
+            ", operatingCashFlowLastUpdate=" + operatingCashFlowLastUpdate +
+            ", investingCashFlowLastUpdate=" + investingCashFlowLastUpdate +
+            ", financingCashFlowLastUpdate=" + financingCashFlowLastUpdate +
+            ", endCashPositionLastUpdate=" + endCashPositionLastUpdate +
+            ", capitalExpenditureLastUpdate=" + capitalExpenditureLastUpdate +
+            ", freeCashFlowLastUpdate=" + freeCashFlowLastUpdate +
             '}';
   }
 
@@ -112,106 +108,100 @@ public class CompanyCashFlow extends AbstractCompanyInformation {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof CompanyCashFlow that)) return false;
-    return Objects.equals(getOperatingCashFlowTTM(), that.getOperatingCashFlowTTM())
-            && Objects.equals(getInvestingCashFlowTTM(), that.getInvestingCashFlowTTM())
-            && Objects.equals(getFinancingCashFlowTTM(), that.getFinancingCashFlowTTM())
-            && Objects.equals(getEndCashPositionTTM(), that.getEndCashPositionTTM())
-            && Objects.equals(getCapitalExpenditureTTM(), that.getCapitalExpenditureTTM())
-            && Objects.equals(getFreeCashFlowTTM(), that.getFreeCashFlowTTM())
-            && Objects.equals(getOperatingCashFlowLastUpdate(), that.getOperatingCashFlowLastUpdate())
-            && Objects.equals(getInvestingCashFlowLastUpdate(), that.getInvestingCashFlowLastUpdate())
-            && Objects.equals(getFinancingCashFlowLastUpdate(), that.getFinancingCashFlowLastUpdate())
-            && Objects.equals(getEndCashPositionLastUpdate(), that.getEndCashPositionLastUpdate())
-            && Objects.equals(getCapitalExpenditureLastUpdate(), that.getCapitalExpenditureLastUpdate())
-            && Objects.equals(getFreeCashFlowLastUpdate(), that.getFreeCashFlowLastUpdate());
+    return Double.compare(that.operatingCashFlowTTM, operatingCashFlowTTM) == 0 &&
+            Double.compare(that.investingCashFlowTTM, investingCashFlowTTM) == 0 &&
+            Double.compare(that.financingCashFlowTTM, financingCashFlowTTM) == 0 &&
+            Double.compare(that.endCashPositionTTM, endCashPositionTTM) == 0 &&
+            Double.compare(that.capitalExpenditureTTM, capitalExpenditureTTM) == 0 &&
+            Double.compare(that.freeCashFlowTTM, freeCashFlowTTM) == 0 &&
+            Double.compare(that.operatingCashFlowLastUpdate, operatingCashFlowLastUpdate) == 0 &&
+            Double.compare(that.investingCashFlowLastUpdate, investingCashFlowLastUpdate) == 0 &&
+            Double.compare(that.financingCashFlowLastUpdate, financingCashFlowLastUpdate) == 0 &&
+            Double.compare(that.endCashPositionLastUpdate, endCashPositionLastUpdate) == 0 &&
+            Double.compare(that.capitalExpenditureLastUpdate, capitalExpenditureLastUpdate) == 0 &&
+            Double.compare(that.freeCashFlowLastUpdate, freeCashFlowLastUpdate) == 0;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getOperatingCashFlowTTM(),
-            getInvestingCashFlowTTM(),
-            getFinancingCashFlowTTM(),
-            getEndCashPositionTTM(),
-            getCapitalExpenditureTTM(),
-            getFreeCashFlowTTM(),
-            getOperatingCashFlowLastUpdate(),
-            getInvestingCashFlowLastUpdate(),
-            getFinancingCashFlowLastUpdate(),
-            getEndCashPositionLastUpdate(),
-            getCapitalExpenditureLastUpdate(),
-            getFreeCashFlowLastUpdate());
+    return Objects.hash(operatingCashFlowTTM, investingCashFlowTTM, financingCashFlowTTM,
+            endCashPositionTTM, capitalExpenditureTTM, freeCashFlowTTM,
+            operatingCashFlowLastUpdate, investingCashFlowLastUpdate,
+            financingCashFlowLastUpdate, endCashPositionLastUpdate,
+            capitalExpenditureLastUpdate, freeCashFlowLastUpdate);
   }
 
   public static class Builder extends AbstractCompanyInformation.Builder<Builder> {
-    private String operatingCashFlowTTM = DEFAULT;
-    private String investingCashFlowTTM = DEFAULT;
-    private String financingCashFlowTTM = DEFAULT;
-    private String endCashPositionTTM = DEFAULT;
-    private String capitalExpenditureTTM = DEFAULT;
-    private String freeCashFlowTTM = DEFAULT;
-    private String operatingCashFlowLastUpdate = DEFAULT;
-    private String investingCashFlowLastUpdate = DEFAULT;
-    private String financingCashFlowLastUpdate = DEFAULT;
-    private String endCashPositionLastUpdate = DEFAULT;
-    private String capitalExpenditureLastUpdate = DEFAULT;
-    private String freeCashFlowLastUpdate = DEFAULT;
+    private double operatingCashFlowTTM = DEFAULT_DOUBLE;
+    private double investingCashFlowTTM = DEFAULT_DOUBLE;
+    private double financingCashFlowTTM = DEFAULT_DOUBLE;
+    private double endCashPositionTTM = DEFAULT_DOUBLE;
+    private double capitalExpenditureTTM = DEFAULT_DOUBLE;
+    private double freeCashFlowTTM = DEFAULT_DOUBLE;
 
-    public Builder withOperatingCashFlowTTM(String operatingCashFlowTTM) {
+    private double operatingCashFlowLastUpdate = DEFAULT_DOUBLE;
+    private double investingCashFlowLastUpdate = DEFAULT_DOUBLE;
+    private double financingCashFlowLastUpdate = DEFAULT_DOUBLE;
+    private double endCashPositionLastUpdate = DEFAULT_DOUBLE;
+    private double capitalExpenditureLastUpdate = DEFAULT_DOUBLE;
+    private double freeCashFlowLastUpdate = DEFAULT_DOUBLE;
+
+    public Builder withOperatingCashFlowTTM(double operatingCashFlowTTM) {
       this.operatingCashFlowTTM = operatingCashFlowTTM;
       return this;
     }
 
-    public Builder withInvestingCashFlowTTM(String investingCashFlowTTM) {
+    public Builder withInvestingCashFlowTTM(double investingCashFlowTTM) {
       this.investingCashFlowTTM = investingCashFlowTTM;
       return this;
     }
 
-    public Builder withFinancingCashFlowTTM(String financingCashFlowTTM) {
+    public Builder withFinancingCashFlowTTM(double financingCashFlowTTM) {
       this.financingCashFlowTTM = financingCashFlowTTM;
       return this;
     }
 
-    public Builder withEndCashPositionTTM(String endCashPositionTTM) {
+    public Builder withEndCashPositionTTM(double endCashPositionTTM) {
       this.endCashPositionTTM = endCashPositionTTM;
       return this;
     }
 
-    public Builder withCapitalExpenditureTTM(String capitalExpenditureTTM) {
+    public Builder withCapitalExpenditureTTM(double capitalExpenditureTTM) {
       this.capitalExpenditureTTM = capitalExpenditureTTM;
       return this;
     }
 
-    public Builder withFreeCashFlowTTM(String freeCashFlowTTM) {
+    public Builder withFreeCashFlowTTM(double freeCashFlowTTM) {
       this.freeCashFlowTTM = freeCashFlowTTM;
       return this;
     }
 
-    public Builder withOperatingCashFlowLastUpdate(String operatingCashFlowLastUpdate) {
+    public Builder withOperatingCashFlowLastUpdate(double operatingCashFlowLastUpdate) {
       this.operatingCashFlowLastUpdate = operatingCashFlowLastUpdate;
       return this;
     }
 
-    public Builder withInvestingCashFlowLastUpdate(String investingCashFlowLastUpdate) {
+    public Builder withInvestingCashFlowLastUpdate(double investingCashFlowLastUpdate) {
       this.investingCashFlowLastUpdate = investingCashFlowLastUpdate;
       return this;
     }
 
-    public Builder withFinancingCashFlowLastUpdate(String financingCashFlowLastUpdate) {
+    public Builder withFinancingCashFlowLastUpdate(double financingCashFlowLastUpdate) {
       this.financingCashFlowLastUpdate = financingCashFlowLastUpdate;
       return this;
     }
 
-    public Builder withEndCashPositionLastUpdate(String endCashPositionLastUpdate) {
+    public Builder withEndCashPositionLastUpdate(double endCashPositionLastUpdate) {
       this.endCashPositionLastUpdate = endCashPositionLastUpdate;
       return this;
     }
 
-    public Builder withCapitalExpenditureLastUpdate(String capitalExpenditureLastUpdate) {
+    public Builder withCapitalExpenditureLastUpdate(double capitalExpenditureLastUpdate) {
       this.capitalExpenditureLastUpdate = capitalExpenditureLastUpdate;
       return this;
     }
 
-    public Builder withFreeCashFlowLastUpdate(String freeCashFlowLastUpdate) {
+    public Builder withFreeCashFlowLastUpdate(double freeCashFlowLastUpdate) {
       this.freeCashFlowLastUpdate = freeCashFlowLastUpdate;
       return this;
     }

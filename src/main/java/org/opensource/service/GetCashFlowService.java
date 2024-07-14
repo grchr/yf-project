@@ -22,6 +22,7 @@ import java.util.concurrent.Executors;
 import static org.opensource.service.ReaderHelpers.createURL;
 import static org.opensource.service.ReaderHelpers.getCompanyName;
 import static org.opensource.service.ReaderHelpers.getCurrentPrice;
+import static org.opensource.service.ReaderHelpers.getDoubleFromStringSimpleCase;
 
 public class GetCashFlowService extends AbstractWebTitleIterableService<CashFlowTitles> implements IWebExecutableService<CompanyCashFlow>{
 
@@ -46,7 +47,7 @@ public class GetCashFlowService extends AbstractWebTitleIterableService<CashFlow
       }
 
       builder.withCompanyName(getCompanyName(pageDocument));
-      builder.withCurrentPrice(getCurrentPrice(pageDocument));
+      builder.withCurrentPrice(getDoubleFromStringSimpleCase(getCurrentPrice(pageDocument)));
       builder.withCompanyTicker(tickerCaps);
 
     } finally {
@@ -74,7 +75,7 @@ public class GetCashFlowService extends AbstractWebTitleIterableService<CashFlow
         }
 
         builder.withCompanyName(getCompanyName(pageDocument));
-        builder.withCurrentPrice(getCurrentPrice(pageDocument));
+        builder.withCurrentPrice(getDoubleFromStringSimpleCase(getCurrentPrice(pageDocument)));
         builder.withCompanyTicker(tickerCaps);
 
       } finally {
@@ -95,18 +96,18 @@ public class GetCashFlowService extends AbstractWebTitleIterableService<CashFlow
     Map<CashFlowTitles, String> cashFlowTitlesMapTTM = fillMap(dataElements, 1);
     Map<CashFlowTitles, String> cashFlowTitlesMapLastUpdate = fillMap(dataElements, 2);
 
-    builder.withOperatingCashFlowTTM(getTitleValue(cashFlowTitlesMapTTM, CashFlowTitles.OPERATING_CASH_FLOW))
-            .withInvestingCashFlowTTM(getTitleValue(cashFlowTitlesMapTTM, CashFlowTitles.INVESTING_CASH_FLOW))
-            .withFinancingCashFlowTTM(getTitleValue(cashFlowTitlesMapTTM, CashFlowTitles.FINANCING_CASH_FLOW))
-            .withEndCashPositionTTM(getTitleValue(cashFlowTitlesMapTTM, CashFlowTitles.END_CASH_POSITION))
-            .withCapitalExpenditureTTM(getTitleValue(cashFlowTitlesMapTTM, CashFlowTitles.CAPITAL_EXPENDITURE))
-            .withFreeCashFlowTTM(getTitleValue(cashFlowTitlesMapTTM, CashFlowTitles.FREE_CASH_FLOW))
-            .withOperatingCashFlowLastUpdate(getTitleValue(cashFlowTitlesMapLastUpdate, CashFlowTitles.OPERATING_CASH_FLOW))
-            .withInvestingCashFlowLastUpdate(getTitleValue(cashFlowTitlesMapLastUpdate, CashFlowTitles.INVESTING_CASH_FLOW))
-            .withFinancingCashFlowLastUpdate(getTitleValue(cashFlowTitlesMapLastUpdate, CashFlowTitles.FINANCING_CASH_FLOW))
-            .withEndCashPositionLastUpdate(getTitleValue(cashFlowTitlesMapLastUpdate, CashFlowTitles.END_CASH_POSITION))
-            .withCapitalExpenditureLastUpdate(getTitleValue(cashFlowTitlesMapLastUpdate, CashFlowTitles.CAPITAL_EXPENDITURE))
-            .withFreeCashFlowLastUpdate(getTitleValue(cashFlowTitlesMapLastUpdate, CashFlowTitles.FREE_CASH_FLOW));
+    builder.withOperatingCashFlowTTM(getDoubleFromStringSimpleCase(getTitleValue(cashFlowTitlesMapTTM, CashFlowTitles.OPERATING_CASH_FLOW)))
+            .withInvestingCashFlowTTM(getDoubleFromStringSimpleCase(getTitleValue(cashFlowTitlesMapTTM, CashFlowTitles.INVESTING_CASH_FLOW)))
+            .withFinancingCashFlowTTM(getDoubleFromStringSimpleCase(getTitleValue(cashFlowTitlesMapTTM, CashFlowTitles.FINANCING_CASH_FLOW)))
+            .withEndCashPositionTTM(getDoubleFromStringSimpleCase(getTitleValue(cashFlowTitlesMapTTM, CashFlowTitles.END_CASH_POSITION)))
+            .withCapitalExpenditureTTM(getDoubleFromStringSimpleCase(getTitleValue(cashFlowTitlesMapTTM, CashFlowTitles.CAPITAL_EXPENDITURE)))
+            .withFreeCashFlowTTM(getDoubleFromStringSimpleCase(getTitleValue(cashFlowTitlesMapTTM, CashFlowTitles.FREE_CASH_FLOW)))
+            .withOperatingCashFlowLastUpdate(getDoubleFromStringSimpleCase(getTitleValue(cashFlowTitlesMapLastUpdate, CashFlowTitles.OPERATING_CASH_FLOW)))
+            .withInvestingCashFlowLastUpdate(getDoubleFromStringSimpleCase(getTitleValue(cashFlowTitlesMapLastUpdate, CashFlowTitles.INVESTING_CASH_FLOW)))
+            .withFinancingCashFlowLastUpdate(getDoubleFromStringSimpleCase(getTitleValue(cashFlowTitlesMapLastUpdate, CashFlowTitles.FINANCING_CASH_FLOW)))
+            .withEndCashPositionLastUpdate(getDoubleFromStringSimpleCase(getTitleValue(cashFlowTitlesMapLastUpdate, CashFlowTitles.END_CASH_POSITION)))
+            .withCapitalExpenditureLastUpdate(getDoubleFromStringSimpleCase(getTitleValue(cashFlowTitlesMapLastUpdate, CashFlowTitles.CAPITAL_EXPENDITURE)))
+            .withFreeCashFlowLastUpdate(getDoubleFromStringSimpleCase(getTitleValue(cashFlowTitlesMapLastUpdate, CashFlowTitles.FREE_CASH_FLOW)));
 
     return builder;
   }

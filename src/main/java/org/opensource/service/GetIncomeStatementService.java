@@ -19,6 +19,7 @@ import java.util.concurrent.Executors;
 import static org.opensource.service.ReaderHelpers.createURL;
 import static org.opensource.service.ReaderHelpers.getCompanyName;
 import static org.opensource.service.ReaderHelpers.getCurrentPrice;
+import static org.opensource.service.ReaderHelpers.getDoubleFromStringSimpleCase;
 
 public class GetIncomeStatementService extends AbstractWebTitleIterableService<IncomeStatementTitles> implements IWebExecutableService<CompanyIncomeStatement> {
 
@@ -43,7 +44,7 @@ public class GetIncomeStatementService extends AbstractWebTitleIterableService<I
       }
 
       builder.withCompanyName(getCompanyName(pageDocument));
-      builder.withCurrentPrice(getCurrentPrice(pageDocument));
+      builder.withCurrentPrice(getDoubleFromStringSimpleCase(getCurrentPrice(pageDocument)));
       builder.withCompanyTicker(tickerCaps);
 
     } finally {
@@ -58,26 +59,26 @@ public class GetIncomeStatementService extends AbstractWebTitleIterableService<I
     Map<IncomeStatementTitles, String> incomeStatementTTMMap = fillMap(dataElements, 1);
     Map<IncomeStatementTitles, String> incomeStatementLastUpdateMap = fillMap(dataElements, 2);
 
-    builder.withTotalRevenueTTM(getTitleValue(incomeStatementTTMMap, IncomeStatementTitles.TOTAL_REVENUE))
-            .withTotalRevenueLastUpdate(getTitleValue(incomeStatementLastUpdateMap, IncomeStatementTitles.TOTAL_REVENUE))
-            .withPretaxIncomeTTM(getTitleValue(incomeStatementTTMMap, IncomeStatementTitles.PRETAX_INCOME))
-            .withPretaxIncomeLastUpdate(getTitleValue(incomeStatementLastUpdateMap, IncomeStatementTitles.PRETAX_INCOME))
-            .withTaxProvisionTTM(getTitleValue(incomeStatementTTMMap, IncomeStatementTitles.TAX_PROVISION))
-            .withTaxProvisionLastUpdate(getTitleValue(incomeStatementLastUpdateMap, IncomeStatementTitles.TAX_PROVISION))
-            .withNetIncomeCommonStockholdersTTM(getTitleValue(incomeStatementTTMMap, IncomeStatementTitles.NET_INCOME_COMMON_STOCKHOLDERS))
-            .withNetIncomeCommonStockholdersLastUpdate(getTitleValue(incomeStatementLastUpdateMap, IncomeStatementTitles.NET_INCOME_COMMON_STOCKHOLDERS))
-            .withBasicEPSTTM(getTitleValue(incomeStatementTTMMap, IncomeStatementTitles.BASIC_EPS))
-            .withBasicEPSLastUpdate(getTitleValue(incomeStatementLastUpdateMap, IncomeStatementTitles.BASIC_EPS))
-            .withDilutedEPSTTM(getTitleValue(incomeStatementTTMMap, IncomeStatementTitles.DILUTED_EPS))
-            .withDilutedEPSLastUpdate(getTitleValue(incomeStatementLastUpdateMap, IncomeStatementTitles.DILUTED_EPS))
-            .withBasicAvgSharesTTM(getTitleValue(incomeStatementTTMMap, IncomeStatementTitles.BASIC_AVERAGE_SHARES))
-            .withBasicAvgSharesLastUpdate(getTitleValue(incomeStatementLastUpdateMap, IncomeStatementTitles.BASIC_AVERAGE_SHARES))
-            .withDilutedAvgSharesTTM(getTitleValue(incomeStatementTTMMap, IncomeStatementTitles.DILUTED_AVERAGE_SHARES))
-            .withDilutedAvgSharesLastUpdate(getTitleValue(incomeStatementLastUpdateMap, IncomeStatementTitles.DILUTED_AVERAGE_SHARES))
-            .withNetIncomeContinuingDiscontinuedOpsTTM(getTitleValue(incomeStatementTTMMap, IncomeStatementTitles.NET_INCOME_FROM_CONTINUING_DISCONTINUED_OPERATION))
-            .withNetIncomeContinuingDiscontinuedOpsLastUpdate(getTitleValue(incomeStatementLastUpdateMap, IncomeStatementTitles.NET_INCOME_FROM_CONTINUING_DISCONTINUED_OPERATION))
-            .withNormalizedIncomeTTM(getTitleValue(incomeStatementTTMMap, IncomeStatementTitles.NORMALIZED_INCOME))
-            .withNormalizedIncomeLastUpdate(getTitleValue(incomeStatementLastUpdateMap, IncomeStatementTitles.NORMALIZED_INCOME));
+    builder.withTotalRevenueTTM(getDoubleFromStringSimpleCase(getTitleValue(incomeStatementTTMMap, IncomeStatementTitles.TOTAL_REVENUE)))
+            .withTotalRevenueLastUpdate(getDoubleFromStringSimpleCase(getTitleValue(incomeStatementLastUpdateMap, IncomeStatementTitles.TOTAL_REVENUE)))
+            .withPretaxIncomeTTM(getDoubleFromStringSimpleCase(getTitleValue(incomeStatementTTMMap, IncomeStatementTitles.PRETAX_INCOME)))
+            .withPretaxIncomeLastUpdate(getDoubleFromStringSimpleCase(getTitleValue(incomeStatementLastUpdateMap, IncomeStatementTitles.PRETAX_INCOME)))
+            .withTaxProvisionTTM(getDoubleFromStringSimpleCase(getTitleValue(incomeStatementTTMMap, IncomeStatementTitles.TAX_PROVISION)))
+            .withTaxProvisionLastUpdate(getDoubleFromStringSimpleCase(getTitleValue(incomeStatementLastUpdateMap, IncomeStatementTitles.TAX_PROVISION)))
+            .withNetIncomeCommonStockholdersTTM(getDoubleFromStringSimpleCase(getTitleValue(incomeStatementTTMMap, IncomeStatementTitles.NET_INCOME_COMMON_STOCKHOLDERS)))
+            .withNetIncomeCommonStockholdersLastUpdate(getDoubleFromStringSimpleCase(getTitleValue(incomeStatementLastUpdateMap, IncomeStatementTitles.NET_INCOME_COMMON_STOCKHOLDERS)))
+            .withBasicEPSTTM(getDoubleFromStringSimpleCase(getTitleValue(incomeStatementTTMMap, IncomeStatementTitles.BASIC_EPS)))
+            .withBasicEPSLastUpdate(getDoubleFromStringSimpleCase(getTitleValue(incomeStatementLastUpdateMap, IncomeStatementTitles.BASIC_EPS)))
+            .withDilutedEPSTTM(getDoubleFromStringSimpleCase(getTitleValue(incomeStatementTTMMap, IncomeStatementTitles.DILUTED_EPS)))
+            .withDilutedEPSLastUpdate(getDoubleFromStringSimpleCase(getTitleValue(incomeStatementLastUpdateMap, IncomeStatementTitles.DILUTED_EPS)))
+            .withBasicAvgSharesTTM(getDoubleFromStringSimpleCase(getTitleValue(incomeStatementTTMMap, IncomeStatementTitles.BASIC_AVERAGE_SHARES)))
+            .withBasicAvgSharesLastUpdate(getDoubleFromStringSimpleCase(getTitleValue(incomeStatementLastUpdateMap, IncomeStatementTitles.BASIC_AVERAGE_SHARES)))
+            .withDilutedAvgSharesTTM(getDoubleFromStringSimpleCase(getTitleValue(incomeStatementTTMMap, IncomeStatementTitles.DILUTED_AVERAGE_SHARES)))
+            .withDilutedAvgSharesLastUpdate(getDoubleFromStringSimpleCase(getTitleValue(incomeStatementLastUpdateMap, IncomeStatementTitles.DILUTED_AVERAGE_SHARES)))
+            .withNetIncomeContinuingDiscontinuedOpsTTM(getDoubleFromStringSimpleCase(getTitleValue(incomeStatementTTMMap, IncomeStatementTitles.NET_INCOME_FROM_CONTINUING_DISCONTINUED_OPERATION)))
+            .withNetIncomeContinuingDiscontinuedOpsLastUpdate(getDoubleFromStringSimpleCase(getTitleValue(incomeStatementLastUpdateMap, IncomeStatementTitles.NET_INCOME_FROM_CONTINUING_DISCONTINUED_OPERATION)))
+            .withNormalizedIncomeTTM(getDoubleFromStringSimpleCase(getTitleValue(incomeStatementTTMMap, IncomeStatementTitles.NORMALIZED_INCOME)))
+            .withNormalizedIncomeLastUpdate(getDoubleFromStringSimpleCase(getTitleValue(incomeStatementLastUpdateMap, IncomeStatementTitles.NORMALIZED_INCOME)));
 
     return builder;
   }
@@ -126,7 +127,7 @@ public class GetIncomeStatementService extends AbstractWebTitleIterableService<I
         }
 
         builder.withCompanyName(getCompanyName(pageDocument));
-        builder.withCurrentPrice(getCurrentPrice(pageDocument));
+        builder.withCurrentPrice(getDoubleFromStringSimpleCase(getCurrentPrice(pageDocument)));
         builder.withCompanyTicker(tickerCaps);
 
       } finally {

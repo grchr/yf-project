@@ -43,26 +43,26 @@ public class GetIncomeStatementServiceTest {
 
   private void assertNoFieldsContainDoubleDash(CompanyIncomeStatement companyIncomeStatement) {
 
-    assertNotEquals("--", companyIncomeStatement.getTotalRevenueTTM());
-    assertNotEquals("--", companyIncomeStatement.getTotalRevenueLastUpdate());
-    assertNotEquals("--", companyIncomeStatement.getPretaxIncomeTTM());
-    assertNotEquals("--", companyIncomeStatement.getPretaxIncomeLastUpdate());
-    assertNotEquals("--", companyIncomeStatement.getTaxProvisionTTM());
-    assertNotEquals("--", companyIncomeStatement.getTaxProvisionLastUpdate());
-    assertNotEquals("--", companyIncomeStatement.getNetIncomeCommonStockholdersTTM());
-    assertNotEquals("--", companyIncomeStatement.getNetIncomeCommonStockholdersLastUpdate());
-    assertNotEquals("--", companyIncomeStatement.getBasicEPSTTM());
-    assertNotEquals("--", companyIncomeStatement.getBasicEPSLastUpdate());
-    assertNotEquals("--", companyIncomeStatement.getDilutedEPSTTM());
-    assertNotEquals("--", companyIncomeStatement.getDilutedEPSLastUpdate());
-    assertNotEquals("--", companyIncomeStatement.getBasicAvgSharesTTM());
-    assertNotEquals("--", companyIncomeStatement.getBasicAvgSharesLastUpdate());
-    assertNotEquals("--", companyIncomeStatement.getDilutedAvgSharesTTM());
-    assertNotEquals("--", companyIncomeStatement.getDilutedAvgSharesLastUpdate());
-    assertNotEquals("--", companyIncomeStatement.getNetIncomeContinuingDiscontinuedOpsTTM());
-    assertNotEquals("--", companyIncomeStatement.getNetIncomeContinuingDiscontinuedOpsLastUpdate());
-    assertNotEquals("--", companyIncomeStatement.getNormalizedIncomeTTM());
-    assertNotEquals("--", companyIncomeStatement.getNormalizedIncomeLastUpdate());
+    assertNotEquals(Double.NaN, companyIncomeStatement.getTotalRevenueTTM());
+    assertNotEquals(Double.NaN, companyIncomeStatement.getTotalRevenueLastUpdate());
+    assertNotEquals(Double.NaN, companyIncomeStatement.getPretaxIncomeTTM());
+    assertNotEquals(Double.NaN, companyIncomeStatement.getPretaxIncomeLastUpdate());
+    assertNotEquals(Double.NaN, companyIncomeStatement.getTaxProvisionTTM());
+    assertNotEquals(Double.NaN, companyIncomeStatement.getTaxProvisionLastUpdate());
+    assertNotEquals(Double.NaN, companyIncomeStatement.getNetIncomeCommonStockholdersTTM());
+    assertNotEquals(Double.NaN, companyIncomeStatement.getNetIncomeCommonStockholdersLastUpdate());
+    assertNotEquals(Double.NaN, companyIncomeStatement.getBasicEPSTTM());
+    assertNotEquals(Double.NaN, companyIncomeStatement.getBasicEPSLastUpdate());
+    assertNotEquals(Double.NaN, companyIncomeStatement.getDilutedEPSTTM());
+    assertNotEquals(Double.NaN, companyIncomeStatement.getDilutedEPSLastUpdate());
+    assertNotEquals(Double.NaN, companyIncomeStatement.getBasicAvgSharesTTM());
+    assertNotEquals(Double.NaN, companyIncomeStatement.getBasicAvgSharesLastUpdate());
+    assertNotEquals(Double.NaN, companyIncomeStatement.getDilutedAvgSharesTTM());
+    assertNotEquals(Double.NaN, companyIncomeStatement.getDilutedAvgSharesLastUpdate());
+    assertNotEquals(Double.NaN, companyIncomeStatement.getNetIncomeContinuingDiscontinuedOpsTTM());
+    assertNotEquals(Double.NaN, companyIncomeStatement.getNetIncomeContinuingDiscontinuedOpsLastUpdate());
+    assertNotEquals(Double.NaN, companyIncomeStatement.getNormalizedIncomeTTM());
+    assertNotEquals(Double.NaN, companyIncomeStatement.getNormalizedIncomeLastUpdate());
 
   }
 }

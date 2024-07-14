@@ -43,17 +43,17 @@ public class GetCashFlowServiceTest {
   }
 
   private void assertNoFieldsContainDoubleDash(CompanyCashFlow companyCashFlow) {
-    assertNotEquals("--", companyCashFlow.getOperatingCashFlowTTM());
-    assertNotEquals("--", companyCashFlow.getInvestingCashFlowTTM());
-    assertNotEquals("--", companyCashFlow.getFinancingCashFlowTTM());
-    assertNotEquals("--", companyCashFlow.getEndCashPositionTTM());
-    assertNotEquals("--", companyCashFlow.getCapitalExpenditureTTM());
-    assertNotEquals("--", companyCashFlow.getFreeCashFlowTTM());
-    assertNotEquals("--", companyCashFlow.getOperatingCashFlowLastUpdate());
-    assertNotEquals("--", companyCashFlow.getInvestingCashFlowLastUpdate());
-    assertNotEquals("--", companyCashFlow.getFinancingCashFlowLastUpdate());
-    assertNotEquals("--", companyCashFlow.getEndCashPositionLastUpdate());
-    assertNotEquals("--", companyCashFlow.getCapitalExpenditureLastUpdate());
-    assertNotEquals("--", companyCashFlow.getFreeCashFlowLastUpdate());
+    assertNotEquals(Double.NaN, companyCashFlow.getOperatingCashFlowTTM());
+    assertNotEquals(Double.NaN, companyCashFlow.getInvestingCashFlowTTM());
+    assertNotEquals(Double.NaN, companyCashFlow.getFinancingCashFlowTTM());
+    assertNotEquals(Double.NaN, companyCashFlow.getEndCashPositionTTM());
+    assertNotEquals(Double.NaN, companyCashFlow.getCapitalExpenditureTTM());
+    assertNotEquals(Double.NaN, companyCashFlow.getFreeCashFlowTTM());
+    assertNotEquals(Double.NaN, companyCashFlow.getOperatingCashFlowLastUpdate());
+    assertNotEquals(Double.NaN, companyCashFlow.getInvestingCashFlowLastUpdate());
+    assertNotEquals(Double.NaN, companyCashFlow.getFinancingCashFlowLastUpdate());
+    assertNotEquals(Double.NaN, companyCashFlow.getEndCashPositionLastUpdate());
+    assertNotEquals(Double.NaN, companyCashFlow.getCapitalExpenditureLastUpdate());
+    assertNotEquals(Double.NaN, companyCashFlow.getFreeCashFlowLastUpdate());
   }
 }

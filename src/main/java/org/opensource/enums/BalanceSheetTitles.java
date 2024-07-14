@@ -12,6 +12,7 @@ public enum BalanceSheetTitles {
   TOTAL_DEBT("Total Debt"),
   NET_DEBT("Net Debt"),
   SHARE_ISSUED("Share Issued"),
+  WORKING_CAPITAL("Working Capital"),
   ORDINARY_SHARES_NUMBER("Ordinary Shares Number");
 
   private final String title;

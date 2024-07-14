@@ -5,35 +5,42 @@ import java.util.Objects;
 public class CompanyKeyStatistics extends AbstractCompanyInformation {
   private String marketCap;
   private String enterpriseValue;
-  private String trailingPE;
-  private String forwardPE;
-  private String pegRatio;
-  private String ratioPS;
-  private String ratioPB;
-  private String evToRevenue;
-  private String evToEBITDA;
-  private String profitMargin;
-  private String operatingMargin;
-  private String returnOnAssets;
-  private String returnOnEquity;
   private String revenue;
-  private String revenuePerShare;
-  private String quarterlyRevenueGrowth;
-  private String grossProfit;
-  private String EBITDA;
   private String netIncomeAviToCommon;
-  private String dilutedEPS;
-  private String quartEarningsGrowth;
-  private String totalCash;
-  private String totalCashPerShare;
   private String totalDebt;
-  private String totalDebtToEquity;
+
+  private double trailingPE;
+  private double forwardPE;
+  private double pegRatio;
+  private double ratioPS;
+  private double ratioPB;
+  private double evToRevenue;
+  private double evToEBITDA;
+  private double profitMarginPercentage;
+  private double operatingMarginPercentage;
+  private double returnOnAssetsPercentage;
+  private double returnOnEquityPercentage;
+  private double revenuePerShare;
+  private double quarterlyRevenueGrowthPercentage;
+  private double grossProfit;
+  private String EBITDA;
+  private double dilutedEPS;
+  private double quartEarningsGrowthPercentage;
+  private double totalCash;
+  private double totalCashPerShare;
+  private double totalDebtToEquityPercentage;
+
   private CompanyTradingInformation tradingInformation;
 
   private CompanyKeyStatistics(Builder builder) {
     super(builder); // Call to the parent builder
     this.marketCap = builder.marketCap;
     this.enterpriseValue = builder.enterpriseValue;
+    this.revenue = builder.revenue;
+    this.netIncomeAviToCommon = builder.netIncomeAviToCommon;
+    this.totalDebt = builder.totalDebt;
+    this.EBITDA = builder.EBITDA;
+
     this.trailingPE = builder.trailingPE;
     this.forwardPE = builder.forwardPE;
     this.pegRatio = builder.pegRatio;
@@ -41,22 +48,18 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
     this.ratioPB = builder.ratioPB;
     this.evToRevenue = builder.evToRevenue;
     this.evToEBITDA = builder.evToEBITDA;
-    this.profitMargin = builder.profitMargin;
-    this.operatingMargin = builder.operatingMargin;
-    this.returnOnAssets = builder.returnOnAssets;
-    this.returnOnEquity = builder.returnOnEquity;
-    this.revenue = builder.revenue;
+    this.profitMarginPercentage = builder.profitMarginPercentage;
+    this.operatingMarginPercentage = builder.operatingMarginPercentage;
+    this.returnOnAssetsPercentage = builder.returnOnAssetsPercentage;
+    this.returnOnEquityPercentage = builder.returnOnEquityPercentage;
     this.revenuePerShare = builder.revenuePerShare;
-    this.quarterlyRevenueGrowth = builder.quarterlyRevenueGrowth;
+    this.quarterlyRevenueGrowthPercentage = builder.quarterlyRevenueGrowthPercentage;
     this.grossProfit = builder.grossProfit;
-    this.EBITDA = builder.EBITDA;
-    this.netIncomeAviToCommon = builder.netIncomeAviToCommon;
     this.dilutedEPS = builder.dilutedEPS;
-    this.quartEarningsGrowth = builder.quartEarningsGrowth;
+    this.quartEarningsGrowthPercentage = builder.quartEarningsGrowthPercentage;
     this.totalCash = builder.totalCash;
     this.totalCashPerShare = builder.totalCashPerShare;
-    this.totalDebt = builder.totalDebt;
-    this.totalDebtToEquity = builder.totalDebtToEquity;
+    this.totalDebtToEquityPercentage = builder.totalDebtToEquityPercentage;
     this.tradingInformation = builder.tradingInformation;
   }
 
@@ -68,63 +71,63 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
     return enterpriseValue;
   }
 
-  public String getTrailingPE() {
+  public double getTrailingPE() {
     return trailingPE;
   }
 
-  public String getForwardPE() {
+  public double getForwardPE() {
     return forwardPE;
   }
 
-  public String getPegRatio() {
+  public double getPegRatio() {
     return pegRatio;
   }
 
-  public String getRatioPS() {
+  public double getRatioPS() {
     return ratioPS;
   }
 
-  public String getRatioPB() {
+  public double getRatioPB() {
     return ratioPB;
   }
 
-  public String getEvToRevenue() {
+  public double getEvToRevenue() {
     return evToRevenue;
   }
 
-  public String getEvToEBITDA() {
+  public double getEvToEBITDA() {
     return evToEBITDA;
   }
 
-  public String getProfitMargin() {
-    return profitMargin;
+  public double getProfitMarginPercentage() {
+    return profitMarginPercentage;
   }
 
-  public String getOperatingMargin() {
-    return operatingMargin;
+  public double getOperatingMarginPercentage() {
+    return operatingMarginPercentage;
   }
 
-  public String getReturnOnAssets() {
-    return returnOnAssets;
+  public double getReturnOnAssetsPercentage() {
+    return returnOnAssetsPercentage;
   }
 
-  public String getReturnOnEquity() {
-    return returnOnEquity;
+  public double getReturnOnEquityPercentage() {
+    return returnOnEquityPercentage;
   }
 
   public String getRevenue() {
     return revenue;
   }
 
-  public String getRevenuePerShare() {
+  public double getRevenuePerShare() {
     return revenuePerShare;
   }
 
-  public String getQuarterlyRevenueGrowth() {
-    return quarterlyRevenueGrowth;
+  public double getQuarterlyRevenueGrowthPercentage() {
+    return quarterlyRevenueGrowthPercentage;
   }
 
-  public String getGrossProfit() {
+  public double getGrossProfit() {
     return grossProfit;
   }
 
@@ -136,19 +139,19 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
     return netIncomeAviToCommon;
   }
 
-  public String getDilutedEPS() {
+  public double getDilutedEPS() {
     return dilutedEPS;
   }
 
-  public String getQuartEarningsGrowth() {
-    return quartEarningsGrowth;
+  public double getQuartEarningsGrowthPercentage() {
+    return quartEarningsGrowthPercentage;
   }
 
-  public String getTotalCash() {
+  public double getTotalCash() {
     return totalCash;
   }
 
-  public String getTotalCashPerShare() {
+  public double getTotalCashPerShare() {
     return totalCashPerShare;
   }
 
@@ -156,8 +159,8 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
     return totalDebt;
   }
 
-  public String getTotalDebtToEquity() {
-    return totalDebtToEquity;
+  public double getTotalDebtToEquityPercentage() {
+    return totalDebtToEquityPercentage;
   }
 
   public CompanyTradingInformation getTradingInformation() {
@@ -172,29 +175,29 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
             ", currentPrice='" + getCurrentPrice() + '\'' +
             ", marketCap='" + marketCap + '\'' +
             ", enterpriseValue='" + enterpriseValue + '\'' +
-            ", trailingPE='" + trailingPE + '\'' +
-            ", forwardPE='" + forwardPE + '\'' +
-            ", pegRatio='" + pegRatio + '\'' +
-            ", ratioPS='" + ratioPS + '\'' +
-            ", ratioPB='" + ratioPB + '\'' +
-            ", evToRevenue='" + evToRevenue + '\'' +
-            ", evToEBITDA='" + evToEBITDA + '\'' +
-            ", profitMargin='" + profitMargin + '\'' +
-            ", operatingMargin='" + operatingMargin + '\'' +
-            ", returnOnAssets='" + returnOnAssets + '\'' +
-            ", returnOnEquity='" + returnOnEquity + '\'' +
+            ", trailingPE=" + trailingPE +
+            ", forwardPE=" + forwardPE +
+            ", pegRatio=" + pegRatio +
+            ", ratioPS=" + ratioPS +
+            ", ratioPB=" + ratioPB +
+            ", evToRevenue=" + evToRevenue +
+            ", evToEBITDA=" + evToEBITDA +
+            ", profitMargin=" + profitMarginPercentage +
+            ", operatingMarginPercentage=" + operatingMarginPercentage +
+            ", returnOnAssetsPercentage=" + returnOnAssetsPercentage +
+            ", returnOnEquityPercentage=" + returnOnEquityPercentage +
             ", revenue='" + revenue + '\'' +
-            ", revenuePerShare='" + revenuePerShare + '\'' +
-            ", quarterlyRevenueGrowth='" + quarterlyRevenueGrowth + '\'' +
-            ", grossProfit='" + grossProfit + '\'' +
-            ", EBITDA='" + EBITDA + '\'' +
+            ", revenuePerShare=" + revenuePerShare +
+            ", quarterlyRevenueGrowthPercentage=" + quarterlyRevenueGrowthPercentage +
+            ", grossProfit=" + grossProfit +
+            ", EBITDA=" + EBITDA +
             ", netIncomeAviToCommon='" + netIncomeAviToCommon + '\'' +
-            ", dilutedEPS='" + dilutedEPS + '\'' +
-            ", quartEarningsGrowth='" + quartEarningsGrowth + '\'' +
-            ", totalCash='" + totalCash + '\'' +
-            ", totalCashPerShare='" + totalCashPerShare + '\'' +
+            ", dilutedEPS=" + dilutedEPS +
+            ", quartEarningsGrowthPercentage=" + quartEarningsGrowthPercentage +
+            ", totalCash=" + totalCash +
+            ", totalCashPerShare=" + totalCashPerShare +
             ", totalDebt='" + totalDebt + '\'' +
-            ", totalDebtToEquity='" + totalDebtToEquity + '\'' +
+            ", totalDebtToEquityPercentage=" + totalDebtToEquityPercentage +
             ", tradingInformation=" + tradingInformation +
             '}';
   }
@@ -203,96 +206,70 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof CompanyKeyStatistics that)) return false;
-    return Objects.equals(getCompanyName(), that.getCompanyName())
-            && Objects.equals(getCompanyTicker(), that.getCompanyTicker())
-            && Objects.equals(getCurrentPrice(), that.getCurrentPrice())
-            && Objects.equals(getMarketCap(), that.getMarketCap())
-            && Objects.equals(getEnterpriseValue(), that.getEnterpriseValue())
-            && Objects.equals(getTrailingPE(), that.getTrailingPE())
-            && Objects.equals(getForwardPE(), that.getForwardPE())
-            && Objects.equals(getPegRatio(), that.getPegRatio())
-            && Objects.equals(getRatioPS(), that.getRatioPS())
-            && Objects.equals(getRatioPB(), that.getRatioPB())
-            && Objects.equals(getEvToRevenue(), that.getEvToRevenue())
-            && Objects.equals(getEvToEBITDA(), that.getEvToEBITDA())
-            && Objects.equals(getProfitMargin(), that.getProfitMargin())
-            && Objects.equals(getOperatingMargin(), that.getOperatingMargin())
-            && Objects.equals(getReturnOnAssets(), that.getReturnOnAssets())
-            && Objects.equals(getReturnOnEquity(), that.getReturnOnEquity())
-            && Objects.equals(getRevenue(), that.getRevenue())
-            && Objects.equals(getRevenuePerShare(), that.getRevenuePerShare())
-            && Objects.equals(getQuarterlyRevenueGrowth(), that.getQuarterlyRevenueGrowth())
-            && Objects.equals(getGrossProfit(), that.getGrossProfit())
-            && Objects.equals(getEBITDA(), that.getEBITDA())
-            && Objects.equals(getNetIncomeAviToCommon(), that.getNetIncomeAviToCommon())
-            && Objects.equals(getDilutedEPS(), that.getDilutedEPS())
-            && Objects.equals(getQuartEarningsGrowth(), that.getQuartEarningsGrowth())
-            && Objects.equals(getTotalCash(), that.getTotalCash())
-            && Objects.equals(getTotalCashPerShare(), that.getTotalCashPerShare())
-            && Objects.equals(getTotalDebt(), that.getTotalDebt())
-            && Objects.equals(getTotalDebtToEquity(), that.getTotalDebtToEquity())
-            && Objects.equals(getTradingInformation(), that.getTradingInformation());
+    return Double.compare(that.trailingPE, trailingPE) == 0 &&
+            Double.compare(that.forwardPE, forwardPE) == 0 &&
+            Double.compare(that.pegRatio, pegRatio) == 0 &&
+            Double.compare(that.ratioPS, ratioPS) == 0 &&
+            Double.compare(that.ratioPB, ratioPB) == 0 &&
+            Double.compare(that.evToRevenue, evToRevenue) == 0 &&
+            Double.compare(that.evToEBITDA, evToEBITDA) == 0 &&
+            Double.compare(that.profitMarginPercentage, profitMarginPercentage) == 0 &&
+            Double.compare(that.operatingMarginPercentage, operatingMarginPercentage) == 0 &&
+            Double.compare(that.returnOnAssetsPercentage, returnOnAssetsPercentage) == 0 &&
+            Double.compare(that.returnOnEquityPercentage, returnOnEquityPercentage) == 0 &&
+            Double.compare(that.revenuePerShare, revenuePerShare) == 0 &&
+            Double.compare(that.quarterlyRevenueGrowthPercentage, quarterlyRevenueGrowthPercentage) == 0 &&
+            Double.compare(that.grossProfit, grossProfit) == 0 &&
+            Objects.equals(that.EBITDA, EBITDA) &&
+            Double.compare(that.dilutedEPS, dilutedEPS) == 0 &&
+            Double.compare(that.quartEarningsGrowthPercentage, quartEarningsGrowthPercentage) == 0 &&
+            Double.compare(that.totalCash, totalCash) == 0 &&
+            Double.compare(that.totalCashPerShare, totalCashPerShare) == 0 &&
+            Double.compare(that.totalDebtToEquityPercentage, totalDebtToEquityPercentage) == 0 &&
+            Objects.equals(marketCap, that.marketCap) &&
+            Objects.equals(enterpriseValue, that.enterpriseValue) &&
+            Objects.equals(revenue, that.revenue) &&
+            Objects.equals(netIncomeAviToCommon, that.netIncomeAviToCommon) &&
+            Objects.equals(totalDebt, that.totalDebt) &&
+            Objects.equals(tradingInformation, that.tradingInformation);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getCompanyName(),
-            getCompanyTicker(),
-            getCurrentPrice(),
-            getMarketCap(),
-            getEnterpriseValue(),
-            getTrailingPE(),
-            getForwardPE(),
-            getPegRatio(),
-            getRatioPS(),
-            getRatioPB(),
-            getEvToRevenue(),
-            getEvToEBITDA(),
-            getProfitMargin(),
-            getOperatingMargin(),
-            getReturnOnAssets(),
-            getReturnOnEquity(),
-            getRevenue(),
-            getRevenuePerShare(),
-            getQuarterlyRevenueGrowth(),
-            getGrossProfit(),
-            getEBITDA(),
-            getNetIncomeAviToCommon(),
-            getDilutedEPS(),
-            getQuartEarningsGrowth(),
-            getTotalCash(),
-            getTotalCashPerShare(),
-            getTotalDebt(),
-            getTotalDebtToEquity(),
-            getTradingInformation());
+    return Objects.hash(marketCap, enterpriseValue, revenue, netIncomeAviToCommon, totalDebt,
+            trailingPE, forwardPE, pegRatio, ratioPS, ratioPB, evToRevenue, evToEBITDA, profitMarginPercentage,
+            operatingMarginPercentage, returnOnAssetsPercentage, returnOnEquityPercentage, revenuePerShare,
+            quarterlyRevenueGrowthPercentage, grossProfit, EBITDA, dilutedEPS, quartEarningsGrowthPercentage,
+            totalCash, totalCashPerShare, totalDebtToEquityPercentage, tradingInformation);
   }
 
   public static class Builder extends AbstractCompanyInformation.Builder<CompanyKeyStatistics.Builder> {
     private String marketCap = DEFAULT;
     private String enterpriseValue = DEFAULT;
-    private String trailingPE = DEFAULT;
-    private String forwardPE = DEFAULT;
-    private String pegRatio = DEFAULT;
-    private String ratioPS = DEFAULT;
-    private String ratioPB = DEFAULT;
-    private String evToRevenue = DEFAULT;
-    private String evToEBITDA = DEFAULT;
-    private String profitMargin = DEFAULT;
-    private String operatingMargin = DEFAULT;
-    private String returnOnAssets = DEFAULT;
-    private String returnOnEquity = DEFAULT;
     private String revenue = DEFAULT;
-    private String revenuePerShare = DEFAULT;
-    private String quarterlyRevenueGrowth = DEFAULT;
-    private String grossProfit = DEFAULT;
-    private String EBITDA = DEFAULT;
     private String netIncomeAviToCommon = DEFAULT;
-    private String dilutedEPS = DEFAULT;
-    private String quartEarningsGrowth = DEFAULT;
-    private String totalCash = DEFAULT;
-    private String totalCashPerShare = DEFAULT;
     private String totalDebt = DEFAULT;
-    private String totalDebtToEquity = DEFAULT;
+
+    private double trailingPE = DEFAULT_DOUBLE;
+    private double forwardPE = DEFAULT_DOUBLE;
+    private double pegRatio = DEFAULT_DOUBLE;
+    private double ratioPS = DEFAULT_DOUBLE;
+    private double ratioPB = DEFAULT_DOUBLE;
+    private double evToRevenue = DEFAULT_DOUBLE;
+    private double evToEBITDA = DEFAULT_DOUBLE;
+    private double profitMarginPercentage = DEFAULT_DOUBLE;
+    private double operatingMarginPercentage = DEFAULT_DOUBLE;
+    private double returnOnAssetsPercentage = DEFAULT_DOUBLE;
+    private double returnOnEquityPercentage = DEFAULT_DOUBLE;
+    private double revenuePerShare = DEFAULT_DOUBLE;
+    private double quarterlyRevenueGrowthPercentage = DEFAULT_DOUBLE;
+    private double grossProfit = DEFAULT_DOUBLE;
+    private String EBITDA = DEFAULT;
+    private double dilutedEPS = DEFAULT_DOUBLE;
+    private double quartEarningsGrowthPercentage = DEFAULT_DOUBLE;
+    private double totalCash = DEFAULT_DOUBLE;
+    private double totalCashPerShare = DEFAULT_DOUBLE;
+    private double totalDebtToEquityPercentage = DEFAULT_DOUBLE;
     private CompanyTradingInformation tradingInformation = new CompanyTradingInformation.Builder().build();
 
     public Builder withMarketCap(String marketCap) {
@@ -305,58 +282,58 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
       return this;
     }
 
-    public Builder withTrailingPE(String trailingPE) {
+    public Builder withTrailingPE(double trailingPE) {
       this.trailingPE = trailingPE;
       return this;
     }
 
-    public Builder withForwardPE(String forwardPE) {
+    public Builder withForwardPE(double forwardPE) {
       this.forwardPE = forwardPE;
       return this;
     }
 
-    public Builder withPegRatio(String pegRatio) {
+    public Builder withPegRatio(double pegRatio) {
       this.pegRatio = pegRatio;
       return this;
     }
 
-    public Builder withRatioPS(String ratioPS) {
+    public Builder withRatioPS(double ratioPS) {
       this.ratioPS = ratioPS;
       return this;
     }
 
-    public Builder withRatioPB(String ratioPB) {
+    public Builder withRatioPB(double ratioPB) {
       this.ratioPB = ratioPB;
       return this;
     }
 
-    public Builder withEvToRevenue(String evToRevenue) {
+    public Builder withEvToRevenue(double evToRevenue) {
       this.evToRevenue = evToRevenue;
       return this;
     }
 
-    public Builder withEvToEBITDA(String evToEBITDA) {
+    public Builder withEvToEBITDA(double evToEBITDA) {
       this.evToEBITDA = evToEBITDA;
       return this;
     }
 
-    public Builder withProfitMargin(String profitMargin) {
-      this.profitMargin = profitMargin;
+    public Builder withProfitMarginPercentage(double profitMarginPercentage) {
+      this.profitMarginPercentage = profitMarginPercentage;
       return this;
     }
 
-    public Builder withOperatingMargin(String operatingMargin) {
-      this.operatingMargin = operatingMargin;
+    public Builder withOperatingMarginPercentage(double operatingMarginPercentage) {
+      this.operatingMarginPercentage = operatingMarginPercentage;
       return this;
     }
 
-    public Builder withReturnOnAssets(String returnOnAssets) {
-      this.returnOnAssets = returnOnAssets;
+    public Builder withReturnOnAssetsPercentage(double returnOnAssetsPercentage) {
+      this.returnOnAssetsPercentage = returnOnAssetsPercentage;
       return this;
     }
 
-    public Builder withReturnOnEquity(String returnOnEquity) {
-      this.returnOnEquity = returnOnEquity;
+    public Builder withReturnOnEquityPercentage(double returnOnEquityPercentage) {
+      this.returnOnEquityPercentage = returnOnEquityPercentage;
       return this;
     }
 
@@ -365,17 +342,17 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
       return this;
     }
 
-    public Builder withRevenuePerShare(String revenuePerShare) {
+    public Builder withRevenuePerShare(double revenuePerShare) {
       this.revenuePerShare = revenuePerShare;
       return this;
     }
 
-    public Builder withQuarterlyRevenueGrowth(String quarterlyRevenueGrowth) {
-      this.quarterlyRevenueGrowth = quarterlyRevenueGrowth;
+    public Builder withQuarterlyRevenueGrowthPercentage(double quarterlyRevenueGrowthPercentage) {
+      this.quarterlyRevenueGrowthPercentage = quarterlyRevenueGrowthPercentage;
       return this;
     }
 
-    public Builder withGrossProfit(String grossProfit) {
+    public Builder withGrossProfit(double grossProfit) {
       this.grossProfit = grossProfit;
       return this;
     }
@@ -390,22 +367,22 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
       return this;
     }
 
-    public Builder withDilutedEPS(String dilutedEPS) {
+    public Builder withDilutedEPS(double dilutedEPS) {
       this.dilutedEPS = dilutedEPS;
       return this;
     }
 
-    public Builder withQuartEarningsGrowth(String quartEarningsGrowth) {
-      this.quartEarningsGrowth = quartEarningsGrowth;
+    public Builder withQuartEarningsGrowthPercentage(double quartEarningsGrowthPercentage) {
+      this.quartEarningsGrowthPercentage = quartEarningsGrowthPercentage;
       return this;
     }
 
-    public Builder withTotalCash(String totalCash) {
+    public Builder withTotalCash(double totalCash) {
       this.totalCash = totalCash;
       return this;
     }
 
-    public Builder withTotalCashPerShare(String totalCashPerShare) {
+    public Builder withTotalCashPerShare(double totalCashPerShare) {
       this.totalCashPerShare = totalCashPerShare;
       return this;
     }
@@ -415,8 +392,8 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
       return this;
     }
 
-    public Builder withTotalDebtToEquity(String totalDebtToEquity) {
-      this.totalDebtToEquity = totalDebtToEquity;
+    public Builder withTotalDebtToEquityPercentage(double totalDebtToEquityPercentage) {
+      this.totalDebtToEquityPercentage = totalDebtToEquityPercentage;
       return this;
     }
 

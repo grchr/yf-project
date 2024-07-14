@@ -19,6 +19,7 @@ import java.util.concurrent.Executors;
 import static org.opensource.service.ReaderHelpers.createURL;
 import static org.opensource.service.ReaderHelpers.getCompanyName;
 import static org.opensource.service.ReaderHelpers.getCurrentPrice;
+import static org.opensource.service.ReaderHelpers.getDoubleFromStringSimpleCase;
 
 public class GetBalanceSheetService extends AbstractWebTitleIterableService<BalanceSheetTitles> implements IWebExecutableService<CompanyBalanceSheet> {
 
@@ -43,7 +44,7 @@ public class GetBalanceSheetService extends AbstractWebTitleIterableService<Bala
       }
 
       builder.withCompanyName(getCompanyName(pageDocument));
-      builder.withCurrentPrice(getCurrentPrice(pageDocument));
+      builder.withCurrentPrice(getDoubleFromStringSimpleCase(getCurrentPrice(pageDocument)));
       builder.withCompanyTicker(tickerCaps);
 
     } finally {
@@ -71,7 +72,7 @@ public class GetBalanceSheetService extends AbstractWebTitleIterableService<Bala
         }
 
         builder.withCompanyName(getCompanyName(pageDocument));
-        builder.withCurrentPrice(getCurrentPrice(pageDocument));
+        builder.withCurrentPrice(getDoubleFromStringSimpleCase(getCurrentPrice(pageDocument)));
         builder.withCompanyTicker(tickerCaps);
 
       } finally {
@@ -92,18 +93,19 @@ public class GetBalanceSheetService extends AbstractWebTitleIterableService<Bala
     CompanyBalanceSheet.Builder builder = new CompanyBalanceSheet.Builder();
     Map<BalanceSheetTitles, String> balanceSheetTitlesMap = fillMap(dataElements, 1);
 
-    builder.withTotalAssets(getTitleValue(balanceSheetTitlesMap, BalanceSheetTitles.TOTAL_ASSETS))
-            .withTotalLiabilitiesNetMinorityInterest(getTitleValue(balanceSheetTitlesMap, BalanceSheetTitles.TOTAL_LIABILITIES_NET_MINORITY_INTEREST))
-            .withTotalEquityGrossMinorityInterest(getTitleValue(balanceSheetTitlesMap, BalanceSheetTitles.TOTAL_EQUITY_GROSS_MINORITY_INTEREST))
-            .withTotalCapitalization(getTitleValue(balanceSheetTitlesMap, BalanceSheetTitles.TOTAL_CAPITALIZATION))
-            .withCommonStockEquity(getTitleValue(balanceSheetTitlesMap, BalanceSheetTitles.COMMON_STOCK_EQUITY))
-            .withNetTangibleAssets(getTitleValue(balanceSheetTitlesMap, BalanceSheetTitles.NET_TANGIBLE_ASSETS))
-            .withInvestedCapital(getTitleValue(balanceSheetTitlesMap, BalanceSheetTitles.INVESTED_CAPITAL))
-            .withTangibleBookValue(getTitleValue(balanceSheetTitlesMap, BalanceSheetTitles.TANGIBLE_BOOK_VALUE))
-            .withTotalDebt(getTitleValue(balanceSheetTitlesMap, BalanceSheetTitles.TOTAL_DEBT))
-            .withNetDebt(getTitleValue(balanceSheetTitlesMap, BalanceSheetTitles.NET_DEBT))
-            .withSharesIssued(getTitleValue(balanceSheetTitlesMap, BalanceSheetTitles.SHARE_ISSUED))
-            .withOrdinarySharesNumber(getTitleValue(balanceSheetTitlesMap, BalanceSheetTitles.ORDINARY_SHARES_NUMBER));
+    builder.withTotalAssets(getDoubleFromStringSimpleCase(getTitleValue(balanceSheetTitlesMap, BalanceSheetTitles.TOTAL_ASSETS)))
+            .withTotalLiabilitiesNetMinorityInterest(getDoubleFromStringSimpleCase(getTitleValue(balanceSheetTitlesMap, BalanceSheetTitles.TOTAL_LIABILITIES_NET_MINORITY_INTEREST)))
+            .withTotalEquityGrossMinorityInterest(getDoubleFromStringSimpleCase(getTitleValue(balanceSheetTitlesMap, BalanceSheetTitles.TOTAL_EQUITY_GROSS_MINORITY_INTEREST)))
+            .withTotalCapitalization(getDoubleFromStringSimpleCase(getTitleValue(balanceSheetTitlesMap, BalanceSheetTitles.TOTAL_CAPITALIZATION)))
+            .withCommonStockEquity(getDoubleFromStringSimpleCase(getTitleValue(balanceSheetTitlesMap, BalanceSheetTitles.COMMON_STOCK_EQUITY)))
+            .withNetTangibleAssets(getDoubleFromStringSimpleCase(getTitleValue(balanceSheetTitlesMap, BalanceSheetTitles.NET_TANGIBLE_ASSETS)))
+            .withInvestedCapital(getDoubleFromStringSimpleCase(getTitleValue(balanceSheetTitlesMap, BalanceSheetTitles.INVESTED_CAPITAL)))
+            .withTangibleBookValue(getDoubleFromStringSimpleCase(getTitleValue(balanceSheetTitlesMap, BalanceSheetTitles.TANGIBLE_BOOK_VALUE)))
+            .withTotalDebt(getDoubleFromStringSimpleCase(getTitleValue(balanceSheetTitlesMap, BalanceSheetTitles.TOTAL_DEBT)))
+            .withNetDebt(getDoubleFromStringSimpleCase(getTitleValue(balanceSheetTitlesMap, BalanceSheetTitles.NET_DEBT)))
+            .withSharesIssued(getDoubleFromStringSimpleCase(getTitleValue(balanceSheetTitlesMap, BalanceSheetTitles.SHARE_ISSUED)))
+            .withWorkingCapital(getDoubleFromStringSimpleCase(getTitleValue(balanceSheetTitlesMap, BalanceSheetTitles.WORKING_CAPITAL)))
+            .withOrdinarySharesNumber(getDoubleFromStringSimpleCase(getTitleValue(balanceSheetTitlesMap, BalanceSheetTitles.ORDINARY_SHARES_NUMBER)));
 
     return builder;
   }

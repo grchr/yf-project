@@ -30,7 +30,7 @@ public class GetBalanceSheetServiceTest {
     CompanyBalanceSheet companyBalanceSheet = service.execute(ticker);
 
     assertNotNull(companyBalanceSheet);
-    assertNoFieldsContainDoubleDash(companyBalanceSheet);
+    assertNoFieldsContainNan(companyBalanceSheet);
   }
 
   @Test
@@ -39,22 +39,22 @@ public class GetBalanceSheetServiceTest {
     CompanyBalanceSheet companyBalanceSheet = service.executeAsync(ticker).get();
 
     assertNotNull(companyBalanceSheet);
-    assertNoFieldsContainDoubleDash(companyBalanceSheet);
+    assertNoFieldsContainNan(companyBalanceSheet);
   }
 
-  private void assertNoFieldsContainDoubleDash(CompanyBalanceSheet companyBalanceSheet) {
-    assertNotEquals("--", companyBalanceSheet.getTotalAssets());
-    assertNotEquals("--", companyBalanceSheet.getTotalLiabilitiesNetMinorityInterest());
-    assertNotEquals("--", companyBalanceSheet.getTotalEquityGrossMinorityInterest());
-    assertNotEquals("--", companyBalanceSheet.getTotalCapitalization());
-    assertNotEquals("--", companyBalanceSheet.getCommonStockEquity());
-    assertNotEquals("--", companyBalanceSheet.getNetTangibleAssets());
-    assertNotEquals("--", companyBalanceSheet.getInvestedCapital());
-    assertNotEquals("--", companyBalanceSheet.getTangibleBookValue());
-    assertNotEquals("--", companyBalanceSheet.getTotalDebt());
-    assertNotEquals("--", companyBalanceSheet.getNetDebt());
-    assertNotEquals("--", companyBalanceSheet.getSharesIssued());
-    assertNotEquals("--", companyBalanceSheet.getOrdinarySharesNumber());
+  private void assertNoFieldsContainNan(CompanyBalanceSheet companyBalanceSheet) {
+    assertNotEquals(Double.NaN, companyBalanceSheet.getTotalAssets());
+    assertNotEquals(Double.NaN, companyBalanceSheet.getTotalLiabilitiesNetMinorityInterest());
+    assertNotEquals(Double.NaN, companyBalanceSheet.getTotalEquityGrossMinorityInterest());
+    assertNotEquals(Double.NaN, companyBalanceSheet.getTotalCapitalization());
+    assertNotEquals(Double.NaN, companyBalanceSheet.getCommonStockEquity());
+    assertNotEquals(Double.NaN, companyBalanceSheet.getNetTangibleAssets());
+    assertNotEquals(Double.NaN, companyBalanceSheet.getInvestedCapital());
+    assertNotEquals(Double.NaN, companyBalanceSheet.getTangibleBookValue());
+    assertNotEquals(Double.NaN, companyBalanceSheet.getTotalDebt());
+    assertNotEquals(Double.NaN, companyBalanceSheet.getNetDebt());
+    assertNotEquals(Double.NaN, companyBalanceSheet.getSharesIssued());
+    assertNotEquals(Double.NaN, companyBalanceSheet.getOrdinarySharesNumber());
 
   }
 }

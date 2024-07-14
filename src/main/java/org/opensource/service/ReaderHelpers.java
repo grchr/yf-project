@@ -25,6 +25,22 @@ public class ReaderHelpers {
     return DEFAULT;
   }
 
+  static double getDoubleFromStringSimpleCase(String value) {
+    try {
+      return Double.parseDouble(value.replace(",", ""));
+    } catch (NumberFormatException e) {
+      return Double.NaN;
+    }
+  }
+
+  static double getDoubleFromPercentageValue(String value) {
+    try {
+      return Double.parseDouble(value.replace("%", ""));
+    } catch (NumberFormatException e) {
+      return Double.NaN;
+    }
+  }
+
   static String getCurrentPrice(Document pageDocument) {
     Element container = pageDocument.selectFirst(CURRENT_PRICE_FIRST_SELECTOR);
     // Select all span elements within the specific container
