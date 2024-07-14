@@ -26,7 +26,7 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
   private String EBITDA;
   private double dilutedEPS;
   private double quartEarningsGrowthPercentage;
-  private double totalCash;
+  private String totalCash;
   private double totalCashPerShare;
   private double totalDebtToEquityPercentage;
 
@@ -147,7 +147,7 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
     return quartEarningsGrowthPercentage;
   }
 
-  public double getTotalCash() {
+  public String getTotalCash() {
     return totalCash;
   }
 
@@ -223,7 +223,7 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
             Objects.equals(that.EBITDA, EBITDA) &&
             Double.compare(that.dilutedEPS, dilutedEPS) == 0 &&
             Double.compare(that.quartEarningsGrowthPercentage, quartEarningsGrowthPercentage) == 0 &&
-            Double.compare(that.totalCash, totalCash) == 0 &&
+            Objects.equals(that.totalCash, totalCash) &&
             Double.compare(that.totalCashPerShare, totalCashPerShare) == 0 &&
             Double.compare(that.totalDebtToEquityPercentage, totalDebtToEquityPercentage) == 0 &&
             Objects.equals(marketCap, that.marketCap) &&
@@ -267,7 +267,7 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
     private String EBITDA = DEFAULT;
     private double dilutedEPS = DEFAULT_DOUBLE;
     private double quartEarningsGrowthPercentage = DEFAULT_DOUBLE;
-    private double totalCash = DEFAULT_DOUBLE;
+    private String totalCash = DEFAULT;
     private double totalCashPerShare = DEFAULT_DOUBLE;
     private double totalDebtToEquityPercentage = DEFAULT_DOUBLE;
     private CompanyTradingInformation tradingInformation = new CompanyTradingInformation.Builder().build();
@@ -377,7 +377,7 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
       return this;
     }
 
-    public Builder withTotalCash(double totalCash) {
+    public Builder withTotalCash(String totalCash) {
       this.totalCash = totalCash;
       return this;
     }

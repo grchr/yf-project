@@ -113,7 +113,7 @@ public class GetKeyStatisticsService implements IWebExecutableService<CompanyKey
             .withNetIncomeAviToCommon(getValueFromElements(tdElements, KeyStatisticsPositions.NET_INC_AVI_TO_COMMON.getValue()))
             .withDilutedEPS(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.DILUTED_EPS.getValue())))
             .withQuartEarningsGrowthPercentage(getDoubleFromPercentageValue(getValueFromElements(tdElements, KeyStatisticsPositions.QUARTERLY_EARNINGS_GROWTH.getValue())))
-            .withTotalCash(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.TOTAL_CASH.getValue())))
+            .withTotalCash(getValueFromElements(tdElements, KeyStatisticsPositions.TOTAL_CASH.getValue()))
             .withTotalCashPerShare(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.TOTAL_CASH_PER_SHARE.getValue())))
             .withTotalDebt(getValueFromElements(tdElements, KeyStatisticsPositions.TOTAL_DEBT.getValue()))
             .withTotalDebtToEquityPercentage(getDoubleFromPercentageValue(getValueFromElements(tdElements, KeyStatisticsPositions.TOTAL_DEBT_TO_EQUITY.getValue())))
@@ -124,7 +124,7 @@ public class GetKeyStatisticsService implements IWebExecutableService<CompanyKey
     CompanyTradingInformation.Builder builder = new CompanyTradingInformation.Builder();
     builder.withBeta(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.BETA.getValue())))
             .withCurrentRatio(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.CURRENT_RATIO.getValue())))
-            .withWeek52RangePercentage(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.WEEK_52_RANGE.getValue())))
+            .withWeek52RangePercentage(getDoubleFromPercentageValue(getValueFromElements(tdElements, KeyStatisticsPositions.WEEK_52_RANGE.getValue())))
             .withWeek52High(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.WEEK_52_HIGH.getValue())))
             .withWeek52Low(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.WEEK_52_LOW.getValue())))
             .withDay50MovingAvg(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.DAY_50_MOVING_AVG.getValue())))
