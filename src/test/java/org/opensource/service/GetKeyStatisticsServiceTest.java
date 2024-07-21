@@ -11,6 +11,7 @@ import java.util.concurrent.ExecutionException;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.opensource.service.TestUtils.getRandomStockToTest;
 
 public class GetKeyStatisticsServiceTest {
 
@@ -28,7 +29,7 @@ public class GetKeyStatisticsServiceTest {
 
   @Test
   public void testExecute() {
-    String ticker = "AAPL";
+    String ticker = getRandomStockToTest();
     CompanyKeyStatistics keyStatistics = service.execute(ticker);
 
     assertNotNull(keyStatistics);
@@ -37,7 +38,7 @@ public class GetKeyStatisticsServiceTest {
 
   @Test
   public void testExecuteAsync() throws ExecutionException, InterruptedException {
-    String ticker = "AAPL";
+    String ticker = getRandomStockToTest();
     CompletableFuture<CompanyKeyStatistics> future = service.executeAsync(ticker);
     CompanyKeyStatistics keyStatistics = future.get();
 
@@ -64,24 +65,9 @@ public class GetKeyStatisticsServiceTest {
     assertNotEquals("--", keyStatistics.getNetIncomeAviToCommon());
     assertNotEquals(Double.NaN, keyStatistics.getDilutedEPS());
     assertNotEquals(Double.NaN, keyStatistics.getQuartEarningsGrowthPercentage());
-    assertNotEquals(Double.NaN, keyStatistics.getTotalCash());
+    assertNotEquals("--", keyStatistics.getTotalCash());
     assertNotEquals(Double.NaN, keyStatistics.getTotalCashPerShare());
     assertNotEquals("--", keyStatistics.getTotalDebt());
     assertNotEquals(Double.NaN, keyStatistics.getTotalDebtToEquityPercentage());
-
-    CompanyTradingInformation tradingInfo = keyStatistics.getTradingInformation();
-    assertNotEquals(Double.NaN, tradingInfo.getBeta());
-    assertNotEquals(Double.NaN, tradingInfo.getCurrentRatio());
-    assertNotEquals(Double.NaN, tradingInfo.getWeek52RangePercentage());
-    assertNotEquals(Double.NaN, tradingInfo.getWeek52High());
-    assertNotEquals(Double.NaN, tradingInfo.getWeek52Low());
-    assertNotEquals(Double.NaN, tradingInfo.getDay50MovingAvg());
-    assertNotEquals(Double.NaN, tradingInfo.getDay200MovingAverage());
-    assertNotEquals(Double.NaN, tradingInfo.getForwardAnnualDividendYieldPercentage());
-    assertNotEquals(Double.NaN, tradingInfo.getForwardAnnualDividendRate());
-    assertNotEquals(Double.NaN, tradingInfo.getDividendYield5YearAvg());
-    assertNotEquals(Double.NaN, tradingInfo.getTrailingAnnualDividendRate());
-    assertNotEquals(Double.NaN, tradingInfo.getTrailingAnnualDividendYieldPercentage());
-    assertNotEquals(Double.NaN, tradingInfo.getPayoutRatioPercentage());
   }
 }

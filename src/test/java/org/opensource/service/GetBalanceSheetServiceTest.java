@@ -9,6 +9,7 @@ import java.util.concurrent.ExecutionException;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.opensource.service.TestUtils.getRandomStockToTest;
 
 public class GetBalanceSheetServiceTest {
 
@@ -26,7 +27,7 @@ public class GetBalanceSheetServiceTest {
 
   @Test
   void testExecute() {
-    String ticker = "AAPL";
+    String ticker = getRandomStockToTest();
     CompanyBalanceSheet companyBalanceSheet = service.execute(ticker);
 
     assertNotNull(companyBalanceSheet);
@@ -35,7 +36,7 @@ public class GetBalanceSheetServiceTest {
 
   @Test
   void testExecuteAsync() throws ExecutionException, InterruptedException {
-    String ticker = "AAPL";
+    String ticker = getRandomStockToTest();
     CompanyBalanceSheet companyBalanceSheet = service.executeAsync(ticker).get();
 
     assertNotNull(companyBalanceSheet);
