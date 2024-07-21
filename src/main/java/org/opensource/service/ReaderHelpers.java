@@ -9,7 +9,7 @@ public class ReaderHelpers {
 
   static final String COMPANY_NAME_SELECTOR = "h1";
   static final int COMPANY_NAME_POSITION = 1;
-  static final String CURRENT_PRICE_FIRST_SELECTOR = "div.container.svelte-mgkamr";
+  static final String CURRENT_PRICE_FIRST_SELECTOR = "div.container.yf-mgkamr";
   static final String CURRENT_PRICE_SECOND_SELECTOR = "span";
   static final int CURRENT_PRICE_POSITION = 0;
   static String DEFAULT = "--";
