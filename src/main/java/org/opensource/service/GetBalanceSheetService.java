@@ -44,7 +44,7 @@ public class GetBalanceSheetService extends AbstractWebTitleIterableService<Bala
       }
 
       builder.withCompanyName(getCompanyName(pageDocument));
-      builder.withCurrentPrice(getDoubleFromStringSimpleCase(getCurrentPrice(pageDocument)));
+      builder.withCurrentPrice(getDoubleFromStringSimpleCase(getCurrentPrice(pageDocument, ticker)));
       builder.withCompanyTicker(tickerCaps);
 
     } finally {
@@ -72,7 +72,7 @@ public class GetBalanceSheetService extends AbstractWebTitleIterableService<Bala
         }
 
         builder.withCompanyName(getCompanyName(pageDocument));
-        builder.withCurrentPrice(getDoubleFromStringSimpleCase(getCurrentPrice(pageDocument)));
+        builder.withCurrentPrice(getDoubleFromStringSimpleCase(getCurrentPrice(pageDocument, ticker)));
         builder.withCompanyTicker(tickerCaps);
 
       } finally {

@@ -47,7 +47,7 @@ public class GetCashFlowService extends AbstractWebTitleIterableService<CashFlow
       }
 
       builder.withCompanyName(getCompanyName(pageDocument));
-      builder.withCurrentPrice(getDoubleFromStringSimpleCase(getCurrentPrice(pageDocument)));
+      builder.withCurrentPrice(getDoubleFromStringSimpleCase(getCurrentPrice(pageDocument, ticker)));
       builder.withCompanyTicker(tickerCaps);
 
     } finally {
@@ -75,7 +75,7 @@ public class GetCashFlowService extends AbstractWebTitleIterableService<CashFlow
         }
 
         builder.withCompanyName(getCompanyName(pageDocument));
-        builder.withCurrentPrice(getDoubleFromStringSimpleCase(getCurrentPrice(pageDocument)));
+        builder.withCurrentPrice(getDoubleFromStringSimpleCase(getCurrentPrice(pageDocument, ticker)));
         builder.withCompanyTicker(tickerCaps);
 
       } finally {

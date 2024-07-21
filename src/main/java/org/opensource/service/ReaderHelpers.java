@@ -10,6 +10,8 @@ public class ReaderHelpers {
   static final String COMPANY_NAME_SELECTOR = "h1";
   static final int COMPANY_NAME_POSITION = 1;
   static final String CURRENT_PRICE_FIRST_SELECTOR = "div.container.yf-mgkamr";
+
+  static final String CURRENT_PRICE_DATA_SELECTOR = "fin-streamer.livePrice[data-symbol=%s]";
   static final String CURRENT_PRICE_SECOND_SELECTOR = "span";
   static final int CURRENT_PRICE_POSITION = 0;
   static String DEFAULT = "--";
@@ -48,6 +50,17 @@ public class ReaderHelpers {
       Elements spans = container.select(CURRENT_PRICE_SECOND_SELECTOR);
       if (CollectionUtils.isNotEmpty(spans)) {
         return getValueFromElements(spans, CURRENT_PRICE_POSITION);
+      }
+    }
+    return DEFAULT;
+  }
+
+  static String getCurrentPrice(Document pageDocument, String ticker) {
+    Element livePriceElement = pageDocument.select(String.format(CURRENT_PRICE_DATA_SELECTOR, ticker)).first();
+    if (livePriceElement != null) {
+      Element spanElement = livePriceElement.selectFirst(CURRENT_PRICE_SECOND_SELECTOR);
+      if (spanElement != null) {
+        return spanElement.text();
       }
     }
     return DEFAULT;

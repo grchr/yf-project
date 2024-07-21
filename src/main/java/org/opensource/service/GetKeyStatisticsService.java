@@ -46,7 +46,7 @@ public class GetKeyStatisticsService implements IWebExecutableService<CompanyKey
       }
 
       builder.withCompanyName(getCompanyName(pageDocument));
-      builder.withCurrentPrice(getDoubleFromStringSimpleCase(getCurrentPrice(pageDocument)));
+      builder.withCurrentPrice(getDoubleFromStringSimpleCase(getCurrentPrice(pageDocument, ticker)));
       builder.withCompanyTicker(tickerCaps);
 
     } finally {
@@ -75,7 +75,7 @@ public class GetKeyStatisticsService implements IWebExecutableService<CompanyKey
         }
 
         builder.withCompanyName(getCompanyName(pageDocument));
-        builder.withCurrentPrice(getDoubleFromStringSimpleCase(getCurrentPrice(pageDocument)));
+        builder.withCurrentPrice(getDoubleFromStringSimpleCase(getCurrentPrice(pageDocument, ticker)));
         builder.withCompanyTicker(tickerCaps);
 
       } finally {

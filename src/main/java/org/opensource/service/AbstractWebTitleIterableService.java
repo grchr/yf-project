@@ -9,7 +9,7 @@ import java.util.Map;
 public abstract class AbstractWebTitleIterableService<T extends Enum<T>> {
 
   protected static String DEFAULT = "--";
-  protected static final String TITLES_SELECTOR = "div.column.sticky.yf-1xjz32c, div.column.yf-1xjz32c.alt";
+  protected static final String TITLES_SELECTOR = "div[class^=column sticky], div[class^=column]";
 
   protected abstract AbstractCompanyInformation.Builder populateBuilderWithMainInfo(Elements dataElements);
 
