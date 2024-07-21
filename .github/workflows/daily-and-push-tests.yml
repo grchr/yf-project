@@ -3,6 +3,9 @@ name: Daily Tests
 on:
   schedule:
     - cron: '0 4 * * *'  # Runs every day at 21:00 UTC
+  push:
+    branches:
+      - main  # Runs on push to the main branch
 
 jobs:
   test:
