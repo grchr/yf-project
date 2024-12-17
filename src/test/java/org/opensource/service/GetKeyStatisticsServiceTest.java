@@ -30,7 +30,7 @@ public class GetKeyStatisticsServiceTest {
   @Test
   public void testExecute() {
     String ticker = getRandomStockToTest();
-    CompanyKeyStatistics keyStatistics = service.execute(ticker);
+    CompanyKeyStatistics keyStatistics = service.execute("C");
 
     assertNotNull(keyStatistics);
     assertAllFieldsNoDash(keyStatistics);

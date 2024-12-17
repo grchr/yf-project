@@ -129,12 +129,4 @@ public class GetCashFlowService extends AbstractWebTitleIterableService<CashFlow
     return map;
   }
 
-  @Override
-  protected String getTitleValue(Map<CashFlowTitles, String> cashFlowMap, CashFlowTitles title) {
-    if (cashFlowMap.containsKey(title)) {
-      return cashFlowMap.get(title);
-    }
-    return DEFAULT;
-  }
-
 }

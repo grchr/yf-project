@@ -101,14 +101,6 @@ public class GetIncomeStatementService extends AbstractWebTitleIterableService<I
   }
 
   @Override
-  protected String getTitleValue(Map<IncomeStatementTitles, String> incomeStatementMap, IncomeStatementTitles title) {
-    if (incomeStatementMap.containsKey(title)) {
-      return incomeStatementMap.get(title);
-    }
-    return DEFAULT;
-  }
-
-  @Override
   public CompletableFuture<CompanyIncomeStatement> executeAsync(String ticker) {
     return CompletableFuture.supplyAsync(() -> {
       CompanyIncomeStatement.Builder builder = new CompanyIncomeStatement.Builder();

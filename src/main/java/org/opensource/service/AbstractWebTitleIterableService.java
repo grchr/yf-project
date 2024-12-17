@@ -15,5 +15,10 @@ public abstract class AbstractWebTitleIterableService<T extends Enum<T>> {
 
   protected abstract EnumMap<T, String> fillMap(Elements dataElements, int valueOffset);
 
-  protected abstract String getTitleValue(Map<T, String> map, T title);
+  protected String getTitleValue(Map<T, String> map, T title) {
+    if (map.containsKey(title)) {
+      return map.get(title);
+    }
+    return DEFAULT;
+  }
 }

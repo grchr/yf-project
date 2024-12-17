@@ -111,14 +111,6 @@ public class GetBalanceSheetService extends AbstractWebTitleIterableService<Bala
   }
 
   @Override
-  protected String getTitleValue(Map<BalanceSheetTitles, String> balanceSheetMap, BalanceSheetTitles title) {
-    if (balanceSheetMap.containsKey(title)) {
-      return balanceSheetMap.get(title);
-    }
-    return DEFAULT;
-  }
-
-  @Override
   protected EnumMap<BalanceSheetTitles, String> fillMap(Elements dataElements, int valueOffset) {
     EnumMap<BalanceSheetTitles, String> map = new EnumMap<>(BalanceSheetTitles.class);
 
