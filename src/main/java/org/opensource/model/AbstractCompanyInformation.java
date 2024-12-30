@@ -2,9 +2,9 @@ package org.opensource.model;
 
 public abstract class AbstractCompanyInformation {
 
-  private String companyName;
-  private String companyTicker;
-  private double currentPrice;
+  protected String companyName;
+  protected String companyTicker;
+  protected double currentPrice;
 
   protected AbstractCompanyInformation(Builder<?> builder) {
     this.companyName = builder.companyName;

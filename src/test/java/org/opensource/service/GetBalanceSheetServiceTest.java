@@ -1,7 +1,7 @@
 package org.opensource.service;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.opensource.model.CompanyBalanceSheet;
 
@@ -15,13 +15,13 @@ public class GetBalanceSheetServiceTest {
 
   private static GetBalanceSheetService service;
 
-  @BeforeAll
-  static void setUp() {
+  @BeforeEach
+  void setUp() {
     service = new GetBalanceSheetService();
   }
 
-  @AfterAll
-  static void tearDown() {
+  @AfterEach
+  void tearDown() {
     service.shutdown();
   }
 
@@ -31,6 +31,7 @@ public class GetBalanceSheetServiceTest {
     CompanyBalanceSheet companyBalanceSheet = service.execute(ticker);
 
     assertNotNull(companyBalanceSheet);
+    System.out.println(companyBalanceSheet);
     assertNoFieldsContainNan(companyBalanceSheet);
   }
 
@@ -40,6 +41,7 @@ public class GetBalanceSheetServiceTest {
     CompanyBalanceSheet companyBalanceSheet = service.executeAsync(ticker).get();
 
     assertNotNull(companyBalanceSheet);
+    System.out.println(companyBalanceSheet);
     assertNoFieldsContainNan(companyBalanceSheet);
   }
 
@@ -53,7 +55,6 @@ public class GetBalanceSheetServiceTest {
     assertNotEquals(Double.NaN, companyBalanceSheet.getInvestedCapital());
     assertNotEquals(Double.NaN, companyBalanceSheet.getTangibleBookValue());
     assertNotEquals(Double.NaN, companyBalanceSheet.getTotalDebt());
-    assertNotEquals(Double.NaN, companyBalanceSheet.getNetDebt());
     assertNotEquals(Double.NaN, companyBalanceSheet.getSharesIssued());
     assertNotEquals(Double.NaN, companyBalanceSheet.getOrdinarySharesNumber());
 

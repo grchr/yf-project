@@ -10,5 +10,4 @@ public interface IWebExecutableService<T extends AbstractCompanyInformation> {
 
   CompletableFuture<T> executeAsync(String ticker);
 
-  void shutdown();
 }

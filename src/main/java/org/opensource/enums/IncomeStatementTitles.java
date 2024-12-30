@@ -23,8 +23,9 @@ public enum IncomeStatementTitles {
   }
 
   public static IncomeStatementTitles fromTitle(String title) {
+    String sanitizedTitle = title.trim().replaceFirst("\\s\\d+$", "");
     for (IncomeStatementTitles balanceSheetTitle : values()) {
-      if (balanceSheetTitle.getTitle().equalsIgnoreCase(title)) {
+      if (balanceSheetTitle.getTitle().equalsIgnoreCase(sanitizedTitle)) {
         return balanceSheetTitle;
       }
     }

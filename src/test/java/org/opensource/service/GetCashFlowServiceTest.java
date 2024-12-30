@@ -1,7 +1,7 @@
 package org.opensource.service;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.opensource.model.CompanyCashFlow;
 
@@ -15,13 +15,13 @@ public class GetCashFlowServiceTest {
 
   private static GetCashFlowService service;
 
-  @BeforeAll
-  static void setUp() {
+  @BeforeEach
+  void setUp() {
     service = new GetCashFlowService();
   }
 
-  @AfterAll
-  static void tearDown() {
+  @AfterEach
+  void tearDown() {
     service.shutdown();
   }
 
@@ -31,6 +31,7 @@ public class GetCashFlowServiceTest {
     CompanyCashFlow companyCashFlow = service.execute(ticker);
 
     assertNotNull(companyCashFlow);
+    System.out.println(companyCashFlow);
     assertNoFieldsContainDoubleDash(companyCashFlow);
   }
 
@@ -40,6 +41,7 @@ public class GetCashFlowServiceTest {
     CompanyCashFlow companyCashFlow = service.executeAsync(ticker).get();
 
     assertNotNull(companyCashFlow);
+    System.out.println(companyCashFlow);
     assertNoFieldsContainDoubleDash(companyCashFlow);
   }
 

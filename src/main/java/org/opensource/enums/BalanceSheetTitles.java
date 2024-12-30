@@ -26,8 +26,9 @@ public enum BalanceSheetTitles {
   }
 
   public static BalanceSheetTitles fromTitle(String title) {
+    String sanitizedTitle = title.trim().replaceFirst("\\s\\d+$", "");
     for (BalanceSheetTitles balanceSheetTitle : values()) {
-      if (balanceSheetTitle.getTitle().equalsIgnoreCase(title)) {
+      if (balanceSheetTitle.getTitle().equalsIgnoreCase(sanitizedTitle)) {
         return balanceSheetTitle;
       }
     }

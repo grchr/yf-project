@@ -1,7 +1,7 @@
 package org.opensource.service;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.opensource.model.CompanyIncomeStatement;
 
@@ -14,13 +14,13 @@ import static org.opensource.service.TestUtils.getRandomStockToTest;
 public class GetIncomeStatementServiceTest {
   private static GetIncomeStatementService service;
 
-  @BeforeAll
-  static void setUp() {
+  @BeforeEach
+  void setUp() {
     service = new GetIncomeStatementService();
   }
 
-  @AfterAll
-  static void tearDown() {
+  @AfterEach
+  void tearDown() {
     service.shutdown();
   }
 
@@ -30,6 +30,7 @@ public class GetIncomeStatementServiceTest {
     CompanyIncomeStatement companyIncomeStatement = service.execute(ticker);
 
     assertNotNull(companyIncomeStatement);
+    System.out.println(companyIncomeStatement);
     assertNoFieldsContainDoubleDash(companyIncomeStatement);
   }
 
@@ -39,11 +40,11 @@ public class GetIncomeStatementServiceTest {
     CompanyIncomeStatement companyIncomeStatement = service.executeAsync(ticker).get();
 
     assertNotNull(companyIncomeStatement);
+    System.out.println(companyIncomeStatement);
     assertNoFieldsContainDoubleDash(companyIncomeStatement);
   }
 
   private void assertNoFieldsContainDoubleDash(CompanyIncomeStatement companyIncomeStatement) {
-
     assertNotEquals(Double.NaN, companyIncomeStatement.getTotalRevenueTTM());
     assertNotEquals(Double.NaN, companyIncomeStatement.getTotalRevenueLastUpdate());
     assertNotEquals(Double.NaN, companyIncomeStatement.getPretaxIncomeTTM());

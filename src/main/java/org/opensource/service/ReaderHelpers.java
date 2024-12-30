@@ -27,17 +27,9 @@ public class ReaderHelpers {
     return DEFAULT;
   }
 
-  static double getDoubleFromStringSimpleCase(String value) {
+  static double getDoubleFromString(String value) {
     try {
-      return Double.parseDouble(value.replace(",", ""));
-    } catch (NumberFormatException e) {
-      return Double.NaN;
-    }
-  }
-
-  static double getDoubleFromPercentageValue(String value) {
-    try {
-      return Double.parseDouble(value.replace("%", ""));
+      return Double.parseDouble(value.replace(",", "").replace("%", ""));
     } catch (NumberFormatException e) {
       return Double.NaN;
     }
@@ -58,7 +50,7 @@ public class ReaderHelpers {
   static String getCurrentPrice(Document pageDocument, String ticker) {
     Element livePriceElement = pageDocument.select(String.format(CURRENT_PRICE_DATA_SELECTOR, ticker)).first();
     if (livePriceElement != null) {
-      Element spanElement = livePriceElement.selectFirst(CURRENT_PRICE_SECOND_SELECTOR);
+      Element spanElement = livePriceElement.getElementsByAttribute("data-value").get(0); //livePriceElement.selectFirst(CURRENT_PRICE_SECOND_SELECTOR);
       if (spanElement != null) {
         return spanElement.text();
       }

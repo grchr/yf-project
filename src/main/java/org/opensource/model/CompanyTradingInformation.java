@@ -16,6 +16,8 @@ public class CompanyTradingInformation extends AbstractCompanyInformation {
   private double week52Low;
   private double day50MovingAvg;
   private double day200MovingAverage;
+  private String dividendDate;
+  private String exDividendDate;
 
   private CompanyTradingInformation(Builder builder) {
     super(builder);
@@ -32,6 +34,8 @@ public class CompanyTradingInformation extends AbstractCompanyInformation {
     this.week52Low = builder.week52Low;
     this.day50MovingAvg = builder.day50MovingAvg;
     this.day200MovingAverage = builder.day200MovingAverage;
+    this.dividendDate = builder.dividendDate;
+    this.exDividendDate = builder.exDividendDate;
   }
 
   public double getBeta() {
@@ -74,6 +78,14 @@ public class CompanyTradingInformation extends AbstractCompanyInformation {
     return week52High;
   }
 
+  public String getDividendDate() {
+    return dividendDate;
+  }
+
+  public String getExDividendDate() {
+    return exDividendDate;
+  }
+
   public double getWeek52Low() {
     return week52Low;
   }
@@ -89,47 +101,55 @@ public class CompanyTradingInformation extends AbstractCompanyInformation {
   @Override
   public String toString() {
     return "CompanyTradingInformation{" +
-            "beta=" + beta +
-            ", forwardAnnualDividendYieldPercentage=" + forwardAnnualDividendYieldPercentage +
-            ", forwardAnnualDividendRate=" + forwardAnnualDividendRate +
-            ", dividendYield5YearAvg=" + dividendYield5YearAvg +
-            ", trailingAnnualDividendYieldPercentage=" + trailingAnnualDividendYieldPercentage +
-            ", trailingAnnualDividendRate=" + trailingAnnualDividendRate +
-            ", payoutRatioPercentage=" + payoutRatioPercentage +
-            ", currentRatio=" + currentRatio +
-            ", week52RangePercentage=" + week52RangePercentage +
-            ", week52High=" + week52High +
-            ", week52Low=" + week52Low +
-            ", day50MovingAvg=" + day50MovingAvg +
-            ", day200MovingAverage=" + day200MovingAverage +
-            '}';
+        "companyName='" + companyName +
+        ", companyTicker='" + companyTicker +
+        ", currentPrice='" + currentPrice +
+        ", beta=" + beta +
+        ", forwardAnnualDividendYieldPercentage=" + forwardAnnualDividendYieldPercentage +
+        ", forwardAnnualDividendRate=" + forwardAnnualDividendRate +
+        ", dividendYield5YearAvg=" + dividendYield5YearAvg +
+        ", trailingAnnualDividendYieldPercentage=" + trailingAnnualDividendYieldPercentage +
+        ", trailingAnnualDividendRate=" + trailingAnnualDividendRate +
+        ", payoutRatioPercentage=" + payoutRatioPercentage +
+        ", currentRatio=" + currentRatio +
+        ", week52RangePercentage=" + week52RangePercentage +
+        ", week52High=" + week52High +
+        ", week52Low=" + week52Low +
+        ", day50MovingAvg=" + day50MovingAvg +
+        ", day200MovingAverage=" + day200MovingAverage +
+        ", dividendDate='" + dividendDate + '\'' +
+        ", exDividendDate='" + exDividendDate + '\'' +
+        '}';
   }
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof CompanyTradingInformation that)) return false;
-    return Double.compare(that.beta, beta) == 0 &&
-            Double.compare(that.forwardAnnualDividendYieldPercentage, forwardAnnualDividendYieldPercentage) == 0 &&
-            Double.compare(that.forwardAnnualDividendRate, forwardAnnualDividendRate) == 0 &&
-            Double.compare(that.dividendYield5YearAvg, dividendYield5YearAvg) == 0 &&
-            Double.compare(that.trailingAnnualDividendYieldPercentage, trailingAnnualDividendYieldPercentage) == 0 &&
-            Double.compare(that.trailingAnnualDividendRate, trailingAnnualDividendRate) == 0 &&
-            Double.compare(that.payoutRatioPercentage, payoutRatioPercentage) == 0 &&
-            Double.compare(that.currentRatio, currentRatio) == 0 &&
-            Double.compare(that.week52RangePercentage, week52RangePercentage) == 0 &&
-            Double.compare(that.week52High, week52High) == 0 &&
-            Double.compare(that.week52Low, week52Low) == 0 &&
-            Double.compare(that.day50MovingAvg, day50MovingAvg) == 0 &&
-            Double.compare(that.day200MovingAverage, day200MovingAverage) == 0;
+    if (o == null || getClass() != o.getClass()) return false;
+    CompanyTradingInformation that = (CompanyTradingInformation) o;
+    return Double.compare(beta, that.beta) == 0
+        && Double.compare(forwardAnnualDividendYieldPercentage, that.forwardAnnualDividendYieldPercentage) == 0
+        && Double.compare(forwardAnnualDividendRate, that.forwardAnnualDividendRate) == 0
+        && Double.compare(dividendYield5YearAvg, that.dividendYield5YearAvg) == 0
+        && Double.compare(trailingAnnualDividendYieldPercentage, that.trailingAnnualDividendYieldPercentage) == 0
+        && Double.compare(trailingAnnualDividendRate, that.trailingAnnualDividendRate) == 0
+        && Double.compare(payoutRatioPercentage, that.payoutRatioPercentage) == 0
+        && Double.compare(currentRatio, that.currentRatio) == 0
+        && Double.compare(week52RangePercentage, that.week52RangePercentage) == 0
+        && Double.compare(week52High, that.week52High) == 0
+        && Double.compare(week52Low, that.week52Low) == 0
+        && Double.compare(day50MovingAvg, that.day50MovingAvg) == 0
+        && Double.compare(day200MovingAverage, that.day200MovingAverage) == 0
+        && Objects.equals(dividendDate, that.dividendDate)
+        && Objects.equals(exDividendDate, that.exDividendDate);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(beta, forwardAnnualDividendYieldPercentage, forwardAnnualDividendRate,
-            dividendYield5YearAvg, trailingAnnualDividendYieldPercentage, trailingAnnualDividendRate,
-            payoutRatioPercentage, currentRatio, week52RangePercentage, week52High, week52Low,
-            day50MovingAvg, day200MovingAverage);
+        dividendYield5YearAvg, trailingAnnualDividendYieldPercentage, trailingAnnualDividendRate,
+        payoutRatioPercentage, currentRatio, week52RangePercentage, week52High, week52Low, day50MovingAvg,
+        day200MovingAverage, dividendDate, exDividendDate);
   }
 
   public static class Builder extends AbstractCompanyInformation.Builder<CompanyTradingInformation.Builder> {
@@ -146,6 +166,8 @@ public class CompanyTradingInformation extends AbstractCompanyInformation {
     private double week52Low = DEFAULT_DOUBLE;
     private double day50MovingAvg = DEFAULT_DOUBLE;
     private double day200MovingAverage = DEFAULT_DOUBLE;
+    private String dividendDate = DEFAULT;
+    private String exDividendDate = DEFAULT;
 
     public Builder withBeta(double beta) {
       this.beta = beta;
@@ -209,6 +231,16 @@ public class CompanyTradingInformation extends AbstractCompanyInformation {
 
     public Builder withDay200MovingAverage(double day200MovingAverage) {
       this.day200MovingAverage = day200MovingAverage;
+      return this;
+    }
+
+    public Builder withDividendDate(String dividendDate) {
+      this.dividendDate = dividendDate;
+      return this;
+    }
+
+    public Builder withExDividendDate(String exDividendDate) {
+      this.exDividendDate = exDividendDate;
       return this;
     }
 

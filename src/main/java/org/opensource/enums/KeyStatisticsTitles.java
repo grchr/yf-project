@@ -33,33 +33,33 @@ public enum KeyStatisticsTitles {
   LEVERED_FREE_CASH_FLOW("Levered Free Cash Flow (ttm)"),
   BETA("Beta (5Y Monthly)"),
   WEEK_52_RANGE("52 Week Range"),
-  WEEK_52_CHANGE("WEEK_52_CHANGE"),
-  WEEK_52_HIGH("WEEK_52_HIGH"),
-  WEEK_52_LOW("WEEK_52_LOW"),
-  DAY_50_MOVING_AVG("DAY_50_MOVING_AVG"),
-  DAY_200_MOVING_AVG("DAY_200_MOVING_AVG"),
-  AVG_3_MONTH_VOL("AVG_3_MONTH_VOL"),
-  AVG_10_DAY_VOL("AVG_10_DAY_VOL"),
-  SHARES_OUTSTANDING("SHARES_OUTSTANDING"),
-  IMPLIED_SHARES_OUTSTANDING("IMPLIED_SHARES_OUTSTANDING"),
-  FLOAT("FLOAT"),
-  HELD_BY_INSIDERS("HELD_BY_INSIDERS"),
-  HELD_BY_INSTITUTIONS("HELD_BY_INSTITUTIONS"),
+  WEEK_52_CHANGE("52 Week Change"),
+  WEEK_52_HIGH("52 Week High"),
+  WEEK_52_LOW("52 Week Low"),
+  DAY_50_MOVING_AVG("50-Day Moving Average"),
+  DAY_200_MOVING_AVG("200-Day Moving Average"),
+  AVG_3_MONTH_VOL("Avg Vol (3 month)"),
+  AVG_10_DAY_VOL("Avg Vol (10 day)"),
+  SHARES_OUTSTANDING("Shares Outstanding"),
+  IMPLIED_SHARES_OUTSTANDING("Implied Shares Outstanding"),
+  FLOAT("Float"),
+  HELD_BY_INSIDERS("% Held by Insiders"),
+  HELD_BY_INSTITUTIONS("% Held by Institutions"),
   SHARES_SHORT("SHARES_SHORT"),
   SHARES_SHORT_RATIO("SHARES_SHORT_RATIO"),
   SHORT_PERC_FLOAT("SHORT_PERC_FLOAT"),
   SHORT_PERC_OF_SHARES_OUTSTANDING("SHORT_PERC_OF_SHARES_OUTSTANDING"),
   SHARES_SHORT_PRIOR_MONTH("SHARES_SHORT_PRIOR_MONTH"),
-  DIVIDEND_RATE_FWD_ANNUAL("DIVIDEND_RATE_FWD_ANNUAL"),
-  DIVIDEND_YIELD_FWD_ANNUAL("DIVIDEND_YIELD_FWD_ANNUAL"),
-  DIVIDEND_RATE_TRAILING_ANNUAL("DIVIDEND_RATE_TRAILING_ANNUAL"),
-  DIVIDEND_YIELD_TRAILING_ANNUAL("DIVIDEND_YIELD_TRAILING_ANNUAL"),
-  DIVIDEND_YIELD_5_YEAR_AVG("DIVIDEND_YIELD_5_YEAR_AVG"),
-  PAYOUT_RATIO("PAYOUT_RATIO"),
-  DIVIDEND_RATE("DIVIDEND_RATE"),
-  DIVIDEND_EX_DATE("DIVIDEND_EX_DATE"),
-  LAST_SPLIT_FACTOR("LAST_SPLIT_FACTOR"),
-  LAST_SPLIT_DATE("LAST_SPLIT_DATE");
+  DIVIDEND_RATE_FWD_ANNUAL("Forward Annual Dividend Rate"),
+  DIVIDEND_YIELD_FWD_ANNUAL("Forward Annual Dividend Yield"),
+  DIVIDEND_RATE_TRAILING_ANNUAL("Trailing Annual Dividend Rate"),
+  DIVIDEND_YIELD_TRAILING_ANNUAL("Trailing Annual Dividend Yield"),
+  DIVIDEND_YIELD_5_YEAR_AVG("5 Year Average Dividend Yield"),
+  PAYOUT_RATIO("Payout Ratio"),
+  DIVIDEND_DATE("Dividend Date"),
+  DIVIDEND_EX_DATE("Ex-Dividend Date"),
+  LAST_SPLIT_FACTOR("Last Split Factor"),
+  LAST_SPLIT_DATE("Last Split Date");
 
 
   private final String title;
@@ -73,9 +73,10 @@ public enum KeyStatisticsTitles {
   }
 
   public static KeyStatisticsTitles fromTitle(String title) {
-    for (KeyStatisticsTitles titles : values()) {
-      if (titles.getTitle().equalsIgnoreCase(title)) {
-        return titles;
+    String sanitizedTitle = title.trim().replaceFirst("\\s\\d+$", "");
+    for (KeyStatisticsTitles enumTitles : values()) {
+      if (enumTitles.getTitle().equalsIgnoreCase(sanitizedTitle)) {
+        return enumTitles;
       }
     }
     return null;

@@ -7,54 +7,26 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.opensource.enums.CashFlowTitles;
-import org.opensource.enums.IncomeStatementTitles;
-import org.opensource.enums.KeyStatisticsPositions;
 import org.opensource.enums.KeyStatisticsTitles;
 import org.opensource.model.CompanyKeyStatistics;
 import org.opensource.model.CompanyTradingInformation;
 
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.SynchronousQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 import static org.opensource.service.ReaderHelpers.createURL;
 import static org.opensource.service.ReaderHelpers.getCompanyName;
 import static org.opensource.service.ReaderHelpers.getCurrentPrice;
-import static org.opensource.service.ReaderHelpers.getDoubleFromPercentageValue;
-import static org.opensource.service.ReaderHelpers.getDoubleFromStringSimpleCase;
-import static org.opensource.service.ReaderHelpers.getValueFromElements;
+import static org.opensource.service.ReaderHelpers.getDoubleFromString;
 
-public class GetKeyStatisticsService extends AbstractWebTitleIterableService<KeyStatisticsTitles> implements IWebExecutableService<CompanyKeyStatistics>{
+public class GetKeyStatisticsService extends AbstractWebDataService<KeyStatisticsTitles> implements IWebExecutableService<CompanyKeyStatistics>{
 
   private static final String URL = "https://finance.yahoo.com/quote/%s/key-statistics/";
   private static final String KEY_STATISTICS_SELECTOR = "td";
 
-  private final ExecutorService executor =  new ThreadPoolExecutor(10, 50,
-          60L, TimeUnit.SECONDS,
-          new SynchronousQueue<>());
-
-  private final BlockingQueue<HtmlUnitDriver> driverPool = new LinkedBlockingQueue<>(10);
-
   public GetKeyStatisticsService() {
-    // Initialize pool with pre-created drivers (you can adjust the pool size)
-    for (int i = 0; i < 10; i++) {
-      driverPool.add(new HtmlUnitDriver());
-    }
-  }
-
-  private HtmlUnitDriver acquireDriver() throws InterruptedException {
-    return driverPool.take(); // Blocks if no driver is available
-  }
-
-  private void releaseDriver(HtmlUnitDriver driver) {
-    driverPool.offer(driver); // Return driver to pool
+    super();
   }
 
   @Override
@@ -76,7 +48,7 @@ public class GetKeyStatisticsService extends AbstractWebTitleIterableService<Key
       }
 
       builder.withCompanyName(getCompanyName(pageDocument));
-      builder.withCurrentPrice(getDoubleFromStringSimpleCase(getCurrentPrice(pageDocument, ticker)));
+      builder.withCurrentPrice(getDoubleFromString(getCurrentPrice(pageDocument, ticker)));
       builder.withCompanyTicker(tickerCaps);
 
     } catch (InterruptedException e) {
@@ -105,37 +77,33 @@ public class GetKeyStatisticsService extends AbstractWebTitleIterableService<Key
   protected CompanyKeyStatistics.Builder populateBuilderWithMainInfo(Elements tdElements) {
     CompanyKeyStatistics.Builder builder = new CompanyKeyStatistics.Builder();
     Map<KeyStatisticsTitles, String> mainDataMap = fillMap(tdElements, 1);
-
     return builder.withMarketCap(getTitleValue(mainDataMap, KeyStatisticsTitles.MARKET_CAP))
-            .withEnterpriseValue(getTitleValue(mainDataMap, KeyStatisticsTitles.ENTERPRISE_VALUE))
-            .withTrailingPE(getDoubleFromStringSimpleCase(getTitleValue(mainDataMap, KeyStatisticsTitles.TRAILING_PE)));
+        .withEnterpriseValue(getTitleValue(mainDataMap, KeyStatisticsTitles.ENTERPRISE_VALUE))
+        .withTrailingPE(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.TRAILING_PE)))
+        .withForwardPE(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.FORWARD_PE)))
+        .withPegRatio(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.PEG_RATIO)))
+        .withRatioPS(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.PS_RATIO)))
+        .withRatioPB(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.PB_RATIO)))
+        .withEvToRevenue(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.EV_TO_REVENUE)))
+        .withEvToEBITDA(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.EV_TO_EBITDA)))
+        .withProfitMarginPercentage(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.PROFIT_MARGIN)))
+        .withOperatingMarginPercentage(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.OPERATING_MARGIN)))
+        .withReturnOnAssetsPercentage(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.RETURN_ON_ASSETS)))
+        .withReturnOnEquityPercentage(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.RETURN_ON_EQUITY)))
+        .withQuarterlyRevenueGrowthPercentage(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.QUARTERLY_REV_GROWTH)))
+        .withGrossProfit(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.GROSS_PROFIT)))
+        .withEBITDA(getTitleValue(mainDataMap, KeyStatisticsTitles.EBITDA))
+        .withNetIncomeAviToCommon(getTitleValue(mainDataMap, KeyStatisticsTitles.NET_INC_AVI_TO_COMMON))
+        .withDilutedEPS(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.DILUTED_EPS)))
+        .withQuartEarningsGrowthPercentage(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.QUARTERLY_EARNINGS_GROWTH)))
+        .withTotalCash(getTitleValue(mainDataMap, KeyStatisticsTitles.TOTAL_CASH))
+        .withTotalCashPerShare(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.TOTAL_CASH_PER_SHARE)))
+        .withTotalDebt(getTitleValue(mainDataMap, KeyStatisticsTitles.TOTAL_DEBT))
+        .withTotalDebtToEquityPercentage(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.TOTAL_DEBT_TO_EQUITY)))
+        .withRevenue(getTitleValue(mainDataMap, KeyStatisticsTitles.REVENUE))
+        .withRevenuePerShare(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.REVENUE_PER_SHARE)))
+        .withTradingInformation(getCompanyTradingInformation(mainDataMap));
 
-//    return builder.withMarketCap(getValueFromElements(tdElements, KeyStatisticsPositions.MARKET_CAP.getValue()))
-//            .withEnterpriseValue(getValueFromElements(tdElements, KeyStatisticsPositions.ENTERPRISE_VALUE.getValue()))
-//            .withTrailingPE(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.TRAILING_PE.getValue())))
-//            .withForwardPE(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.FORWARD_PE.getValue())))
-//            .withPegRatio(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.PEG_RATIO.getValue())))
-//            .withRatioPS(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.PS_RATIO.getValue())))
-//            .withRatioPB(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.PB_RATIO.getValue())))
-//            .withEvToRevenue(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.EV_TO_REVENUE.getValue())))
-//            .withEvToEBITDA(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.EV_TO_EBITDA.getValue())))
-//            .withProfitMarginPercentage(getDoubleFromPercentageValue(getValueFromElements(tdElements, KeyStatisticsPositions.PROFIT_MARGIN.getValue())))
-//            .withOperatingMarginPercentage(getDoubleFromPercentageValue(getValueFromElements(tdElements, KeyStatisticsPositions.OPERATING_MARGIN.getValue())))
-//            .withReturnOnAssetsPercentage(getDoubleFromPercentageValue(getValueFromElements(tdElements, KeyStatisticsPositions.RETURN_ON_ASSETS.getValue())))
-//            .withReturnOnEquityPercentage(getDoubleFromPercentageValue(getValueFromElements(tdElements, KeyStatisticsPositions.RETURN_ON_EQUITY.getValue())))
-//            .withRevenue(getValueFromElements(tdElements, KeyStatisticsPositions.REVENUE.getValue()))
-//            .withRevenuePerShare(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.REVENUE_PER_SHARE.getValue())))
-//            .withQuarterlyRevenueGrowthPercentage(getDoubleFromPercentageValue(getValueFromElements(tdElements, KeyStatisticsPositions.QUARTERLY_REV_GROWTH.getValue())))
-//            .withGrossProfit(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.GROSS_PROFIT.getValue())))
-//            .withEBITDA(getValueFromElements(tdElements, KeyStatisticsPositions.EBITDA.getValue()))
-//            .withNetIncomeAviToCommon(getValueFromElements(tdElements, KeyStatisticsPositions.NET_INC_AVI_TO_COMMON.getValue()))
-//            .withDilutedEPS(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.DILUTED_EPS.getValue())))
-//            .withQuartEarningsGrowthPercentage(getDoubleFromPercentageValue(getValueFromElements(tdElements, KeyStatisticsPositions.QUARTERLY_EARNINGS_GROWTH.getValue())))
-//            .withTotalCash(getValueFromElements(tdElements, KeyStatisticsPositions.TOTAL_CASH.getValue()))
-//            .withTotalCashPerShare(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.TOTAL_CASH_PER_SHARE.getValue())))
-//            .withTotalDebt(getValueFromElements(tdElements, KeyStatisticsPositions.TOTAL_DEBT.getValue()))
-//            .withTotalDebtToEquityPercentage(getDoubleFromPercentageValue(getValueFromElements(tdElements, KeyStatisticsPositions.TOTAL_DEBT_TO_EQUITY.getValue())))
-//            .withTradingInformation(getCompanyTradingInformation(tdElements));
   }
 
   @Override
@@ -155,29 +123,23 @@ public class GetKeyStatisticsService extends AbstractWebTitleIterableService<Key
     return map;
   }
 
-  @Override
-  protected String getTitleValue(Map<KeyStatisticsTitles, String> keyStatisticsMap, KeyStatisticsTitles title) {
-    if (keyStatisticsMap.containsKey(title)) {
-      return keyStatisticsMap.get(title);
-    }
-    return DEFAULT;
-  }
-
-  private CompanyTradingInformation getCompanyTradingInformation(Elements tdElements) {
+  private CompanyTradingInformation getCompanyTradingInformation(Map<KeyStatisticsTitles, String> mainDataMap) {
     CompanyTradingInformation.Builder builder = new CompanyTradingInformation.Builder();
-    builder.withBeta(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.BETA.getValue())))
-            .withCurrentRatio(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.CURRENT_RATIO.getValue())))
-            .withWeek52RangePercentage(getDoubleFromPercentageValue(getValueFromElements(tdElements, KeyStatisticsPositions.WEEK_52_RANGE.getValue())))
-            .withWeek52High(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.WEEK_52_HIGH.getValue())))
-            .withWeek52Low(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.WEEK_52_LOW.getValue())))
-            .withDay50MovingAvg(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.DAY_50_MOVING_AVG.getValue())))
-            .withDay200MovingAverage(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.DAY_200_MOVING_AVG.getValue())))
-            .withForwardAnnualDividendYieldPercentage(getDoubleFromPercentageValue(getValueFromElements(tdElements, KeyStatisticsPositions.DIVIDEND_YIELD_FWD_ANNUAL.getValue())))
-            .withForwardAnnualDividendRate(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.DIVIDEND_RATE_FWD_ANNUAL.getValue())))
-            .withDividendYield5YearAvg(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.DIVIDEND_YIELD_5_YEAR_AVG.getValue())))
-            .withTrailingAnnualDividendRate(getDoubleFromStringSimpleCase(getValueFromElements(tdElements, KeyStatisticsPositions.DIVIDEND_RATE_TRAILING_ANNUAL.getValue())))
-            .withTrailingAnnualDividendYieldPercentage(getDoubleFromPercentageValue(getValueFromElements(tdElements, KeyStatisticsPositions.DIVIDEND_YIELD_TRAILING_ANNUAL.getValue())))
-            .withPayoutRatioPercentage(getDoubleFromPercentageValue(getValueFromElements(tdElements, KeyStatisticsPositions.PAYOUT_RATIO.getValue())));
+    builder.withBeta(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.BETA)))
+            .withCurrentRatio(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.CURRENT_RATIO)))
+            .withWeek52RangePercentage(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.WEEK_52_RANGE)))
+            .withWeek52High(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.WEEK_52_HIGH)))
+            .withWeek52Low(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.WEEK_52_LOW)))
+            .withDay50MovingAvg(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.DAY_50_MOVING_AVG)))
+            .withDay200MovingAverage(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.DAY_200_MOVING_AVG)))
+            .withForwardAnnualDividendYieldPercentage(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.DIVIDEND_YIELD_FWD_ANNUAL)))
+            .withForwardAnnualDividendRate(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.DIVIDEND_RATE_FWD_ANNUAL)))
+            .withDividendYield5YearAvg(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.DIVIDEND_YIELD_5_YEAR_AVG)))
+            .withTrailingAnnualDividendRate(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.DIVIDEND_RATE_TRAILING_ANNUAL)))
+            .withTrailingAnnualDividendYieldPercentage(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.DIVIDEND_YIELD_TRAILING_ANNUAL)))
+            .withPayoutRatioPercentage(getDoubleFromString(getTitleValue(mainDataMap, KeyStatisticsTitles.PAYOUT_RATIO)))
+            .withDividendDate(getTitleValue(mainDataMap, KeyStatisticsTitles.DIVIDEND_DATE))
+            .withExDividendDate(getTitleValue(mainDataMap, KeyStatisticsTitles.DIVIDEND_EX_DATE));
     return builder.build();
   }
 }

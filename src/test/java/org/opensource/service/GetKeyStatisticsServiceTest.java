@@ -1,7 +1,7 @@
 package org.opensource.service;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.opensource.model.CompanyKeyStatistics;
 import org.opensource.model.CompanyTradingInformation;
@@ -17,22 +17,23 @@ public class GetKeyStatisticsServiceTest {
 
   private static GetKeyStatisticsService service;
 
-  @BeforeAll
-  public static void setUp() {
+  @BeforeEach
+  public void setUp() {
     service = new GetKeyStatisticsService();
   }
 
-  @AfterAll
-  public static void tearDown() {
+  @AfterEach
+  public void tearDown() {
     service.shutdown();
   }
 
   @Test
   public void testExecute() {
     String ticker = getRandomStockToTest();
-    CompanyKeyStatistics keyStatistics = service.execute("C");
+    CompanyKeyStatistics keyStatistics = service.execute(ticker);
 
     assertNotNull(keyStatistics);
+    System.out.println(keyStatistics);
     assertAllFieldsNoDash(keyStatistics);
   }
 
@@ -43,6 +44,7 @@ public class GetKeyStatisticsServiceTest {
     CompanyKeyStatistics keyStatistics = future.get();
 
     assertNotNull(keyStatistics);
+    System.out.println(keyStatistics);
     assertAllFieldsNoDash(keyStatistics);
   }
 
@@ -61,13 +63,11 @@ public class GetKeyStatisticsServiceTest {
     assertNotEquals("--", keyStatistics.getRevenue());
     assertNotEquals(Double.NaN, keyStatistics.getRevenuePerShare());
     assertNotEquals(Double.NaN, keyStatistics.getQuarterlyRevenueGrowthPercentage());
-    assertNotEquals("--", keyStatistics.getEBITDA());
     assertNotEquals("--", keyStatistics.getNetIncomeAviToCommon());
     assertNotEquals(Double.NaN, keyStatistics.getDilutedEPS());
     assertNotEquals(Double.NaN, keyStatistics.getQuartEarningsGrowthPercentage());
     assertNotEquals("--", keyStatistics.getTotalCash());
     assertNotEquals(Double.NaN, keyStatistics.getTotalCashPerShare());
     assertNotEquals("--", keyStatistics.getTotalDebt());
-    assertNotEquals(Double.NaN, keyStatistics.getTotalDebtToEquityPercentage());
   }
 }

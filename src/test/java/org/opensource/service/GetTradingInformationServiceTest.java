@@ -1,7 +1,7 @@
 package org.opensource.service;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.opensource.model.CompanyKeyStatistics;
 import org.opensource.model.CompanyTradingInformation;
@@ -17,13 +17,13 @@ public class GetTradingInformationServiceTest {
 
   private static GetTradingInformationService service;
 
-  @BeforeAll
-  public static void setUp() {
+  @BeforeEach
+  public void setUp() {
     service = new GetTradingInformationService();
   }
 
-  @AfterAll
-  public static void tearDown() {
+  @AfterEach
+  public void tearDown() {
     service.shutdown();
   }
 
@@ -33,6 +33,8 @@ public class GetTradingInformationServiceTest {
     CompanyTradingInformation tradingInformation = service.execute(ticker);
 
     assertNotNull(tradingInformation);
+    System.out.println(ticker);
+    System.out.println(tradingInformation);
     assertAllFieldsNoDash(tradingInformation);
   }
 
@@ -43,6 +45,8 @@ public class GetTradingInformationServiceTest {
     CompanyTradingInformation tradingInformation = future.get();
 
     assertNotNull(tradingInformation);
+    System.out.println(ticker);
+    System.out.println(tradingInformation);
     assertAllFieldsNoDash(tradingInformation);
   }
 

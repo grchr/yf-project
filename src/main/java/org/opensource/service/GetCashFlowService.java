@@ -7,34 +7,33 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.opensource.enums.BalanceSheetTitles;
 import org.opensource.enums.CashFlowTitles;
-import org.opensource.model.AbstractCompanyInformation;
-import org.opensource.model.CompanyBalanceSheet;
 import org.opensource.model.CompanyCashFlow;
 
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import static org.opensource.service.ReaderHelpers.createURL;
 import static org.opensource.service.ReaderHelpers.getCompanyName;
 import static org.opensource.service.ReaderHelpers.getCurrentPrice;
-import static org.opensource.service.ReaderHelpers.getDoubleFromStringSimpleCase;
+import static org.opensource.service.ReaderHelpers.getDoubleFromString;
 
-public class GetCashFlowService extends AbstractWebTitleIterableService<CashFlowTitles> implements IWebExecutableService<CompanyCashFlow>{
+public class GetCashFlowService extends AbstractWebDataService<CashFlowTitles> implements IWebExecutableService<CompanyCashFlow>{
 
   private static final String URL = "https://finance.yahoo.com/quote/%s/cash-flow/";
-  private final ExecutorService executor = Executors.newCachedThreadPool();
+
+  public GetCashFlowService() {
+    super();
+  }
 
   @Override
   public CompanyCashFlow execute(String ticker) {
     CompanyCashFlow.Builder builder = new CompanyCashFlow.Builder();
-    HtmlUnitDriver driver = new HtmlUnitDriver();
+    HtmlUnitDriver driver = null;
     String tickerCaps = StringUtils.capitalize(ticker);
     try {
+      driver = acquireDriver();
       String tickerURL = createURL(URL, tickerCaps);
       driver.get(tickerURL);
       if (!tickerURL.equals(driver.getCurrentUrl())) {
@@ -47,67 +46,42 @@ public class GetCashFlowService extends AbstractWebTitleIterableService<CashFlow
       }
 
       builder.withCompanyName(getCompanyName(pageDocument));
-      builder.withCurrentPrice(getDoubleFromStringSimpleCase(getCurrentPrice(pageDocument, ticker)));
+      builder.withCurrentPrice(getDoubleFromString(getCurrentPrice(pageDocument, ticker)));
       builder.withCompanyTicker(tickerCaps);
 
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
     } finally {
-      driver.quit();
+      if (driver != null) {
+        releaseDriver(driver);  // Release driver back to pool
+      }
     }
     return builder.build();
   }
 
   @Override
   public CompletableFuture<CompanyCashFlow> executeAsync(String ticker) {
-    return CompletableFuture.supplyAsync(() -> {
-      CompanyCashFlow.Builder builder = new CompanyCashFlow.Builder();
-      HtmlUnitDriver driver = new HtmlUnitDriver();
-      String tickerCaps = StringUtils.capitalize(ticker);
-      try {
-        String tickerURL = createURL(URL, tickerCaps);
-        driver.get(tickerURL);
-        if (!tickerURL.equals(driver.getCurrentUrl())) {
-          return builder.build();
-        }
-        Document pageDocument = Jsoup.parse(driver.getPageSource());
-        Elements dataElements = pageDocument.select(TITLES_SELECTOR);
-        if (CollectionUtils.isNotEmpty(dataElements)) {
-          builder = populateBuilderWithMainInfo(dataElements);
-        }
-
-        builder.withCompanyName(getCompanyName(pageDocument));
-        builder.withCurrentPrice(getDoubleFromStringSimpleCase(getCurrentPrice(pageDocument, ticker)));
-        builder.withCompanyTicker(tickerCaps);
-
-      } finally {
-        driver.quit();
-      }
-      return builder.build();
-    }, executor);
+    return CompletableFuture.supplyAsync(() ->  execute(ticker), executor);
   }
 
-  @Override
-  public void shutdown() {
-    // Shutdown the executor service
-    executor.shutdown();
-  }
   @Override
   protected CompanyCashFlow.Builder populateBuilderWithMainInfo(Elements dataElements) {
     CompanyCashFlow.Builder builder = new CompanyCashFlow.Builder();
     Map<CashFlowTitles, String> cashFlowTitlesMapTTM = fillMap(dataElements, 1);
     Map<CashFlowTitles, String> cashFlowTitlesMapLastUpdate = fillMap(dataElements, 2);
 
-    builder.withOperatingCashFlowTTM(getDoubleFromStringSimpleCase(getTitleValue(cashFlowTitlesMapTTM, CashFlowTitles.OPERATING_CASH_FLOW)))
-            .withInvestingCashFlowTTM(getDoubleFromStringSimpleCase(getTitleValue(cashFlowTitlesMapTTM, CashFlowTitles.INVESTING_CASH_FLOW)))
-            .withFinancingCashFlowTTM(getDoubleFromStringSimpleCase(getTitleValue(cashFlowTitlesMapTTM, CashFlowTitles.FINANCING_CASH_FLOW)))
-            .withEndCashPositionTTM(getDoubleFromStringSimpleCase(getTitleValue(cashFlowTitlesMapTTM, CashFlowTitles.END_CASH_POSITION)))
-            .withCapitalExpenditureTTM(getDoubleFromStringSimpleCase(getTitleValue(cashFlowTitlesMapTTM, CashFlowTitles.CAPITAL_EXPENDITURE)))
-            .withFreeCashFlowTTM(getDoubleFromStringSimpleCase(getTitleValue(cashFlowTitlesMapTTM, CashFlowTitles.FREE_CASH_FLOW)))
-            .withOperatingCashFlowLastUpdate(getDoubleFromStringSimpleCase(getTitleValue(cashFlowTitlesMapLastUpdate, CashFlowTitles.OPERATING_CASH_FLOW)))
-            .withInvestingCashFlowLastUpdate(getDoubleFromStringSimpleCase(getTitleValue(cashFlowTitlesMapLastUpdate, CashFlowTitles.INVESTING_CASH_FLOW)))
-            .withFinancingCashFlowLastUpdate(getDoubleFromStringSimpleCase(getTitleValue(cashFlowTitlesMapLastUpdate, CashFlowTitles.FINANCING_CASH_FLOW)))
-            .withEndCashPositionLastUpdate(getDoubleFromStringSimpleCase(getTitleValue(cashFlowTitlesMapLastUpdate, CashFlowTitles.END_CASH_POSITION)))
-            .withCapitalExpenditureLastUpdate(getDoubleFromStringSimpleCase(getTitleValue(cashFlowTitlesMapLastUpdate, CashFlowTitles.CAPITAL_EXPENDITURE)))
-            .withFreeCashFlowLastUpdate(getDoubleFromStringSimpleCase(getTitleValue(cashFlowTitlesMapLastUpdate, CashFlowTitles.FREE_CASH_FLOW)));
+    builder.withOperatingCashFlowTTM(getDoubleFromString(getTitleValue(cashFlowTitlesMapTTM, CashFlowTitles.OPERATING_CASH_FLOW)))
+            .withInvestingCashFlowTTM(getDoubleFromString(getTitleValue(cashFlowTitlesMapTTM, CashFlowTitles.INVESTING_CASH_FLOW)))
+            .withFinancingCashFlowTTM(getDoubleFromString(getTitleValue(cashFlowTitlesMapTTM, CashFlowTitles.FINANCING_CASH_FLOW)))
+            .withEndCashPositionTTM(getDoubleFromString(getTitleValue(cashFlowTitlesMapTTM, CashFlowTitles.END_CASH_POSITION)))
+            .withCapitalExpenditureTTM(getDoubleFromString(getTitleValue(cashFlowTitlesMapTTM, CashFlowTitles.CAPITAL_EXPENDITURE)))
+            .withFreeCashFlowTTM(getDoubleFromString(getTitleValue(cashFlowTitlesMapTTM, CashFlowTitles.FREE_CASH_FLOW)))
+            .withOperatingCashFlowLastUpdate(getDoubleFromString(getTitleValue(cashFlowTitlesMapLastUpdate, CashFlowTitles.OPERATING_CASH_FLOW)))
+            .withInvestingCashFlowLastUpdate(getDoubleFromString(getTitleValue(cashFlowTitlesMapLastUpdate, CashFlowTitles.INVESTING_CASH_FLOW)))
+            .withFinancingCashFlowLastUpdate(getDoubleFromString(getTitleValue(cashFlowTitlesMapLastUpdate, CashFlowTitles.FINANCING_CASH_FLOW)))
+            .withEndCashPositionLastUpdate(getDoubleFromString(getTitleValue(cashFlowTitlesMapLastUpdate, CashFlowTitles.END_CASH_POSITION)))
+            .withCapitalExpenditureLastUpdate(getDoubleFromString(getTitleValue(cashFlowTitlesMapLastUpdate, CashFlowTitles.CAPITAL_EXPENDITURE)))
+            .withFreeCashFlowLastUpdate(getDoubleFromString(getTitleValue(cashFlowTitlesMapLastUpdate, CashFlowTitles.FREE_CASH_FLOW)));
 
     return builder;
   }
