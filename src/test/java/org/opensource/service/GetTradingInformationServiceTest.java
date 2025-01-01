@@ -51,6 +51,7 @@ public class GetTradingInformationServiceTest {
   }
 
   private void assertAllFieldsNoDash(CompanyTradingInformation tradingInfo) {
+    assertNotEquals(Double.NaN, tradingInfo.getCurrentPrice());
     assertNotEquals(Double.NaN, tradingInfo.getBeta());
     assertNotEquals(Double.NaN, tradingInfo.getCurrentRatio());
     assertNotEquals(Double.NaN, tradingInfo.getWeek52RangePercentage());

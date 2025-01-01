@@ -50,6 +50,7 @@ public class GetKeyStatisticsServiceTest {
 
   private void assertAllFieldsNoDash(CompanyKeyStatistics keyStatistics) {
     assertNotEquals("--", keyStatistics.getMarketCap());
+    assertNotEquals(Double.NaN, keyStatistics.getCurrentPrice());
     assertNotEquals(Double.NaN, keyStatistics.getTrailingPE());
     assertNotEquals(Double.NaN, keyStatistics.getForwardPE());
     assertNotEquals(Double.NaN, keyStatistics.getPegRatio());

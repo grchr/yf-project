@@ -12,6 +12,7 @@ public class ReaderHelpers {
   static final String CURRENT_PRICE_FIRST_SELECTOR = "div.container.yf-mgkamr";
 
   static final String CURRENT_PRICE_DATA_SELECTOR = "fin-streamer.livePrice[data-symbol=%s]";
+  static final String CURRENT_PRICE_BACKUP_SELECTOR = "span[data-testid=qsp-price]";
   static final String CURRENT_PRICE_SECOND_SELECTOR = "span";
   static final int CURRENT_PRICE_POSITION = 0;
   static String DEFAULT = "--";
@@ -50,10 +51,14 @@ public class ReaderHelpers {
   static String getCurrentPrice(Document pageDocument, String ticker) {
     Element livePriceElement = pageDocument.select(String.format(CURRENT_PRICE_DATA_SELECTOR, ticker)).first();
     if (livePriceElement != null) {
-      Element spanElement = livePriceElement.getElementsByAttribute("data-value").get(0); //livePriceElement.selectFirst(CURRENT_PRICE_SECOND_SELECTOR);
+      Element spanElement = livePriceElement.getElementsByAttribute("data-value").get(0);
       if (spanElement != null) {
         return spanElement.text();
       }
+    }
+    livePriceElement = pageDocument.select(CURRENT_PRICE_BACKUP_SELECTOR).first();
+    if (livePriceElement != null) {
+      return livePriceElement.text();
     }
     return DEFAULT;
   }
