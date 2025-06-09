@@ -15,10 +15,10 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 
-import static org.opensource.service.ReaderHelpers.createURL;
-import static org.opensource.service.ReaderHelpers.getCompanyName;
-import static org.opensource.service.ReaderHelpers.getCurrentPrice;
-import static org.opensource.service.ReaderHelpers.getDoubleFromString;
+import static org.opensource.service.helpers.ReaderHelpers.createURL;
+import static org.opensource.service.helpers.ReaderHelpers.getCompanyName;
+import static org.opensource.service.helpers.ReaderHelpers.getCurrentPrice;
+import static org.opensource.service.helpers.ReaderHelpers.getDoubleFromString;
 
 public class GetBalanceSheetService extends AbstractWebDataService<BalanceSheetTitles> implements IWebExecutableService<CompanyBalanceSheet> {
 
