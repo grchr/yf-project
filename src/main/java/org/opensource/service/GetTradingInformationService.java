@@ -67,6 +67,11 @@ public class GetTradingInformationService extends AbstractWebDataService<KeyStat
   }
 
   @Override
+  public CompletableFuture<CompanyTradingInformation> executeAsync(String ticker, ExecutorService customExecutor) {
+    return CompletableFuture.supplyAsync(() ->  execute(ticker), customExecutor);
+  }
+
+  @Override
   protected CompanyTradingInformation.Builder populateBuilderWithMainInfo(Elements tdElements) {
     CompanyTradingInformation.Builder builder = new CompanyTradingInformation.Builder();
     Map<KeyStatisticsTitles, String> mainDataMap = fillMap(tdElements, 1);

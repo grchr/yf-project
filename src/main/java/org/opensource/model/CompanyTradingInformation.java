@@ -101,9 +101,9 @@ public class CompanyTradingInformation extends AbstractCompanyInformation {
   @Override
   public String toString() {
     return "CompanyTradingInformation{" +
-        "companyName='" + companyName +
-        ", companyTicker='" + companyTicker +
-        ", currentPrice='" + currentPrice +
+        "companyName='" + companyName + '\'' +
+        ", companyTicker='" + companyTicker + '\'' +
+        ", currentPrice='" + currentPrice + '\'' +
         ", beta=" + beta +
         ", forwardAnnualDividendYieldPercentage=" + forwardAnnualDividendYieldPercentage +
         ", forwardAnnualDividendRate=" + forwardAnnualDividendRate +

@@ -64,6 +64,11 @@ public class GetIncomeStatementService extends AbstractWebDataService<IncomeStat
   }
 
   @Override
+  public CompletableFuture<CompanyIncomeStatement> executeAsync(String ticker, ExecutorService customExecutor) {
+    return CompletableFuture.supplyAsync(() ->  execute(ticker), customExecutor);
+  }
+
+  @Override
   protected CompanyIncomeStatement.Builder populateBuilderWithMainInfo(Elements dataElements) {
     CompanyIncomeStatement.Builder builder = new CompanyIncomeStatement.Builder();
     Map<IncomeStatementTitles, String> incomeStatementTTMMap = fillMap(dataElements, 1);

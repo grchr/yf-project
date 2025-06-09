@@ -13,6 +13,7 @@ import org.opensource.model.CompanyBalanceSheet;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
 
 import static org.opensource.service.ReaderHelpers.createURL;
 import static org.opensource.service.ReaderHelpers.getCompanyName;
@@ -62,6 +63,11 @@ public class GetBalanceSheetService extends AbstractWebDataService<BalanceSheetT
   @Override
   public CompletableFuture<CompanyBalanceSheet> executeAsync(String ticker) {
     return CompletableFuture.supplyAsync(() ->  execute(ticker), executor);
+  }
+
+  @Override
+  public CompletableFuture<CompanyBalanceSheet> executeAsync(String ticker, ExecutorService customExecutor) {
+    return CompletableFuture.supplyAsync(() ->  execute(ticker), customExecutor);
   }
 
   @Override

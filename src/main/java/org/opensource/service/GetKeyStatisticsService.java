@@ -14,6 +14,7 @@ import org.opensource.model.CompanyTradingInformation;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
 
 import static org.opensource.service.ReaderHelpers.createURL;
 import static org.opensource.service.ReaderHelpers.getCompanyName;
@@ -68,9 +69,8 @@ public class GetKeyStatisticsService extends AbstractWebDataService<KeyStatistic
   }
 
   @Override
-  public void shutdown() {
-    // Shutdown the executor service
-    executor.shutdown();
+  public CompletableFuture<CompanyKeyStatistics> executeAsync(String ticker, ExecutorService customExecutor) {
+    return CompletableFuture.supplyAsync(() ->  execute(ticker), customExecutor);
   }
 
   @Override

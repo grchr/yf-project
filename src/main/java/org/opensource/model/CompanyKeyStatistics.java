@@ -8,7 +8,6 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
   private String revenue;
   private String netIncomeAviToCommon;
   private String totalDebt;
-
   private double trailingPE;
   private double forwardPE;
   private double pegRatio;
@@ -29,7 +28,6 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
   private String totalCash;
   private double totalCashPerShare;
   private double totalDebtToEquityPercentage;
-
   private CompanyTradingInformation tradingInformation;
 
   private CompanyKeyStatistics(Builder builder) {
@@ -40,7 +38,6 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
     this.netIncomeAviToCommon = builder.netIncomeAviToCommon;
     this.totalDebt = builder.totalDebt;
     this.EBITDA = builder.EBITDA;
-
     this.trailingPE = builder.trailingPE;
     this.forwardPE = builder.forwardPE;
     this.pegRatio = builder.pegRatio;
