@@ -17,8 +17,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 
 import static org.opensource.service.helpers.ReaderHelpers.createURL;
-import static org.opensource.service.helpers.ReaderHelpers.getCompanyName;
-import static org.opensource.service.helpers.ReaderHelpers.getCurrentPrice;
 import static org.opensource.service.helpers.ReaderHelpers.getDoubleFromString;
 
 public class GetKeyStatisticsService extends AbstractWebDataService<KeyStatisticsTitles> implements IWebExecutableService<CompanyKeyStatistics>{
@@ -48,9 +46,7 @@ public class GetKeyStatisticsService extends AbstractWebDataService<KeyStatistic
         builder = populateBuilderWithMainInfo(dataElements);
       }
 
-      builder.withCompanyName(getCompanyName(pageDocument));
-      builder.withCurrentPrice(getDoubleFromString(getCurrentPrice(pageDocument, ticker)));
-      builder.withCompanyTicker(tickerCaps);
+      builder = populateCommonFields(builder, pageDocument, tickerCaps);
 
     } catch (InterruptedException e) {
       Thread.currentThread().interrupt();

@@ -16,8 +16,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 
 import static org.opensource.service.helpers.ReaderHelpers.createURL;
-import static org.opensource.service.helpers.ReaderHelpers.getCompanyName;
-import static org.opensource.service.helpers.ReaderHelpers.getCurrentPrice;
 import static org.opensource.service.helpers.ReaderHelpers.getDoubleFromString;
 
 public class GetCashFlowService extends AbstractWebDataService<CashFlowTitles> implements IWebExecutableService<CompanyCashFlow>{
@@ -46,9 +44,7 @@ public class GetCashFlowService extends AbstractWebDataService<CashFlowTitles> i
         builder = populateBuilderWithMainInfo(dataElements);
       }
 
-      builder.withCompanyName(getCompanyName(pageDocument));
-      builder.withCurrentPrice(getDoubleFromString(getCurrentPrice(pageDocument, ticker)));
-      builder.withCompanyTicker(tickerCaps);
+      builder = populateCommonFields(builder, pageDocument, tickerCaps);
 
     } catch (InterruptedException e) {
       Thread.currentThread().interrupt();

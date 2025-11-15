@@ -47,6 +47,7 @@ public class GetCashFlowServiceTest {
 
   private void assertNoFieldsContainDoubleDash(CompanyCashFlow companyCashFlow) {
     assertNotEquals(Double.NaN, companyCashFlow.getOperatingCashFlowTTM());
+    assertNotEquals("--", companyCashFlow.getCurrency());
     assertNotEquals(Double.NaN, companyCashFlow.getInvestingCashFlowTTM());
     assertNotEquals(Double.NaN, companyCashFlow.getFinancingCashFlowTTM());
     assertNotEquals(Double.NaN, companyCashFlow.getEndCashPositionTTM());

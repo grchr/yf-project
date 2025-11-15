@@ -46,6 +46,7 @@ public class GetIncomeStatementServiceTest {
 
   private void assertNoFieldsContainDoubleDash(CompanyIncomeStatement companyIncomeStatement) {
     assertNotEquals(Double.NaN, companyIncomeStatement.getTotalRevenueTTM());
+    assertNotEquals("--", companyIncomeStatement.getCurrency());
     assertNotEquals(Double.NaN, companyIncomeStatement.getTotalRevenueLastUpdate());
     assertNotEquals(Double.NaN, companyIncomeStatement.getPretaxIncomeTTM());
     assertNotEquals(Double.NaN, companyIncomeStatement.getPretaxIncomeLastUpdate());

@@ -47,6 +47,7 @@ public class GetBalanceSheetServiceTest {
 
   private void assertNoFieldsContainNan(CompanyBalanceSheet companyBalanceSheet) {
     assertNotEquals(Double.NaN, companyBalanceSheet.getTotalAssets());
+    assertNotEquals("--", companyBalanceSheet.getCurrency());
     assertNotEquals(Double.NaN, companyBalanceSheet.getTotalLiabilitiesNetMinorityInterest());
     assertNotEquals(Double.NaN, companyBalanceSheet.getTotalEquityGrossMinorityInterest());
     assertNotEquals(Double.NaN, companyBalanceSheet.getTotalCapitalization());

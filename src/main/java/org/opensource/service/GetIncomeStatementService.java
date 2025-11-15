@@ -17,8 +17,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import static org.opensource.service.helpers.ReaderHelpers.createURL;
-import static org.opensource.service.helpers.ReaderHelpers.getCompanyName;
-import static org.opensource.service.helpers.ReaderHelpers.getCurrentPrice;
 import static org.opensource.service.helpers.ReaderHelpers.getDoubleFromString;
 
 public class GetIncomeStatementService extends AbstractWebDataService<IncomeStatementTitles> implements IWebExecutableService<CompanyIncomeStatement> {
@@ -44,9 +42,7 @@ public class GetIncomeStatementService extends AbstractWebDataService<IncomeStat
         builder = populateBuilderWithMainInfo(dataElements);
       }
 
-      builder.withCompanyName(getCompanyName(pageDocument));
-      builder.withCurrentPrice(getDoubleFromString(getCurrentPrice(pageDocument, ticker)));
-      builder.withCompanyTicker(tickerCaps);
+      builder = populateCommonFields(builder, pageDocument, tickerCaps);
 
     } catch (InterruptedException e) {
       Thread.currentThread().interrupt();

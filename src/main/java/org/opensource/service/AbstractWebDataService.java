@@ -1,5 +1,7 @@
 package org.opensource.service;
 
+import org.apache.commons.lang3.StringUtils;
+import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.opensource.model.AbstractCompanyInformation;
@@ -13,6 +15,11 @@ import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import static org.opensource.service.helpers.ReaderHelpers.getCompanyName;
+import static org.opensource.service.helpers.ReaderHelpers.getCurrency;
+import static org.opensource.service.helpers.ReaderHelpers.getCurrentPrice;
+import static org.opensource.service.helpers.ReaderHelpers.getDoubleFromString;
 
 public abstract class AbstractWebDataService<T extends Enum<T>> {
 
@@ -66,6 +73,13 @@ public abstract class AbstractWebDataService<T extends Enum<T>> {
       // Return to pool
       driverPool.offer(driver);
     }
+  }
+
+  protected <B extends AbstractCompanyInformation.Builder<B>> B populateCommonFields(B builder, Document pageDocument, String ticker) {
+    return builder.withCompanyName(getCompanyName(pageDocument))
+            .withCurrentPrice(getDoubleFromString(getCurrentPrice(pageDocument, ticker)))
+            .withCompanyTicker(StringUtils.capitalize(ticker))
+            .withCurrency(getCurrency(pageDocument));
   }
 
   protected abstract AbstractCompanyInformation.Builder populateBuilderWithMainInfo(Elements dataElements);

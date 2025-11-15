@@ -170,6 +170,7 @@ public class CompanyKeyStatistics extends AbstractCompanyInformation {
             "companyName='" + getCompanyName() + '\'' +
             ", companyTicker='" + getCompanyTicker() + '\'' +
             ", currentPrice='" + getCurrentPrice() + '\'' +
+            ", currency='" + getCurrency() + '\'' +
             ", marketCap='" + marketCap + '\'' +
             ", enterpriseValue='" + enterpriseValue + '\'' +
             ", trailingPE=" + trailingPE +

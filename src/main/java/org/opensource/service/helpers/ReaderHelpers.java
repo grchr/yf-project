@@ -14,6 +14,7 @@ public class ReaderHelpers {
   public static final String CURRENT_PRICE_DATA_SELECTOR = "fin-streamer.livePrice[data-symbol=%s]";
   public static final String CURRENT_PRICE_BACKUP_SELECTOR = "span[data-testid=qsp-price]";
   public static final String CURRENT_PRICE_SECOND_SELECTOR = "span";
+  public static final String CURRENCY_SELECTOR = "span.exchange > span:nth-of-type(3)";
   public static final int CURRENT_PRICE_POSITION = 0;
   public static String DEFAULT = "--";
 
@@ -67,6 +68,14 @@ public class ReaderHelpers {
     Elements headTitles = pageDocument.select(COMPANY_NAME_SELECTOR);
     if (CollectionUtils.isNotEmpty(headTitles)) {
       return getValueFromElements(headTitles, COMPANY_NAME_POSITION);
+    }
+    return DEFAULT;
+  }
+
+  public static String getCurrency(Document pageDocument) {
+    Elements currencyElements = pageDocument.select(CURRENCY_SELECTOR);
+    if (CollectionUtils.isNotEmpty(currencyElements)) {
+      return getValueFromElements(currencyElements, 0);
     }
     return DEFAULT;
   }
