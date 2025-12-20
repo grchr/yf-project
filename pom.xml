@@ -11,6 +11,7 @@
   <modules>
     <module>yf-project-bom</module>
     <module>yf-project-app</module>
+    <module>yf-project-api</module>
   </modules>
 
   <properties>
