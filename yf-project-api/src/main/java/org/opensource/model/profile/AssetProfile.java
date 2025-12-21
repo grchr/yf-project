@@ -15,7 +15,7 @@ public class AssetProfile{
 	private String website;
 
 	@JsonProperty("compensationRisk")
-	private int compensationRisk;
+	private Integer compensationRisk;
 
 	@JsonProperty("industryDisp")
 	private String industryDisp;
@@ -33,37 +33,37 @@ public class AssetProfile{
 	private String industry;
 
 	@JsonProperty("shareHolderRightsRisk")
-	private int shareHolderRightsRisk;
+	private Integer shareHolderRightsRisk;
 
 	@JsonProperty("executiveTeam")
 	private List<String> executiveTeam;
 
 	@JsonProperty("compensationAsOfEpochDate")
-	private int compensationAsOfEpochDate;
+	private Integer compensationAsOfEpochDate;
 
 	@JsonProperty("fullTimeEmployees")
-	private int fullTimeEmployees;
+	private Integer fullTimeEmployees;
 
 	@JsonProperty("longBusinessSummary")
 	private String longBusinessSummary;
 
 	@JsonProperty("boardRisk")
-	private int boardRisk;
+	private Integer boardRisk;
 
 	@JsonProperty("governanceEpochDate")
-	private int governanceEpochDate;
+	private Integer governanceEpochDate;
 
 	@JsonProperty("phone")
 	private String phone;
 
 	@JsonProperty("maxAge")
-	private int maxAge;
+	private Integer maxAge;
 
 	@JsonProperty("overallRisk")
-	private int overallRisk;
+	private Integer overallRisk;
 
 	@JsonProperty("auditRisk")
-	private int auditRisk;
+	private Integer auditRisk;
 
 	@JsonProperty("sectorKey")
 	private String sectorKey;
@@ -89,7 +89,7 @@ public class AssetProfile{
 		return website;
 	}
 
-	public int getCompensationRisk(){
+	public Integer getCompensationRisk(){
 		return compensationRisk;
 	}
 
@@ -113,7 +113,7 @@ public class AssetProfile{
 		return industry;
 	}
 
-	public int getShareHolderRightsRisk(){
+	public Integer getShareHolderRightsRisk(){
 		return shareHolderRightsRisk;
 	}
 
@@ -121,11 +121,11 @@ public class AssetProfile{
 		return executiveTeam;
 	}
 
-	public int getCompensationAsOfEpochDate(){
+	public Integer getCompensationAsOfEpochDate(){
 		return compensationAsOfEpochDate;
 	}
 
-	public int getFullTimeEmployees(){
+	public Integer getFullTimeEmployees(){
 		return fullTimeEmployees;
 	}
 
@@ -133,11 +133,11 @@ public class AssetProfile{
 		return longBusinessSummary;
 	}
 
-	public int getBoardRisk(){
+	public Integer getBoardRisk(){
 		return boardRisk;
 	}
 
-	public int getGovernanceEpochDate(){
+	public Integer getGovernanceEpochDate(){
 		return governanceEpochDate;
 	}
 
@@ -145,15 +145,15 @@ public class AssetProfile{
 		return phone;
 	}
 
-	public int getMaxAge(){
+	public Integer getMaxAge(){
 		return maxAge;
 	}
 
-	public int getOverallRisk(){
+	public Integer getOverallRisk(){
 		return overallRisk;
 	}
 
-	public int getAuditRisk(){
+	public Integer getAuditRisk(){
 		return auditRisk;
 	}
 
@@ -172,4 +172,35 @@ public class AssetProfile{
 	public String getIndustryKey(){
 		return industryKey;
 	}
+
+	@Override
+ 	public String toString(){
+		return
+			"AssetProfile{" +
+			"zip = '" + zip + '\'' +
+			",country = '" + country + '\'' +
+			",website = '" + website + '\'' +
+			",compensationRisk = '" + compensationRisk + '\'' +
+			",industryDisp = '" + industryDisp + '\'' +
+			",city = '" + city + '\'' +
+			",address1 = '" + address1 + '\'' +
+			",companyOfficers = '" + companyOfficers + '\'' +
+			",industry = '" + industry + '\'' +
+			",shareHolderRightsRisk = '" + shareHolderRightsRisk + '\'' +
+			",executiveTeam = '" + executiveTeam + '\'' +
+			",compensationAsOfEpochDate = '" + compensationAsOfEpochDate + '\'' +
+			",fullTimeEmployees = '" + fullTimeEmployees + '\'' +
+			",longBusinessSummary = '" + longBusinessSummary + '\'' +
+			",boardRisk = '" + boardRisk + '\'' +
+			",governanceEpochDate = '" + governanceEpochDate + '\'' +
+			",phone = '" + phone + '\'' +
+			",maxAge = '" + maxAge + '\'' +
+			",overallRisk = '" + overallRisk + '\'' +
+			",auditRisk = '" + auditRisk + '\'' +
+			",sectorKey = '" + sectorKey + '\'' +
+			",sector = '" + sector + '\'' +
+			",sectorDisp = '" + sectorDisp + '\'' +
+			",industryKey = '" + industryKey + '\'' +
+			"}";
+		}
 }

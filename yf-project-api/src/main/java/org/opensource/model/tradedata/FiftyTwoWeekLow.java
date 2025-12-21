@@ -17,4 +17,13 @@ public class FiftyTwoWeekLow{
 	public String getFmt(){
 		return fmt;
 	}
+
+	@Override
+ 	public String toString(){
+		return
+			"FiftyTwoWeekLow{" +
+			"raw = '" + raw + '\'' +
+			",fmt = '" + fmt + '\'' +
+			"}";
+		}
 }

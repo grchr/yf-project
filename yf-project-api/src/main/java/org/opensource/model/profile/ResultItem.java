@@ -10,4 +10,12 @@ public class ResultItem{
 	public AssetProfile getAssetProfile(){
 		return assetProfile;
 	}
+
+	@Override
+ 	public String toString(){
+		return
+			"ResultItem{" +
+			"assetProfile = '" + assetProfile + '\'' +
+			"}";
+		}
 }

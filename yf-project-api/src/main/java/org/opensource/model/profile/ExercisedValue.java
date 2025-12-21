@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ExercisedValue{
 
 	@JsonProperty("raw")
-	private int raw;
+	private Integer raw;
 
 	@JsonProperty("longFmt")
 	private String longFmt;
@@ -13,7 +13,7 @@ public class ExercisedValue{
 	@JsonProperty("fmt")
 	private Object fmt;
 
-	public int getRaw(){
+	public Integer getRaw(){
 		return raw;
 	}
 
@@ -24,4 +24,14 @@ public class ExercisedValue{
 	public Object getFmt(){
 		return fmt;
 	}
+
+	@Override
+ 	public String toString(){
+		return
+			"ExercisedValue{" +
+			"raw = '" + raw + '\'' +
+			",longFmt = '" + longFmt + '\'' +
+			",fmt = '" + fmt + '\'' +
+			"}";
+		}
 }

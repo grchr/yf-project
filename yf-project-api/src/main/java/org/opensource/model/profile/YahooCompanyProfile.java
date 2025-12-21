@@ -12,4 +12,10 @@ public class YahooCompanyProfile {
 		return quoteSummary;
 	}
 
+	@Override
+	public String toString() {
+		return "YahooCompanyProfile{" +
+						"quoteSummary=" + quoteSummary +
+						'}';
+	}
 }

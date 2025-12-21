@@ -18,19 +18,19 @@ public class Meta{
 	private String range;
 
 	@JsonProperty("regularMarketTime")
-	private int regularMarketTime;
+	private Integer regularMarketTime;
 
 	@JsonProperty("dataGranularity")
 	private String dataGranularity;
 
 	@JsonProperty("gmtoffset")
-	private int gmtoffset;
+	private Integer gmtoffset;
 
 	@JsonProperty("regularMarketDayHigh")
-	private double regularMarketDayHigh;
+	private Double regularMarketDayHigh;
 
 	@JsonProperty("chartPreviousClose")
-	private double chartPreviousClose;
+	private Double chartPreviousClose;
 
 	@JsonProperty("currency")
 	private String currency;
@@ -39,7 +39,7 @@ public class Meta{
 	private CurrentTradingPeriod currentTradingPeriod;
 
 	@JsonProperty("fiftyTwoWeekHigh")
-	private double fiftyTwoWeekHigh;
+	private Double fiftyTwoWeekHigh;
 
 	@JsonProperty("exchangeTimezoneName")
 	private String exchangeTimezoneName;
@@ -48,7 +48,7 @@ public class Meta{
 	private String instrumentType;
 
 	@JsonProperty("firstTradeDate")
-	private int firstTradeDate;
+	private Integer firstTradeDate;
 
 	@JsonProperty("validRanges")
 	private List<String> validRanges;
@@ -57,22 +57,22 @@ public class Meta{
 	private boolean hasPrePostMarketData;
 
 	@JsonProperty("regularMarketPrice")
-	private double regularMarketPrice;
+	private Double regularMarketPrice;
 
 	@JsonProperty("fiftyTwoWeekLow")
-	private double fiftyTwoWeekLow;
+	private Double fiftyTwoWeekLow;
 
 	@JsonProperty("regularMarketVolume")
-	private int regularMarketVolume;
+	private Integer regularMarketVolume;
 
 	@JsonProperty("priceHint")
-	private int priceHint;
+	private Integer priceHint;
 
 	@JsonProperty("exchangeName")
 	private String exchangeName;
 
 	@JsonProperty("regularMarketDayLow")
-	private double regularMarketDayLow;
+	private Double regularMarketDayLow;
 
 	@JsonProperty("shortName")
 	private String shortName;
@@ -96,7 +96,7 @@ public class Meta{
 		return range;
 	}
 
-	public int getRegularMarketTime(){
+	public Integer getRegularMarketTime(){
 		return regularMarketTime;
 	}
 
@@ -104,15 +104,15 @@ public class Meta{
 		return dataGranularity;
 	}
 
-	public int getGmtoffset(){
+	public Integer getGmtoffset(){
 		return gmtoffset;
 	}
 
-	public double getRegularMarketDayHigh(){
+	public Double getRegularMarketDayHigh(){
 		return regularMarketDayHigh;
 	}
 
-	public double getChartPreviousClose(){
+	public Double getChartPreviousClose(){
 		return chartPreviousClose;
 	}
 
@@ -124,7 +124,7 @@ public class Meta{
 		return currentTradingPeriod;
 	}
 
-	public double getFiftyTwoWeekHigh(){
+	public Double getFiftyTwoWeekHigh(){
 		return fiftyTwoWeekHigh;
 	}
 
@@ -136,7 +136,7 @@ public class Meta{
 		return instrumentType;
 	}
 
-	public int getFirstTradeDate(){
+	public Integer getFirstTradeDate(){
 		return firstTradeDate;
 	}
 
@@ -148,19 +148,19 @@ public class Meta{
 		return hasPrePostMarketData;
 	}
 
-	public double getRegularMarketPrice(){
+	public Double getRegularMarketPrice(){
 		return regularMarketPrice;
 	}
 
-	public double getFiftyTwoWeekLow(){
+	public Double getFiftyTwoWeekLow(){
 		return fiftyTwoWeekLow;
 	}
 
-	public int getRegularMarketVolume(){
+	public Integer getRegularMarketVolume(){
 		return regularMarketVolume;
 	}
 
-	public int getPriceHint(){
+	public Integer getPriceHint(){
 		return priceHint;
 	}
 
@@ -168,7 +168,7 @@ public class Meta{
 		return exchangeName;
 	}
 
-	public double getRegularMarketDayLow(){
+	public Double getRegularMarketDayLow(){
 		return regularMarketDayLow;
 	}
 

@@ -14,7 +14,7 @@ public class ResultItem{
 	private FiftyTwoWeekLowChangePercent fiftyTwoWeekLowChangePercent;
 
 	@JsonProperty("gmtOffSetMilliseconds")
-	private int gmtOffSetMilliseconds;
+	private Integer gmtOffSetMilliseconds;
 
 	@JsonProperty("regularMarketOpen")
 	private RegularMarketOpen regularMarketOpen;
@@ -83,7 +83,7 @@ public class ResultItem{
 	private long firstTradeDateMilliseconds;
 
 	@JsonProperty("exchangeDataDelayedBy")
-	private int exchangeDataDelayedBy;
+	private Integer exchangeDataDelayedBy;
 
 	@JsonProperty("exchangeTimezoneShortName")
 	private String exchangeTimezoneShortName;
@@ -119,13 +119,13 @@ public class ResultItem{
 	private String messageBoardId;
 
 	@JsonProperty("priceHint")
-	private int priceHint;
+	private Integer priceHint;
 
 	@JsonProperty("regularMarketDayLow")
 	private RegularMarketDayLow regularMarketDayLow;
 
 	@JsonProperty("sourceInterval")
-	private int sourceInterval;
+	private Integer sourceInterval;
 
 	@JsonProperty("exchange")
 	private String exchange;
@@ -154,7 +154,7 @@ public class ResultItem{
 		return fiftyTwoWeekLowChangePercent;
 	}
 
-	public int getGmtOffSetMilliseconds(){
+	public Integer getGmtOffSetMilliseconds(){
 		return gmtOffSetMilliseconds;
 	}
 
@@ -246,7 +246,7 @@ public class ResultItem{
 		return firstTradeDateMilliseconds;
 	}
 
-	public int getExchangeDataDelayedBy(){
+	public Integer getExchangeDataDelayedBy(){
 		return exchangeDataDelayedBy;
 	}
 
@@ -294,7 +294,7 @@ public class ResultItem{
 		return messageBoardId;
 	}
 
-	public int getPriceHint(){
+	public Integer getPriceHint(){
 		return priceHint;
 	}
 
@@ -302,7 +302,7 @@ public class ResultItem{
 		return regularMarketDayLow;
 	}
 
-	public int getSourceInterval(){
+	public Integer getSourceInterval(){
 		return sourceInterval;
 	}
 
@@ -324,5 +324,57 @@ public class ResultItem{
 
 	public String getLongName(){
 		return longName;
+	}
+
+	@Override
+	public String toString() {
+		return "ResultItem{" +
+						"fullExchangeName='" + fullExchangeName + '\'' +
+						", symbol='" + symbol + '\'' +
+						", fiftyTwoWeekLowChangePercent=" + fiftyTwoWeekLowChangePercent +
+						", gmtOffSetMilliseconds=" + gmtOffSetMilliseconds +
+						", regularMarketOpen=" + regularMarketOpen +
+						", language='" + language + '\'' +
+						", regularMarketTime=" + regularMarketTime +
+						", regularMarketChangePercent=" + regularMarketChangePercent +
+						", quoteType='" + quoteType + '\'' +
+						", regularMarketDayRange=" + regularMarketDayRange +
+						", fiftyTwoWeekLowChange=" + fiftyTwoWeekLowChange +
+						", fiftyTwoWeekHighChangePercent=" + fiftyTwoWeekHighChangePercent +
+						", regularMarketDayHigh=" + regularMarketDayHigh +
+						", typeDisp='" + typeDisp + '\'' +
+						", tradeable=" + tradeable +
+						", currency='" + currency + '\'' +
+						", sharesOutstanding=" + sharesOutstanding +
+						", fiftyTwoWeekHigh=" + fiftyTwoWeekHigh +
+						", regularMarketPreviousClose=" + regularMarketPreviousClose +
+						", exchangeTimezoneName='" + exchangeTimezoneName + '\'' +
+						", fiftyTwoWeekHighChange=" + fiftyTwoWeekHighChange +
+						", marketCap=" + marketCap +
+						", regularMarketChange=" + regularMarketChange +
+						", fiftyTwoWeekRange=" + fiftyTwoWeekRange +
+						", cryptoTradeable=" + cryptoTradeable +
+						", firstTradeDateMilliseconds=" + firstTradeDateMilliseconds +
+						", exchangeDataDelayedBy=" + exchangeDataDelayedBy +
+						", exchangeTimezoneShortName='" + exchangeTimezoneShortName + '\'' +
+						", hasPrePostMarketData=" + hasPrePostMarketData +
+						", quartrId='" + quartrId + '\'' +
+						", marketState='" + marketState + '\'' +
+						", fiftyTwoWeekLow=" + fiftyTwoWeekLow +
+						", customPriceAlertConfidence='" + customPriceAlertConfidence + '\'' +
+						", regularMarketPrice=" + regularMarketPrice +
+						", regularMarketVolume=" + regularMarketVolume +
+						", market='" + market + '\'' +
+						", quoteSourceName='" + quoteSourceName + '\'' +
+						", messageBoardId='" + messageBoardId + '\'' +
+						", priceHint=" + priceHint +
+						", regularMarketDayLow=" + regularMarketDayLow +
+						", sourceInterval=" + sourceInterval +
+						", exchange='" + exchange + '\'' +
+						", shortName='" + shortName + '\'' +
+						", region='" + region + '\'' +
+						", triggerable=" + triggerable +
+						", longName='" + longName + '\'' +
+						'}';
 	}
 }

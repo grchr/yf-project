@@ -17,4 +17,13 @@ public class RegularMarketOpen{
 	public String getFmt(){
 		return fmt;
 	}
+
+	@Override
+ 	public String toString(){
+		return
+			"RegularMarketOpen{" +
+			"raw = '" + raw + '\'' +
+			",fmt = '" + fmt + '\'' +
+			"}";
+		}
 }

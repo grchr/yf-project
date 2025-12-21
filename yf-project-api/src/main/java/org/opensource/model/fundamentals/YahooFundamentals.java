@@ -4,18 +4,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class YahooFundamentals{
 
-	@JsonProperty("quoteSummary")
-	private QuoteSummary quoteSummary;
+	// Retrieved from: https://query2.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/AAPL?symbol=AAPL&type=annualTotalRevenue,annualNetIncome,annualOperatingIncome&period1=1483142400&period2=1735689600
 
-	public QuoteSummary getQuoteSummary(){
-		return quoteSummary;
+	@JsonProperty("timeseries")
+	private Timeseries timeseries;
+
+	public Timeseries getTimeseries(){
+		return timeseries;
 	}
 
 	@Override
  	public String toString(){
-		return 
-			"YahooFundamentals{" + 
-			"quoteSummary = '" + quoteSummary + '\'' + 
+		return
+			"YahooFundamentals{" +
+			"timeseries = '" + timeseries + '\'' +
 			"}";
 		}
 }

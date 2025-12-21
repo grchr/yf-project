@@ -11,4 +11,11 @@ public class YahooTradeData{
 	public QuoteResponse getQuoteResponse(){
 		return quoteResponse;
 	}
+
+	@Override
+	public String toString() {
+		return "YahooTradeData{" +
+						"quoteResponse=" + quoteResponse +
+						'}';
+	}
 }

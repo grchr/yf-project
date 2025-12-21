@@ -17,4 +17,13 @@ public class RegularMarketDayLow{
 	public String getFmt(){
 		return fmt;
 	}
+
+	@Override
+ 	public String toString(){
+		return
+			"RegularMarketDayLow{" +
+			"raw = '" + raw + '\'' +
+			",fmt = '" + fmt + '\'' +
+			"}";
+		}
 }

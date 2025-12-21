@@ -1,61 +1,54 @@
 package org.opensource.model.fundamentals;
 
+import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ResultItem{
 
-	@JsonProperty("incomeStatementHistoryQuarterly")
-	private IncomeStatementHistoryQuarterly incomeStatementHistoryQuarterly;
+	@JsonProperty("annualNetIncome")
+	private List<AnnualNetIncomeItem> annualNetIncome;
 
-	@JsonProperty("cashflowStatementHistory")
-	private CashflowStatementHistory cashflowStatementHistory;
+	@JsonProperty("meta")
+	private Meta meta;
 
-	@JsonProperty("cashflowStatementHistoryQuarterly")
-	private CashflowStatementHistoryQuarterly cashflowStatementHistoryQuarterly;
+	@JsonProperty("timestamp")
+	private List<Integer> timestamp;
 
-	@JsonProperty("balanceSheetHistoryQuarterly")
-	private BalanceSheetHistoryQuarterly balanceSheetHistoryQuarterly;
+	@JsonProperty("annualTotalRevenue")
+	private List<AnnualTotalRevenueItem> annualTotalRevenue;
 
-	@JsonProperty("balanceSheetHistory")
-	private BalanceSheetHistory balanceSheetHistory;
+	@JsonProperty("annualOperatingIncome")
+	private List<AnnualOperatingIncomeItem> annualOperatingIncome;
 
-	@JsonProperty("incomeStatementHistory")
-	private IncomeStatementHistory incomeStatementHistory;
-
-	public IncomeStatementHistoryQuarterly getIncomeStatementHistoryQuarterly(){
-		return incomeStatementHistoryQuarterly;
+	public List<AnnualNetIncomeItem> getAnnualNetIncome(){
+		return annualNetIncome;
 	}
 
-	public CashflowStatementHistory getCashflowStatementHistory(){
-		return cashflowStatementHistory;
+	public Meta getMeta(){
+		return meta;
 	}
 
-	public CashflowStatementHistoryQuarterly getCashflowStatementHistoryQuarterly(){
-		return cashflowStatementHistoryQuarterly;
+	public List<Integer> getTimestamp(){
+		return timestamp;
 	}
 
-	public BalanceSheetHistoryQuarterly getBalanceSheetHistoryQuarterly(){
-		return balanceSheetHistoryQuarterly;
+	public List<AnnualTotalRevenueItem> getAnnualTotalRevenue(){
+		return annualTotalRevenue;
 	}
 
-	public BalanceSheetHistory getBalanceSheetHistory(){
-		return balanceSheetHistory;
-	}
-
-	public IncomeStatementHistory getIncomeStatementHistory(){
-		return incomeStatementHistory;
+	public List<AnnualOperatingIncomeItem> getAnnualOperatingIncome(){
+		return annualOperatingIncome;
 	}
 
 	@Override
  	public String toString(){
-		return 
-			"ResultItem{" + 
-			"incomeStatementHistoryQuarterly = '" + incomeStatementHistoryQuarterly + '\'' + 
-			",cashflowStatementHistory = '" + cashflowStatementHistory + '\'' + 
-			",cashflowStatementHistoryQuarterly = '" + cashflowStatementHistoryQuarterly + '\'' + 
-			",balanceSheetHistoryQuarterly = '" + balanceSheetHistoryQuarterly + '\'' + 
-			",balanceSheetHistory = '" + balanceSheetHistory + '\'' + 
-			",incomeStatementHistory = '" + incomeStatementHistory + '\'' + 
+		return
+			"ResultItem{" +
+			"annualNetIncome = '" + annualNetIncome + '\'' +
+			",meta = '" + meta + '\'' +
+			",timestamp = '" + timestamp + '\'' +
+			",annualTotalRevenue = '" + annualTotalRevenue + '\'' +
+			",annualOperatingIncome = '" + annualOperatingIncome + '\'' +
 			"}";
 		}
 }

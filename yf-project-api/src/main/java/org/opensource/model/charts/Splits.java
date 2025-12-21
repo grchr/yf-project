@@ -5,19 +5,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Splits{
 
 	private long date;
-	private double numerator;
-	private double denominator;
+	private Double numerator;
+	private Double denominator;
 	private String splitRatio;
 
 	public long getDate() {
 		return date;
 	}
 
-	public double getNumerator() {
+	public Double getNumerator() {
 		return numerator;
 	}
 
-	public double getDenominator() {
+	public Double getDenominator() {
 		return denominator;
 	}
 

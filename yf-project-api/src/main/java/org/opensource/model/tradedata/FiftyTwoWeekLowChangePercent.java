@@ -17,4 +17,13 @@ public class FiftyTwoWeekLowChangePercent{
 	public String getFmt(){
 		return fmt;
 	}
+
+	@Override
+ 	public String toString(){
+		return
+			"FiftyTwoWeekLowChangePercent{" +
+			"raw = '" + raw + '\'' +
+			",fmt = '" + fmt + '\'' +
+			"}";
+		}
 }

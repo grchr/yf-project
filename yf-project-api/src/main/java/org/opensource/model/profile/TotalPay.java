@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class TotalPay{
 
 	@JsonProperty("raw")
-	private int raw;
+	private Integer raw;
 
 	@JsonProperty("longFmt")
 	private String longFmt;
@@ -13,7 +13,7 @@ public class TotalPay{
 	@JsonProperty("fmt")
 	private String fmt;
 
-	public int getRaw(){
+	public Integer getRaw(){
 		return raw;
 	}
 
@@ -24,4 +24,14 @@ public class TotalPay{
 	public String getFmt(){
 		return fmt;
 	}
+
+	@Override
+ 	public String toString(){
+		return
+			"TotalPay{" +
+			"raw = '" + raw + '\'' +
+			",longFmt = '" + longFmt + '\'' +
+			",fmt = '" + fmt + '\'' +
+			"}";
+		}
 }

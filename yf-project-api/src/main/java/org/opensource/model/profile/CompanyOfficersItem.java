@@ -8,7 +8,7 @@ public class CompanyOfficersItem{
 	private UnexercisedValue unexercisedValue;
 
 	@JsonProperty("maxAge")
-	private int maxAge;
+	private Integer maxAge;
 
 	@JsonProperty("name")
 	private String name;
@@ -20,13 +20,13 @@ public class CompanyOfficersItem{
 	private String title;
 
 	@JsonProperty("fiscalYear")
-	private int fiscalYear;
+	private Integer fiscalYear;
 
 	@JsonProperty("yearBorn")
-	private int yearBorn;
+	private Integer yearBorn;
 
 	@JsonProperty("age")
-	private int age;
+	private Integer age;
 
 	@JsonProperty("totalPay")
 	private TotalPay totalPay;
@@ -35,7 +35,7 @@ public class CompanyOfficersItem{
 		return unexercisedValue;
 	}
 
-	public int getMaxAge(){
+	public Integer getMaxAge(){
 		return maxAge;
 	}
 
@@ -51,19 +51,35 @@ public class CompanyOfficersItem{
 		return title;
 	}
 
-	public int getFiscalYear(){
+	public Integer getFiscalYear(){
 		return fiscalYear;
 	}
 
-	public int getYearBorn(){
+	public Integer getYearBorn(){
 		return yearBorn;
 	}
 
-	public int getAge(){
+	public Integer getAge(){
 		return age;
 	}
 
 	public TotalPay getTotalPay(){
 		return totalPay;
 	}
+
+	@Override
+ 	public String toString(){
+		return
+			"CompanyOfficersItem{" +
+			"unexercisedValue = '" + unexercisedValue + '\'' +
+			",maxAge = '" + maxAge + '\'' +
+			",name = '" + name + '\'' +
+			",exercisedValue = '" + exercisedValue + '\'' +
+			",title = '" + title + '\'' +
+			",fiscalYear = '" + fiscalYear + '\'' +
+			",yearBorn = '" + yearBorn + '\'' +
+			",age = '" + age + '\'' +
+			",totalPay = '" + totalPay + '\'' +
+			"}";
+		}
 }

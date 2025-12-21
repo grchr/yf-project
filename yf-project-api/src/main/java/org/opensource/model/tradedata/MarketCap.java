@@ -24,4 +24,14 @@ public class MarketCap{
 	public String getFmt(){
 		return fmt;
 	}
+
+	@Override
+ 	public String toString(){
+		return
+			"MarketCap{" +
+			"raw = '" + raw + '\'' +
+			",longFmt = '" + longFmt + '\'' +
+			",fmt = '" + fmt + '\'' +
+			"}";
+		}
 }

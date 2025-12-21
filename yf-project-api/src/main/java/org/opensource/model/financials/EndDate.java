@@ -5,12 +5,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class EndDate{
 
 	@JsonProperty("raw")
-	private int raw;
+	private Integer raw;
 
 	@JsonProperty("fmt")
 	private String fmt;
 
-	public int getRaw(){
+	public Integer getRaw(){
 		return raw;
 	}
 

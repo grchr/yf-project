@@ -3,7 +3,7 @@ package org.opensource.model.fundamentals;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class QuoteSummary{
+public class Timeseries{
 
 	@JsonProperty("result")
 	private List<ResultItem> result;
@@ -21,10 +21,10 @@ public class QuoteSummary{
 
 	@Override
  	public String toString(){
-		return 
-			"QuoteSummary{" + 
-			"result = '" + result + '\'' + 
-			",error = '" + error + '\'' + 
+		return
+			"Timeseries{" +
+			"result = '" + result + '\'' +
+			",error = '" + error + '\'' +
 			"}";
 		}
 }

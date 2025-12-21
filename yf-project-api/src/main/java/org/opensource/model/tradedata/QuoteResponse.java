@@ -18,4 +18,13 @@ public class QuoteResponse{
 	public Object getError(){
 		return error;
 	}
+
+	@Override
+ 	public String toString(){
+		return
+			"QuoteResponse{" +
+			"result = '" + result + '\'' +
+			",error = '" + error + '\'' +
+			"}";
+		}
 }

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class TotalOperatingExpenses{
 
 	@JsonProperty("raw")
-	private int raw;
+	private Integer raw;
 
 	@JsonProperty("longFmt")
 	private String longFmt;
@@ -13,7 +13,7 @@ public class TotalOperatingExpenses{
 	@JsonProperty("fmt")
 	private Object fmt;
 
-	public int getRaw(){
+	public Integer getRaw(){
 		return raw;
 	}
 

@@ -1,0 +1,14 @@
+package org.opensource.service;
+
+import org.junit.jupiter.api.Test;
+import org.opensource.model.tradedata.YahooTradeData;
+
+public class TradeDataServiceTest {
+
+  @Test
+  void fundamentalsServiceTest() {
+    TradeDataService tradeDataService = new TradeDataService();
+    YahooTradeData result = tradeDataService.execute("BNP.PA");
+    System.out.println(result);
+  }
+}

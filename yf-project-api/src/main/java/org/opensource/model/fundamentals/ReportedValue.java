@@ -2,15 +2,15 @@ package org.opensource.model.fundamentals;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class EndDate{
+public class ReportedValue{
 
 	@JsonProperty("raw")
-	private int raw;
+	private Object raw;
 
 	@JsonProperty("fmt")
 	private String fmt;
 
-	public int getRaw(){
+	public Object getRaw(){
 		return raw;
 	}
 
@@ -20,10 +20,10 @@ public class EndDate{
 
 	@Override
  	public String toString(){
-		return 
-			"EndDate{" + 
-			"raw = '" + raw + '\'' + 
-			",fmt = '" + fmt + '\'' + 
+		return
+			"ReportedValue{" +
+			"raw = '" + raw + '\'' +
+			",fmt = '" + fmt + '\'' +
 			"}";
 		}
 }
