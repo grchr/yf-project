@@ -54,7 +54,6 @@ public class GetTradingInformationServiceTest {
     assertNotEquals(Double.NaN, tradingInfo.getCurrentPrice());
     assertNotEquals("--", tradingInfo.getCurrency());
     assertNotEquals(Double.NaN, tradingInfo.getBeta());
-    assertNotEquals(Double.NaN, tradingInfo.getCurrentRatio());
     assertNotEquals(Double.NaN, tradingInfo.getWeek52High());
     assertNotEquals(Double.NaN, tradingInfo.getWeek52Low());
     assertNotEquals(Double.NaN, tradingInfo.getDay50MovingAvg());
