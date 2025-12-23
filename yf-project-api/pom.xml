@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.github.grchr</groupId>
         <artifactId>yf-project</artifactId>
-        <version>0.0.10</version>
+        <version>0.0.11</version>
     </parent>
 
     <artifactId>yf-project-api</artifactId>
@@ -40,7 +40,6 @@
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20231013</version>
         </dependency>
 
         <dependency>
@@ -74,7 +73,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
                 <configuration>
-                    <rerunFailingTestsCount>2</rerunFailingTestsCount>
+                    <rerunFailingTestsCount>3</rerunFailingTestsCount>
                 </configuration>
             </plugin>
         </plugins>
