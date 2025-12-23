@@ -24,7 +24,7 @@ public class CompanyProfileService extends YahooService<YahooCompanyProfile> imp
 
   @Override
   protected String prepareUrl(String ticker, String crumb) throws UnsupportedEncodingException {
-    String modules = encode("assetProfile%2CsecFilings&enablePrivateCompany=true&enableQSPExpandedEarnings=true&overnightPrice=true");
+    String modules = "assetProfile%2CsecFilings&enablePrivateCompany=true&enableQSPExpandedEarnings=true&overnightPrice=true";
     return String.format(
             "https://query1.finance.yahoo.com/v10/finance/quoteSummary/%s?formatted=true&modules=%s&lang=en-US&region=US&crumb=%s",
             encode(ticker), modules, encode(crumb)

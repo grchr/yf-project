@@ -1,7 +1,11 @@
 package org.opensource.service;
 
 import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.util.StringUtils;
 import org.opensource.model.profile.YahooCompanyProfile;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CompanyProfileServiceTest {
 
@@ -9,6 +13,8 @@ public class CompanyProfileServiceTest {
   void companyProfileServiceTest() {
     CompanyProfileService companyProfileService = new CompanyProfileService();
     YahooCompanyProfile result = companyProfileService.execute("BNP.PA");
+    assertEquals(1, result.getQuoteSummary().getResult().size());
+    assertTrue(StringUtils.isNotBlank(result.getQuoteSummary().getResult().get(0).getAssetProfile().getLongBusinessSummary()));
     System.out.println(result);
   }
 }

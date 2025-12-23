@@ -48,7 +48,7 @@ public class Earnings{
 	private EarningsChart earningsChart;
 
 	@JsonProperty("raw")
-	private Long raw;
+	private Double raw;
 
 	@JsonProperty("longFmt")
 	private String longFmt;
@@ -112,7 +112,7 @@ public class Earnings{
 		return earningsChart;
 	}
 
-	public Long getRaw(){
+	public Double getRaw(){
 		return raw;
 	}
 

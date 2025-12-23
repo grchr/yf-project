@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class NetIncomeToCommon{
 
 	@JsonProperty("raw")
-	private Long raw;
+	private Double raw;
 
 	@JsonProperty("longFmt")
 	private String longFmt;
@@ -13,7 +13,7 @@ public class NetIncomeToCommon{
 	@JsonProperty("fmt")
 	private String fmt;
 
-	public Long getRaw(){
+	public Double getRaw(){
 		return raw;
 	}
 

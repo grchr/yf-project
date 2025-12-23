@@ -5,12 +5,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Beta{
 
 	@JsonProperty("raw")
-	private Long raw;
+	private Double raw;
 
 	@JsonProperty("fmt")
 	private String fmt;
 
-	public Long getRaw(){
+	public Double getRaw(){
 		return raw;
 	}
 
