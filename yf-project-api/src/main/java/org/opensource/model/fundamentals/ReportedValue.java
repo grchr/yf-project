@@ -5,12 +5,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ReportedValue{
 
 	@JsonProperty("raw")
-	private Object raw;
+	private Long raw;
 
 	@JsonProperty("fmt")
 	private String fmt;
 
-	public Object getRaw(){
+	public Long getRaw(){
 		return raw;
 	}
 

@@ -1,8 +1,9 @@
 package org.opensource.model.profile;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.opensource.model.IYahooResponse;
 
-public class YahooCompanyProfile {
+public class YahooCompanyProfile implements IYahooResponse {
 	//Reachable via: https://query1.finance.yahoo.com/v10/finance/quoteSummary/BNP.PA?formatted=true&modules=assetProfile%2CsecFilings&enablePrivateCompany=true&enableQSPExpandedEarnings=true&overnightPrice=true&lang=en-US&region=US&crumb=Jw4kayWy2mQ
 
 	@JsonProperty("quoteSummary")

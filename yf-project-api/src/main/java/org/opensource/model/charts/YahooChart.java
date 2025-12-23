@@ -1,8 +1,9 @@
 package org.opensource.model.charts;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.opensource.model.IYahooResponse;
 
-public class YahooChart{
+public class YahooChart implements IYahooResponse {
 
 	@JsonProperty("chart")
 	private Chart chart;

@@ -1,66 +1,35 @@
 package org.opensource.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.opensource.model.financials.YahooFinancials;
-import org.opensource.model.mapper.JsonMapper;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.List;
-import java.util.Map;
 
-public class FinancialsService extends YahooService {
+public class FinancialsService extends YahooService<YahooFinancials> implements IYahooEndpointServiceExecutable {
 
+  @Override
   public YahooFinancials execute(String ticker) {
     try {
-      URL crumbURL = new URL(crumbUrl);
-      HttpURLConnection crumbConn = (HttpURLConnection) crumbURL.openConnection();
-      crumbConn.setRequestMethod("GET");
-      crumbConn.setRequestProperty("User-Agent", "Mozilla/5.0");
-      String crumb;
-      try (BufferedReader reader = new BufferedReader(new InputStreamReader(crumbConn.getInputStream()))) {
-        crumb = reader.readLine().replace("\"", "");
-      }
-
-      String cookieHeader = null;
-      // Capture cookies from the first response
-      Map<String, List<String>> headerFields = crumbConn.getHeaderFields();
-      List<String> cookies = headerFields.get("Set-Cookie");
-      if (cookies != null && !cookies.isEmpty()) {
-        StringBuilder sb = new StringBuilder();
-        for (String cookie : cookies) {
-          sb.append(cookie.split(";", 2)[0]).append("; ");
-        }
-        cookieHeader = sb.toString();
-      }
-
-      String modules = "incomeStatementHistory,cashflowStatementHistory,balanceSheetHistory,incomeStatementHistoryQuarterly,cashflowStatementHistoryQuarterly,balanceSheetHistoryQuarterly";
-      String quoteSummaryUrl = String.format(
-              "https://query1.finance.yahoo.com/v10/finance/quoteSummary/%s?formatted=true&modules=%s&enablePrivateCompany=true&enableQSPExpandedEarnings=true&overnightPrice=true&lang=en-US&region=US&crumb=%s",
-              ticker, modules, crumb
-      );
-      URL dataUrl = new URL(quoteSummaryUrl);
-      HttpURLConnection dataConn = (HttpURLConnection) dataUrl.openConnection();
-      dataConn.setRequestMethod("GET");
-      dataConn.setRequestProperty("User-Agent", "Mozilla/5.0");
-
-      // Reuse the cookie from first request
-      if (cookieHeader != null) {
-        dataConn.setRequestProperty("Cookie", cookieHeader);
-      }
-
-      YahooFinancials result = new YahooFinancials();
-      ObjectMapper objectMapper = JsonMapper.get();
-      try (BufferedReader reader = new BufferedReader(new InputStreamReader(dataConn.getInputStream()))) {
-        result = objectMapper.readValue(reader, YahooFinancials.class);
-      }
-
-      return result;
+      HttpURLConnection crumbConn = getHttpURLConnection(this.crumbUrl);
+      String crumb = getCrumb(crumbConn);
+      String cookieHeader = retrieveCookies(crumbConn);
+      String quoteSummaryUrl = prepareUrl(ticker, crumb);
+      HttpURLConnection dataConn = getHttpURLConnection(quoteSummaryUrl);
+      updateConnectionWithHeaders(cookieHeader, dataConn);
+      return getResult(dataConn, YahooFinancials.class);
     } catch (IOException e) {
       return new YahooFinancials();
     }
   }
+
+  @Override
+  protected String prepareUrl(String ticker, String crumb) throws UnsupportedEncodingException {
+    String modules = "incomeStatementHistory,cashflowStatementHistory,balanceSheetHistory,incomeStatementHistoryQuarterly,cashflowStatementHistoryQuarterly,balanceSheetHistoryQuarterly";
+    return String.format(
+            "https://query1.finance.yahoo.com/v10/finance/quoteSummary/%s?formatted=true&modules=%s&enablePrivateCompany=true&enableQSPExpandedEarnings=true&overnightPrice=true&lang=en-US&region=US&crumb=%s",
+            encode(ticker), modules, encode(crumb)
+    );
+  }
+
 }

@@ -11,7 +11,7 @@ public class ExercisedValue{
 	private String longFmt;
 
 	@JsonProperty("fmt")
-	private Object fmt;
+	private String fmt;
 
 	public Integer getRaw(){
 		return raw;
@@ -21,7 +21,7 @@ public class ExercisedValue{
 		return longFmt;
 	}
 
-	public Object getFmt(){
+	public String getFmt(){
 		return fmt;
 	}
 

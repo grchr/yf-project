@@ -3,12 +3,12 @@ package org.opensource.service;
 import org.junit.jupiter.api.Test;
 import org.opensource.model.profile.YahooCompanyProfile;
 
-public class ProfileServiceTest {
+public class CompanyProfileServiceTest {
 
   @Test
   void companyProfileServiceTest() {
-    ProfileService profileService = new ProfileService();
-    YahooCompanyProfile result = profileService.execute("BNP.PA");
+    CompanyProfileService companyProfileService = new CompanyProfileService();
+    YahooCompanyProfile result = companyProfileService.execute("BNP.PA");
     System.out.println(result);
   }
 }

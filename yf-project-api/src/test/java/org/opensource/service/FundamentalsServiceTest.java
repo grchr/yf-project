@@ -1,7 +1,6 @@
 package org.opensource.service;
 
 import org.junit.jupiter.api.Test;
-import org.opensource.model.financials.YahooFinancials;
 import org.opensource.model.fundamentals.YahooFundamentals;
 
 public class FundamentalsServiceTest {

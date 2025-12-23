@@ -1,8 +1,9 @@
 package org.opensource.model.financials;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.opensource.model.IYahooResponse;
 
-public class YahooFinancials {
+public class YahooFinancials implements IYahooResponse {
 
 	@JsonProperty("quoteSummary")
 	private QuoteSummary quoteSummary;

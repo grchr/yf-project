@@ -6,7 +6,7 @@ import org.opensource.model.tradedata.YahooTradeData;
 public class TradeDataServiceTest {
 
   @Test
-  void fundamentalsServiceTest() {
+  void tradeDataServiceTest() {
     TradeDataService tradeDataService = new TradeDataService();
     YahooTradeData result = tradeDataService.execute("BNP.PA");
     System.out.println(result);
