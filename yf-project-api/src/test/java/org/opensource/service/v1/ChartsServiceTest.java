@@ -1,9 +1,10 @@
-package org.opensource.service;
+package org.opensource.service.v1;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.junit.jupiter.api.Test;
 import org.opensource.model.response.charts.YahooChart;
+import org.opensource.service.v1.ChartsService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

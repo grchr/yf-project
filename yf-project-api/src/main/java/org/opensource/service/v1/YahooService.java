@@ -1,4 +1,4 @@
-package org.opensource.service;
+package org.opensource.service.v1;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.opensource.model.response.IYahooResponse;
@@ -16,6 +16,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Abstract base class for Yahoo service implementations.
+ * It is based on the legacy HttpURLConnection to enable integration with older Java systems.
+ * @param <T> the type of Yahoo response
+ */
 public abstract class YahooService<T extends IYahooResponse> {
 
   protected final String crumbUrl = "https://query1.finance.yahoo.com/v1/test/getcrumb";

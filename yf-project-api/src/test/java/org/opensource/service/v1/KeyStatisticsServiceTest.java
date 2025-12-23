@@ -1,7 +1,8 @@
-package org.opensource.service;
+package org.opensource.service.v1;
 
 import org.junit.jupiter.api.Test;
 import org.opensource.model.response.keystats.YahooKeyStatistics;
+import org.opensource.service.v1.KeyStatisticsService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

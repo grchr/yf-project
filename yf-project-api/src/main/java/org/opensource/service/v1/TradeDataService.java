@@ -1,4 +1,4 @@
-package org.opensource.service;
+package org.opensource.service.v1;
 
 import org.opensource.model.response.tradedata.YahooTradeData;
 import org.opensource.model.web.CrumbCookie;
