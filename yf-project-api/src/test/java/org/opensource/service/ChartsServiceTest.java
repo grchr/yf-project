@@ -3,7 +3,7 @@ package org.opensource.service;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.junit.jupiter.api.Test;
-import org.opensource.model.charts.YahooChart;
+import org.opensource.model.response.charts.YahooChart;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

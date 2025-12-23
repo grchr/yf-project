@@ -1,6 +1,6 @@
 package org.opensource.service;
 
-import org.opensource.model.IYahooResponse;
+import org.opensource.model.response.IYahooResponse;
 
 public interface IYahooEndpointServiceExecutable {
 

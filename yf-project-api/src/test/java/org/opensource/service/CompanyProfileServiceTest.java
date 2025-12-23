@@ -2,7 +2,7 @@ package org.opensource.service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.util.StringUtils;
-import org.opensource.model.profile.YahooCompanyProfile;
+import org.opensource.model.response.profile.YahooCompanyProfile;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

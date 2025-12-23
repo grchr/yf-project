@@ -1,6 +1,7 @@
 package org.opensource.service;
 
-import org.opensource.model.tradedata.YahooTradeData;
+import org.opensource.model.response.tradedata.YahooTradeData;
+import org.opensource.model.web.CrumbCookie;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -11,11 +12,10 @@ public class TradeDataService extends YahooService<YahooTradeData> implements IY
   public YahooTradeData execute(String ticker) {
     try {
       HttpURLConnection crumbConn = getHttpURLConnection(crumbUrl);
-      String crumb = getCrumb(crumbConn);
-      String cookieHeader = retrieveCookies(crumbConn);
-      String quoteSummaryUrl = prepareUrl(ticker, crumb);
+      CrumbCookie crumbCookie = getCrumbCookie(crumbConn);
+      String quoteSummaryUrl = prepareUrl(ticker, crumbCookie.getCrumb());
       HttpURLConnection dataConn = getHttpURLConnection(quoteSummaryUrl);
-      updateConnectionWithHeaders(cookieHeader, dataConn);
+      updateConnectionWithHeaders(crumbCookie.getCookie(), dataConn);
       return getResult(dataConn, YahooTradeData.class);
     } catch (IOException e) {
       return new YahooTradeData();

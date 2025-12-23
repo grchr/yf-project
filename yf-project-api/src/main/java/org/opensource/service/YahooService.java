@@ -1,8 +1,9 @@
 package org.opensource.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.opensource.model.IYahooResponse;
+import org.opensource.model.response.IYahooResponse;
 import org.opensource.model.mapper.JsonMapper;
+import org.opensource.model.web.CrumbCookie;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
@@ -28,19 +30,10 @@ public abstract class YahooService<T extends IYahooResponse> {
     return crumbConn;
   }
 
-  protected String retrieveCookies(HttpURLConnection connection) {
-    String cookieHeader = null;
-    // Capture cookies from the response
-    Map<String, List<String>> headerFields = connection.getHeaderFields();
-    List<String> cookies = headerFields.get("Set-Cookie");
-    if (cookies != null && !cookies.isEmpty()) {
-      StringBuilder sb = new StringBuilder();
-      for (String cookie : cookies) {
-        sb.append(cookie.split(";", 2)[0]).append("; ");
-      }
-      cookieHeader = sb.toString();
-    }
-    return cookieHeader;
+  protected CrumbCookie getCrumbCookie(HttpURLConnection crumbConn) throws IOException {
+    String crumb = getCrumb(crumbConn);
+    String cookieHeader = retrieveCookies(crumbConn);
+    return new CrumbCookie(crumb, cookieHeader);
   }
 
   protected T getResult(HttpURLConnection dataConn, Class<T> clazz) throws IOException {
@@ -57,14 +50,29 @@ public abstract class YahooService<T extends IYahooResponse> {
     }
   }
 
-  protected String encode(String value) throws UnsupportedEncodingException {
-    return URLEncoder.encode(value, "UTF-8");
+  protected String encode(String value) {
+    return URLEncoder.encode(value, StandardCharsets.UTF_8);
   }
 
-  protected String getCrumb(HttpURLConnection crumbConn) throws IOException {
+  private String getCrumb(HttpURLConnection crumbConn) throws IOException {
     try (BufferedReader reader = new BufferedReader(new InputStreamReader(crumbConn.getInputStream()))) {
       return reader.readLine().replace("\"", "");
     }
+  }
+
+  private String retrieveCookies(HttpURLConnection connection) {
+    String cookieHeader = null;
+    // Capture cookies from the response
+    Map<String, List<String>> headerFields = connection.getHeaderFields();
+    List<String> cookies = headerFields.get("Set-Cookie");
+    if (cookies != null && !cookies.isEmpty()) {
+      StringBuilder sb = new StringBuilder();
+      for (String cookie : cookies) {
+        sb.append(cookie.split(";", 2)[0]).append("; ");
+      }
+      cookieHeader = sb.toString();
+    }
+    return cookieHeader;
   }
 
 }

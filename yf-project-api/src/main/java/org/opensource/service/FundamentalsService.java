@@ -1,6 +1,7 @@
 package org.opensource.service;
 
-import org.opensource.model.fundamentals.YahooFundamentals;
+import org.opensource.model.response.fundamentals.YahooFundamentals;
+import org.opensource.model.web.CrumbCookie;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -12,11 +13,10 @@ public class FundamentalsService extends YahooService<YahooFundamentals> impleme
   public YahooFundamentals execute(String ticker) {
     try {
       HttpURLConnection crumbConn = getHttpURLConnection(crumbUrl);
-      String crumb = getCrumb(crumbConn);
-      String cookieHeader = retrieveCookies(crumbConn);
-      String quoteSummaryUrl = prepareUrl(ticker, crumb);
+      CrumbCookie crumbCookie = getCrumbCookie(crumbConn);
+      String quoteSummaryUrl = prepareUrl(ticker, crumbCookie.getCrumb());
       HttpURLConnection dataConn = getHttpURLConnection(quoteSummaryUrl);
-      updateConnectionWithHeaders(cookieHeader, dataConn);
+      updateConnectionWithHeaders(crumbCookie.getCookie(), dataConn);
       return getResult(dataConn, YahooFundamentals.class);
     } catch (IOException e) {
       return new YahooFundamentals();

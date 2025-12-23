@@ -1,6 +1,7 @@
 package org.opensource.service;
 
-import org.opensource.model.financials.YahooFinancials;
+import org.opensource.model.response.financials.YahooFinancials;
+import org.opensource.model.web.CrumbCookie;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -11,12 +12,11 @@ public class FinancialsService extends YahooService<YahooFinancials> implements 
   @Override
   public YahooFinancials execute(String ticker) {
     try {
-      HttpURLConnection crumbConn = getHttpURLConnection(this.crumbUrl);
-      String crumb = getCrumb(crumbConn);
-      String cookieHeader = retrieveCookies(crumbConn);
-      String quoteSummaryUrl = prepareUrl(ticker, crumb);
+      HttpURLConnection crumbConn = getHttpURLConnection(crumbUrl);
+      CrumbCookie crumbCookie = getCrumbCookie(crumbConn);
+      String quoteSummaryUrl = prepareUrl(ticker, crumbCookie.getCrumb());
       HttpURLConnection dataConn = getHttpURLConnection(quoteSummaryUrl);
-      updateConnectionWithHeaders(cookieHeader, dataConn);
+      updateConnectionWithHeaders(crumbCookie.getCookie(), dataConn);
       return getResult(dataConn, YahooFinancials.class);
     } catch (IOException e) {
       return new YahooFinancials();

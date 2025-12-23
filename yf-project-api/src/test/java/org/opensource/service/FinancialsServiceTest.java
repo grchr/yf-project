@@ -2,7 +2,7 @@ package org.opensource.service;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.junit.jupiter.api.Test;
-import org.opensource.model.financials.YahooFinancials;
+import org.opensource.model.response.financials.YahooFinancials;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

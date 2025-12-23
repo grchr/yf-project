@@ -1,6 +1,7 @@
 package org.opensource.service;
 
-import org.opensource.model.charts.YahooChart;
+import org.opensource.model.response.charts.YahooChart;
+import org.opensource.model.web.CrumbCookie;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -11,11 +12,10 @@ public class ChartsService extends YahooService<YahooChart> implements IYahooEnd
   public YahooChart execute(String ticker) {
     try {
       HttpURLConnection crumbConn = getHttpURLConnection(crumbUrl);
-      String crumb = getCrumb(crumbConn);
-      String cookieHeader = retrieveCookies(crumbConn);
-      String quoteSummaryUrl = prepareUrl(ticker, crumb);
+      CrumbCookie crumbCookie = getCrumbCookie(crumbConn);
+      String quoteSummaryUrl = prepareUrl(ticker, crumbCookie.getCrumb());
       HttpURLConnection dataConn = getHttpURLConnection(quoteSummaryUrl);
-      updateConnectionWithHeaders(cookieHeader, dataConn);
+      updateConnectionWithHeaders(crumbCookie.getCookie(), dataConn);
       return getResult(dataConn, YahooChart.class);
     } catch (IOException e) {
       return new YahooChart();
