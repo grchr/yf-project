@@ -26,7 +26,7 @@ To use in your project add the dependency using the bom set up:
             <dependency>
                 <groupId>com.github.grchr</groupId>
                 <artifactId>yf-project-bom</artifactId>
-                <version>0.0.8</version>
+                <version>0.0.9</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
