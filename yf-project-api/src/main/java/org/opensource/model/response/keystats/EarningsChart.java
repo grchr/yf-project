@@ -21,7 +21,7 @@ public class EarningsChart{
 	private String currentCalendarQuarter;
 
 	@JsonProperty("currentQuarterEstimateYear")
-	private Integer currentQuarterEstimateYear;
+	private Long currentQuarterEstimateYear;
 
 	@JsonProperty("quarterly")
 	private List<QuarterlyItem> quarterly;
@@ -49,7 +49,7 @@ public class EarningsChart{
 		return currentCalendarQuarter;
 	}
 
-	public Integer getCurrentQuarterEstimateYear(){
+	public Long getCurrentQuarterEstimateYear(){
 		return currentQuarterEstimateYear;
 	}
 

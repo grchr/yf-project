@@ -161,7 +161,7 @@ public class DefaultKeyStatistics{
 	private SharesShort sharesShort;
 
 	@JsonProperty("maxAge")
-	private Integer maxAge;
+	private Long maxAge;
 
 	@JsonProperty("52WeekChange")
 	private JsonMember52WeekChange jsonMember52WeekChange;
@@ -395,7 +395,7 @@ public class DefaultKeyStatistics{
 		return sharesShort;
 	}
 
-	public Integer getMaxAge(){
+	public Long getMaxAge(){
 		return maxAge;
 	}
 

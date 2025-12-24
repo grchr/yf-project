@@ -14,7 +14,7 @@ public class ResultItem{
 	private FiftyTwoWeekLowChangePercent fiftyTwoWeekLowChangePercent;
 
 	@JsonProperty("gmtOffSetMilliseconds")
-	private Integer gmtOffSetMilliseconds;
+	private Long gmtOffSetMilliseconds;
 
 	@JsonProperty("regularMarketOpen")
 	private RegularMarketOpen regularMarketOpen;
@@ -83,7 +83,7 @@ public class ResultItem{
 	private long firstTradeDateMilliseconds;
 
 	@JsonProperty("exchangeDataDelayedBy")
-	private Integer exchangeDataDelayedBy;
+	private Long exchangeDataDelayedBy;
 
 	@JsonProperty("exchangeTimezoneShortName")
 	private String exchangeTimezoneShortName;
@@ -119,13 +119,13 @@ public class ResultItem{
 	private String messageBoardId;
 
 	@JsonProperty("priceHint")
-	private Integer priceHint;
+	private Long priceHint;
 
 	@JsonProperty("regularMarketDayLow")
 	private RegularMarketDayLow regularMarketDayLow;
 
 	@JsonProperty("sourceInterval")
-	private Integer sourceInterval;
+	private Long sourceInterval;
 
 	@JsonProperty("exchange")
 	private String exchange;
@@ -154,7 +154,7 @@ public class ResultItem{
 		return fiftyTwoWeekLowChangePercent;
 	}
 
-	public Integer getGmtOffSetMilliseconds(){
+	public Long getGmtOffSetMilliseconds(){
 		return gmtOffSetMilliseconds;
 	}
 
@@ -246,7 +246,7 @@ public class ResultItem{
 		return firstTradeDateMilliseconds;
 	}
 
-	public Integer getExchangeDataDelayedBy(){
+	public Long getExchangeDataDelayedBy(){
 		return exchangeDataDelayedBy;
 	}
 
@@ -294,7 +294,7 @@ public class ResultItem{
 		return messageBoardId;
 	}
 
-	public Integer getPriceHint(){
+	public Long getPriceHint(){
 		return priceHint;
 	}
 
@@ -302,7 +302,7 @@ public class ResultItem{
 		return regularMarketDayLow;
 	}
 
-	public Integer getSourceInterval(){
+	public Long getSourceInterval(){
 		return sourceInterval;
 	}
 

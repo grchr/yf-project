@@ -33,7 +33,7 @@ public class SummaryProfile{
 	private List<Object> executiveTeam;
 
 	@JsonProperty("fullTimeEmployees")
-	private Integer fullTimeEmployees;
+	private Long fullTimeEmployees;
 
 	@JsonProperty("longBusinessSummary")
 	private String longBusinessSummary;
@@ -42,7 +42,7 @@ public class SummaryProfile{
 	private String phone;
 
 	@JsonProperty("maxAge")
-	private Integer maxAge;
+	private Long maxAge;
 
 	@JsonProperty("sectorKey")
 	private String sectorKey;
@@ -92,7 +92,7 @@ public class SummaryProfile{
 		return executiveTeam;
 	}
 
-	public Integer getFullTimeEmployees(){
+	public Long getFullTimeEmployees(){
 		return fullTimeEmployees;
 	}
 
@@ -104,7 +104,7 @@ public class SummaryProfile{
 		return phone;
 	}
 
-	public Integer getMaxAge(){
+	public Long getMaxAge(){
 		return maxAge;
 	}
 

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class PriceHint{
 
 	@JsonProperty("raw")
-	private Integer raw;
+	private Long raw;
 
 	@JsonProperty("longFmt")
 	private String longFmt;
@@ -13,7 +13,7 @@ public class PriceHint{
 	@JsonProperty("fmt")
 	private String fmt;
 
-	public Integer getRaw(){
+	public Long getRaw(){
 		return raw;
 	}
 

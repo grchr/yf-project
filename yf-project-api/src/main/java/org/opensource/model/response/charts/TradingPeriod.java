@@ -5,18 +5,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class TradingPeriod {
 
 	@JsonProperty("gmtoffset")
-	private Integer gmtoffset;
+	private Long gmtoffset;
 
 	@JsonProperty("timezone")
 	private String timezone;
 
 	@JsonProperty("start")
-	private Integer start;
+	private Long start;
 
 	@JsonProperty("end")
-	private Integer end;
+	private Long end;
 
-	public Integer getGmtoffset(){
+	public Long getGmtoffset(){
 		return gmtoffset;
 	}
 
@@ -24,11 +24,11 @@ public class TradingPeriod {
 		return timezone;
 	}
 
-	public Integer getStart(){
+	public Long getStart(){
 		return start;
 	}
 
-	public Integer getEnd(){
+	public Long getEnd(){
 		return end;
 	}
 

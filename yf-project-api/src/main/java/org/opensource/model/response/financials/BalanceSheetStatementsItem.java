@@ -5,12 +5,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class BalanceSheetStatementsItem{
 
 	@JsonProperty("maxAge")
-	private Integer maxAge;
+	private Long maxAge;
 
 	@JsonProperty("endDate")
 	private EndDate endDate;
 
-	public Integer getMaxAge(){
+	public Long getMaxAge(){
 		return maxAge;
 	}
 

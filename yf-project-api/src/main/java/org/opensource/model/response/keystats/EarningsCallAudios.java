@@ -6,12 +6,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class EarningsCallAudios{
 
 	@JsonProperty("maxAge")
-	private Integer maxAge;
+	private Long maxAge;
 
 	@JsonProperty("audios")
 	private List<AudiosItem> audios;
 
-	public Integer getMaxAge(){
+	public Long getMaxAge(){
 		return maxAge;
 	}
 

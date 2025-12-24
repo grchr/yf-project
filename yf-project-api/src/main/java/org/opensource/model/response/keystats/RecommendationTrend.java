@@ -9,13 +9,13 @@ public class RecommendationTrend{
 	private List<TrendItem> trend;
 
 	@JsonProperty("maxAge")
-	private Integer maxAge;
+	private Long maxAge;
 
 	public List<TrendItem> getTrend(){
 		return trend;
 	}
 
-	public Integer getMaxAge(){
+	public Long getMaxAge(){
 		return maxAge;
 	}
 

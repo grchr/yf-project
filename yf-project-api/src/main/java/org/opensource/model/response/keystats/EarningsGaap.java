@@ -8,7 +8,7 @@ public class EarningsGaap{
 	private String financialCurrency;
 
 	@JsonProperty("maxAge")
-	private Integer maxAge;
+	private Long maxAge;
 
 	@JsonProperty("financialsChart")
 	private FinancialsChart financialsChart;
@@ -23,7 +23,7 @@ public class EarningsGaap{
 		return financialCurrency;
 	}
 
-	public Integer getMaxAge(){
+	public Long getMaxAge(){
 		return maxAge;
 	}
 

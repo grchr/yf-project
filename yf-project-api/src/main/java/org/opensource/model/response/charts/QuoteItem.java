@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class QuoteItem{
 
 	@JsonProperty("volume")
-	private List<Integer> volume;
+	private List<Long> volume;
 
 	@JsonProperty("high")
 	private List<Double> high;
@@ -20,7 +20,7 @@ public class QuoteItem{
 	@JsonProperty("open")
 	private List<Double> open;
 
-	public List<Integer> getVolume(){
+	public List<Long> getVolume(){
 		return volume;
 	}
 

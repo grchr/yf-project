@@ -8,7 +8,7 @@ public class CompanyOfficersItem{
 	private UnexercisedValue unexercisedValue;
 
 	@JsonProperty("maxAge")
-	private Integer maxAge;
+	private Long maxAge;
 
 	@JsonProperty("name")
 	private String name;
@@ -20,13 +20,13 @@ public class CompanyOfficersItem{
 	private String title;
 
 	@JsonProperty("fiscalYear")
-	private Integer fiscalYear;
+	private Long fiscalYear;
 
 	@JsonProperty("yearBorn")
-	private Integer yearBorn;
+	private Long yearBorn;
 
 	@JsonProperty("age")
-	private Integer age;
+	private Long age;
 
 	@JsonProperty("totalPay")
 	private TotalPay totalPay;
@@ -35,7 +35,7 @@ public class CompanyOfficersItem{
 		return unexercisedValue;
 	}
 
-	public Integer getMaxAge(){
+	public Long getMaxAge(){
 		return maxAge;
 	}
 
@@ -51,15 +51,15 @@ public class CompanyOfficersItem{
 		return title;
 	}
 
-	public Integer getFiscalYear(){
+	public Long getFiscalYear(){
 		return fiscalYear;
 	}
 
-	public Integer getYearBorn(){
+	public Long getYearBorn(){
 		return yearBorn;
 	}
 
-	public Integer getAge(){
+	public Long getAge(){
 		return age;
 	}
 

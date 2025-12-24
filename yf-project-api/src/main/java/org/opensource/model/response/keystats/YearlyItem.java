@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class YearlyItem{
 
 	@JsonProperty("date")
-	private Integer date;
+	private Long date;
 
 	@JsonProperty("revenue")
 	private Revenue revenue;
@@ -13,7 +13,7 @@ public class YearlyItem{
 	@JsonProperty("earnings")
 	private Earnings earnings;
 
-	public Integer getDate(){
+	public Long getDate(){
 		return date;
 	}
 

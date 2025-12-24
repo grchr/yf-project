@@ -5,19 +5,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class TranscriptsItem{
 
 	@JsonProperty("date")
-	private Integer date;
+	private Long date;
 
 	@JsonProperty("eventId")
-	private Integer eventId;
+	private Long eventId;
 
 	@JsonProperty("s3Url")
 	private String s3Url;
 
 	@JsonProperty("maxAge")
-	private Integer maxAge;
+	private Long maxAge;
 
 	@JsonProperty("transcriptId")
-	private Integer transcriptId;
+	private Long transcriptId;
 
 	@JsonProperty("fiscalPeriod")
 	private String fiscalPeriod;
@@ -32,19 +32,19 @@ public class TranscriptsItem{
 	private String type;
 
 	@JsonProperty("fiscalYear")
-	private Integer fiscalYear;
+	private Long fiscalYear;
 
 	@JsonProperty("updated")
-	private Integer updated;
+	private Long updated;
 
 	@JsonProperty("url")
 	private String url;
 
-	public Integer getDate(){
+	public Long getDate(){
 		return date;
 	}
 
-	public Integer getEventId(){
+	public Long getEventId(){
 		return eventId;
 	}
 
@@ -52,11 +52,11 @@ public class TranscriptsItem{
 		return s3Url;
 	}
 
-	public Integer getMaxAge(){
+	public Long getMaxAge(){
 		return maxAge;
 	}
 
-	public Integer getTranscriptId(){
+	public Long getTranscriptId(){
 		return transcriptId;
 	}
 
@@ -76,11 +76,11 @@ public class TranscriptsItem{
 		return type;
 	}
 
-	public Integer getFiscalYear(){
+	public Long getFiscalYear(){
 		return fiscalYear;
 	}
 
-	public Integer getUpdated(){
+	public Long getUpdated(){
 		return updated;
 	}
 

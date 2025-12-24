@@ -18,13 +18,13 @@ public class Meta{
 	private String range;
 
 	@JsonProperty("regularMarketTime")
-	private Integer regularMarketTime;
+	private Long regularMarketTime;
 
 	@JsonProperty("dataGranularity")
 	private String dataGranularity;
 
 	@JsonProperty("gmtoffset")
-	private Integer gmtoffset;
+	private Long gmtoffset;
 
 	@JsonProperty("regularMarketDayHigh")
 	private Double regularMarketDayHigh;
@@ -48,7 +48,7 @@ public class Meta{
 	private String instrumentType;
 
 	@JsonProperty("firstTradeDate")
-	private Integer firstTradeDate;
+	private Long firstTradeDate;
 
 	@JsonProperty("validRanges")
 	private List<String> validRanges;
@@ -63,10 +63,10 @@ public class Meta{
 	private Double fiftyTwoWeekLow;
 
 	@JsonProperty("regularMarketVolume")
-	private Integer regularMarketVolume;
+	private Long regularMarketVolume;
 
 	@JsonProperty("priceHint")
-	private Integer priceHint;
+	private Long priceHint;
 
 	@JsonProperty("exchangeName")
 	private String exchangeName;
@@ -96,7 +96,7 @@ public class Meta{
 		return range;
 	}
 
-	public Integer getRegularMarketTime(){
+	public Long getRegularMarketTime(){
 		return regularMarketTime;
 	}
 
@@ -104,7 +104,7 @@ public class Meta{
 		return dataGranularity;
 	}
 
-	public Integer getGmtoffset(){
+	public Long getGmtoffset(){
 		return gmtoffset;
 	}
 
@@ -136,7 +136,7 @@ public class Meta{
 		return instrumentType;
 	}
 
-	public Integer getFirstTradeDate(){
+	public Long getFirstTradeDate(){
 		return firstTradeDate;
 	}
 
@@ -156,11 +156,11 @@ public class Meta{
 		return fiftyTwoWeekLow;
 	}
 
-	public Integer getRegularMarketVolume(){
+	public Long getRegularMarketVolume(){
 		return regularMarketVolume;
 	}
 
-	public Integer getPriceHint(){
+	public Long getPriceHint(){
 		return priceHint;
 	}
 

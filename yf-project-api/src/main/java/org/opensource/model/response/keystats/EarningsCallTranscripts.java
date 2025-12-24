@@ -9,13 +9,13 @@ public class EarningsCallTranscripts{
 	private List<TranscriptsItem> transcripts;
 
 	@JsonProperty("maxAge")
-	private Integer maxAge;
+	private Long maxAge;
 
 	public List<TranscriptsItem> getTranscripts(){
 		return transcripts;
 	}
 
-	public Integer getMaxAge(){
+	public Long getMaxAge(){
 		return maxAge;
 	}
 

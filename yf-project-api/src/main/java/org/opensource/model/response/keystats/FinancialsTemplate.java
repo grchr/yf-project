@@ -8,13 +8,13 @@ public class FinancialsTemplate{
 	private String code;
 
 	@JsonProperty("maxAge")
-	private Integer maxAge;
+	private Long maxAge;
 
 	public String getCode(){
 		return code;
 	}
 
-	public Integer getMaxAge(){
+	public Long getMaxAge(){
 		return maxAge;
 	}
 

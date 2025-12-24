@@ -15,7 +15,7 @@ public class AssetProfile{
 	private String website;
 
 	@JsonProperty("compensationRisk")
-	private Integer compensationRisk;
+	private Long compensationRisk;
 
 	@JsonProperty("industryDisp")
 	private String industryDisp;
@@ -33,37 +33,37 @@ public class AssetProfile{
 	private String industry;
 
 	@JsonProperty("shareHolderRightsRisk")
-	private Integer shareHolderRightsRisk;
+	private Long shareHolderRightsRisk;
 
 	@JsonProperty("executiveTeam")
 	private List<String> executiveTeam;
 
 	@JsonProperty("compensationAsOfEpochDate")
-	private Integer compensationAsOfEpochDate;
+	private Long compensationAsOfEpochDate;
 
 	@JsonProperty("fullTimeEmployees")
-	private Integer fullTimeEmployees;
+	private Long fullTimeEmployees;
 
 	@JsonProperty("longBusinessSummary")
 	private String longBusinessSummary;
 
 	@JsonProperty("boardRisk")
-	private Integer boardRisk;
+	private Long boardRisk;
 
 	@JsonProperty("governanceEpochDate")
-	private Integer governanceEpochDate;
+	private Long governanceEpochDate;
 
 	@JsonProperty("phone")
 	private String phone;
 
 	@JsonProperty("maxAge")
-	private Integer maxAge;
+	private Long maxAge;
 
 	@JsonProperty("overallRisk")
-	private Integer overallRisk;
+	private Long overallRisk;
 
 	@JsonProperty("auditRisk")
-	private Integer auditRisk;
+	private Long auditRisk;
 
 	@JsonProperty("sectorKey")
 	private String sectorKey;
@@ -89,7 +89,7 @@ public class AssetProfile{
 		return website;
 	}
 
-	public Integer getCompensationRisk(){
+	public Long getCompensationRisk(){
 		return compensationRisk;
 	}
 
@@ -113,7 +113,7 @@ public class AssetProfile{
 		return industry;
 	}
 
-	public Integer getShareHolderRightsRisk(){
+	public Long getShareHolderRightsRisk(){
 		return shareHolderRightsRisk;
 	}
 
@@ -121,11 +121,11 @@ public class AssetProfile{
 		return executiveTeam;
 	}
 
-	public Integer getCompensationAsOfEpochDate(){
+	public Long getCompensationAsOfEpochDate(){
 		return compensationAsOfEpochDate;
 	}
 
-	public Integer getFullTimeEmployees(){
+	public Long getFullTimeEmployees(){
 		return fullTimeEmployees;
 	}
 
@@ -133,11 +133,11 @@ public class AssetProfile{
 		return longBusinessSummary;
 	}
 
-	public Integer getBoardRisk(){
+	public Long getBoardRisk(){
 		return boardRisk;
 	}
 
-	public Integer getGovernanceEpochDate(){
+	public Long getGovernanceEpochDate(){
 		return governanceEpochDate;
 	}
 
@@ -145,15 +145,15 @@ public class AssetProfile{
 		return phone;
 	}
 
-	public Integer getMaxAge(){
+	public Long getMaxAge(){
 		return maxAge;
 	}
 
-	public Integer getOverallRisk(){
+	public Long getOverallRisk(){
 		return overallRisk;
 	}
 
-	public Integer getAuditRisk(){
+	public Long getAuditRisk(){
 		return auditRisk;
 	}
 

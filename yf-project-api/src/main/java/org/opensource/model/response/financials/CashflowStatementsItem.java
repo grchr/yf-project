@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class CashflowStatementsItem{
 
 	@JsonProperty("maxAge")
-	private Integer maxAge;
+	private Long maxAge;
 
 	@JsonProperty("endDate")
 	private EndDate endDate;
@@ -13,7 +13,7 @@ public class CashflowStatementsItem{
 	@JsonProperty("netIncome")
 	private NetIncome netIncome;
 
-	public Integer getMaxAge(){
+	public Long getMaxAge(){
 		return maxAge;
 	}
 

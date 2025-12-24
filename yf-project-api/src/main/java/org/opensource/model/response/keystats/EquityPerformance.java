@@ -8,7 +8,7 @@ public class EquityPerformance{
 	private PerformanceOverview performanceOverview;
 
 	@JsonProperty("maxAge")
-	private Integer maxAge;
+	private Long maxAge;
 
 	@JsonProperty("benchmark")
 	private Benchmark benchmark;
@@ -20,7 +20,7 @@ public class EquityPerformance{
 		return performanceOverview;
 	}
 
-	public Integer getMaxAge(){
+	public Long getMaxAge(){
 		return maxAge;
 	}
 

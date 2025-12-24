@@ -6,12 +6,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class CashflowStatementHistory{
 
 	@JsonProperty("maxAge")
-	private Integer maxAge;
+	private Long maxAge;
 
 	@JsonProperty("cashflowStatements")
 	private List<CashflowStatementsItem> cashflowStatements;
 
-	public Integer getMaxAge(){
+	public Long getMaxAge(){
 		return maxAge;
 	}
 

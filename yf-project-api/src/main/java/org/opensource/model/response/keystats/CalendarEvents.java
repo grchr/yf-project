@@ -11,7 +11,7 @@ public class CalendarEvents{
 	private DividendDate dividendDate;
 
 	@JsonProperty("maxAge")
-	private Integer maxAge;
+	private Long maxAge;
 
 	@JsonProperty("exDividendDate")
 	private ExDividendDate exDividendDate;
@@ -24,7 +24,7 @@ public class CalendarEvents{
 		return dividendDate;
 	}
 
-	public Integer getMaxAge(){
+	public Long getMaxAge(){
 		return maxAge;
 	}
 

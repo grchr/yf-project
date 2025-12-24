@@ -5,22 +5,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class AudiosItem{
 
 	@JsonProperty("date")
-	private Integer date;
+	private Long date;
 
 	@JsonProperty("eventId")
-	private Integer eventId;
+	private Long eventId;
 
 	@JsonProperty("wentLiveAt")
-	private Integer wentLiveAt;
+	private Long wentLiveAt;
 
 	@JsonProperty("maxAge")
-	private Integer maxAge;
+	private Long maxAge;
 
 	@JsonProperty("fiscalPeriod")
 	private String fiscalPeriod;
 
 	@JsonProperty("id")
-	private Integer id;
+	private Long id;
 
 	@JsonProperty("audio")
 	private String audio;
@@ -32,24 +32,24 @@ public class AudiosItem{
 	private String title;
 
 	@JsonProperty("fiscalYear")
-	private Integer fiscalYear;
+	private Long fiscalYear;
 
 	@JsonProperty("eventDate")
-	private Integer eventDate;
+	private Long eventDate;
 
-	public Integer getDate(){
+	public Long getDate(){
 		return date;
 	}
 
-	public Integer getEventId(){
+	public Long getEventId(){
 		return eventId;
 	}
 
-	public Integer getWentLiveAt(){
+	public Long getWentLiveAt(){
 		return wentLiveAt;
 	}
 
-	public Integer getMaxAge(){
+	public Long getMaxAge(){
 		return maxAge;
 	}
 
@@ -57,7 +57,7 @@ public class AudiosItem{
 		return fiscalPeriod;
 	}
 
-	public Integer getId(){
+	public Long getId(){
 		return id;
 	}
 
@@ -73,11 +73,11 @@ public class AudiosItem{
 		return title;
 	}
 
-	public Integer getFiscalYear(){
+	public Long getFiscalYear(){
 		return fiscalYear;
 	}
 
-	public Integer getEventDate(){
+	public Long getEventDate(){
 		return eventDate;
 	}
 

@@ -167,7 +167,7 @@ public class SummaryDetail{
 	private ForwardPE forwardPE;
 
 	@JsonProperty("maxAge")
-	private Integer maxAge;
+	private Long maxAge;
 
 	@JsonProperty("averageVolume")
 	private AverageVolume averageVolume;
@@ -400,7 +400,7 @@ public class SummaryDetail{
 		return forwardPE;
 	}
 
-	public Integer getMaxAge(){
+	public Long getMaxAge(){
 		return maxAge;
 	}
 

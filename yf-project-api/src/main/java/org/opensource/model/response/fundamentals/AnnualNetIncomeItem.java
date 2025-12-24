@@ -8,7 +8,7 @@ public class AnnualNetIncomeItem{
 	private String periodType;
 
 	@JsonProperty("dataId")
-	private Integer dataId;
+	private Long dataId;
 
 	@JsonProperty("reportedValue")
 	private ReportedValue reportedValue;
@@ -23,7 +23,7 @@ public class AnnualNetIncomeItem{
 		return periodType;
 	}
 
-	public Integer getDataId(){
+	public Long getDataId(){
 		return dataId;
 	}
 

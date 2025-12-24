@@ -12,7 +12,7 @@ public class ResultItem{
 	private Meta meta;
 
 	@JsonProperty("timestamp")
-	private List<Integer> timestamp;
+	private List<Long> timestamp;
 
 	@JsonProperty("annualTotalRevenue")
 	private List<AnnualTotalRevenueItem> annualTotalRevenue;
@@ -28,7 +28,7 @@ public class ResultItem{
 		return meta;
 	}
 
-	public List<Integer> getTimestamp(){
+	public List<Long> getTimestamp(){
 		return timestamp;
 	}
 

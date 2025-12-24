@@ -83,7 +83,7 @@ public class FinancialData{
 	private DebtToEquity debtToEquity;
 
 	@JsonProperty("maxAge")
-	private Integer maxAge;
+	private Long maxAge;
 
 	@JsonProperty("targetMeanPrice")
 	private TargetMeanPrice targetMeanPrice;
@@ -198,7 +198,7 @@ public class FinancialData{
 		return debtToEquity;
 	}
 
-	public Integer getMaxAge(){
+	public Long getMaxAge(){
 		return maxAge;
 	}
 

@@ -14,7 +14,7 @@ public class Price{
 	private RegularMarketOpen regularMarketOpen;
 
 	@JsonProperty("regularMarketTime")
-	private Integer regularMarketTime;
+	private Long regularMarketTime;
 
 	@JsonProperty("regularMarketChangePercent")
 	private RegularMarketChangePercent regularMarketChangePercent;
@@ -68,7 +68,7 @@ public class Price{
 	private AverageDailyVolume3Month averageDailyVolume3Month;
 
 	@JsonProperty("exchangeDataDelayedBy")
-	private Integer exchangeDataDelayedBy;
+	private Long exchangeDataDelayedBy;
 
 	@JsonProperty("currencySymbol")
 	private String currencySymbol;
@@ -95,7 +95,7 @@ public class Price{
 	private PostMarketChange postMarketChange;
 
 	@JsonProperty("maxAge")
-	private Integer maxAge;
+	private Long maxAge;
 
 	@JsonProperty("toCurrency")
 	private Object toCurrency;
@@ -133,7 +133,7 @@ public class Price{
 		return regularMarketOpen;
 	}
 
-	public Integer getRegularMarketTime(){
+	public Long getRegularMarketTime(){
 		return regularMarketTime;
 	}
 
@@ -205,7 +205,7 @@ public class Price{
 		return averageDailyVolume3Month;
 	}
 
-	public Integer getExchangeDataDelayedBy(){
+	public Long getExchangeDataDelayedBy(){
 		return exchangeDataDelayedBy;
 	}
 
@@ -241,7 +241,7 @@ public class Price{
 		return postMarketChange;
 	}
 
-	public Integer getMaxAge(){
+	public Long getMaxAge(){
 		return maxAge;
 	}
 

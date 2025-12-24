@@ -8,7 +8,7 @@ public class GeographicSegmentDataItem{
 	private Object dataValue;
 
 	@JsonProperty("isPrimarySegment")
-	private Integer isPrimarySegment;
+	private Long isPrimarySegment;
 
 	@JsonProperty("segmentType")
 	private String segmentType;
@@ -20,7 +20,7 @@ public class GeographicSegmentDataItem{
 		return dataValue;
 	}
 
-	public Integer getIsPrimarySegment(){
+	public Long getIsPrimarySegment(){
 		return isPrimarySegment;
 	}
 

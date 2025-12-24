@@ -44,7 +44,7 @@ public class IncomeStatementHistoryItem{
 	private SellingGeneralAdministrative sellingGeneralAdministrative;
 
 	@JsonProperty("maxAge")
-	private Integer maxAge;
+	private Long maxAge;
 
 	@JsonProperty("extraordinaryItems")
 	private ExtraordinaryItems extraordinaryItems;
@@ -128,7 +128,7 @@ public class IncomeStatementHistoryItem{
 		return sellingGeneralAdministrative;
 	}
 
-	public Integer getMaxAge(){
+	public Long getMaxAge(){
 		return maxAge;
 	}
 

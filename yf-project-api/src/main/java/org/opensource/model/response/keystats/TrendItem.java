@@ -8,41 +8,41 @@ public class TrendItem{
 	private String period;
 
 	@JsonProperty("buy")
-	private Integer buy;
+	private Long buy;
 
 	@JsonProperty("sell")
-	private Integer sell;
+	private Long sell;
 
 	@JsonProperty("strongSell")
-	private Integer strongSell;
+	private Long strongSell;
 
 	@JsonProperty("strongBuy")
-	private Integer strongBuy;
+	private Long strongBuy;
 
 	@JsonProperty("hold")
-	private Integer hold;
+	private Long hold;
 
 	public String getPeriod(){
 		return period;
 	}
 
-	public Integer getBuy(){
+	public Long getBuy(){
 		return buy;
 	}
 
-	public Integer getSell(){
+	public Long getSell(){
 		return sell;
 	}
 
-	public Integer getStrongSell(){
+	public Long getStrongSell(){
 		return strongSell;
 	}
 
-	public Integer getStrongBuy(){
+	public Long getStrongBuy(){
 		return strongBuy;
 	}
 
-	public Integer getHold(){
+	public Long getHold(){
 		return hold;
 	}
 
