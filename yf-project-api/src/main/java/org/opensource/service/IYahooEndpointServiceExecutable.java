@@ -1,4 +1,4 @@
-package org.opensource.service.v1;
+package org.opensource.service;
 
 import org.opensource.model.response.IYahooResponse;
 

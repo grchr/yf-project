@@ -1,23 +1,30 @@
-package org.opensource.service.v1;
+package org.opensource.service.v2;
 
+import okhttp3.Request;
+import okhttp3.Response;
 import org.opensource.model.response.fundamentals.YahooFundamentals;
-import org.opensource.model.web.CrumbCookie;
 import org.opensource.service.IYahooEndpointServiceExecutable;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.time.Instant;
 
-public class FundamentalsService extends YahooService<YahooFundamentals> implements IYahooEndpointServiceExecutable {
+public class FundamentalsService extends YahooServiceSync<YahooFundamentals> implements IYahooEndpointServiceExecutable {
 
+  @Override
   public YahooFundamentals execute(String ticker) {
+
     try {
-      HttpURLConnection crumbConn = getHttpURLConnection(crumbUrl);
-      CrumbCookie crumbCookie = getCrumbCookie(crumbConn);
-      String quoteSummaryUrl = prepareUrl(ticker, crumbCookie.getCrumb());
-      HttpURLConnection dataConn = getHttpURLConnection(quoteSummaryUrl);
-      updateConnectionWithHeaders(crumbCookie.getCookie(), dataConn);
-      return getResult(dataConn, YahooFundamentals.class);
+      // Get crumb (cookies captured here)
+      String crumb = getCrumb();
+      System.out.println("Crumb: " + crumb);
+      // Use crumb + cookies
+      String url = prepareUrl(ticker, crumb);
+      System.out.println("URL: " + url);
+      Request request = buildRequest(url);
+
+      try (Response response = client.newCall(request).execute()) {
+        return getResult(response, YahooFundamentals.class);
+      }
     } catch (IOException e) {
       return new YahooFundamentals();
     }
@@ -32,5 +39,4 @@ public class FundamentalsService extends YahooService<YahooFundamentals> impleme
             encode(ticker), encode(ticker), modules, period2, encode(crumb)
     );
   }
-
 }

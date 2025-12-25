@@ -1,8 +1,9 @@
-package org.opensource.service.v1;
+package org.opensource.service.v2;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.junit.jupiter.api.Test;
 import org.opensource.model.response.financials.YahooFinancials;
+import org.opensource.service.v2.FinancialsService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

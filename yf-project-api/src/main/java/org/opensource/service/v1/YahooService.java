@@ -1,14 +1,13 @@
 package org.opensource.service.v1;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.opensource.model.response.IYahooResponse;
 import org.opensource.model.mapper.JsonMapper;
+import org.opensource.model.response.IYahooResponse;
 import org.opensource.model.web.CrumbCookie;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -25,7 +24,7 @@ public abstract class YahooService<T extends IYahooResponse> {
 
   protected final String crumbUrl = "https://query1.finance.yahoo.com/v1/test/getcrumb";
 
-  protected abstract String prepareUrl(String ticker, String crumb) throws UnsupportedEncodingException;
+  protected abstract String prepareUrl(String ticker, String crumb);
 
   protected HttpURLConnection getHttpURLConnection(String url) throws IOException {
     URL crumbURL = new URL(url);

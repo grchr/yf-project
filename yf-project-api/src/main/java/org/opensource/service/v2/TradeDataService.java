@@ -1,22 +1,29 @@
-package org.opensource.service.v1;
+package org.opensource.service.v2;
 
+import okhttp3.Request;
+import okhttp3.Response;
 import org.opensource.model.response.tradedata.YahooTradeData;
-import org.opensource.model.web.CrumbCookie;
 import org.opensource.service.IYahooEndpointServiceExecutable;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 
-public class TradeDataService extends YahooService<YahooTradeData> implements IYahooEndpointServiceExecutable {
+public class TradeDataService extends YahooServiceSync<YahooTradeData> implements IYahooEndpointServiceExecutable {
 
+  @Override
   public YahooTradeData execute(String ticker) {
+
     try {
-      HttpURLConnection crumbConn = getHttpURLConnection(crumbUrl);
-      CrumbCookie crumbCookie = getCrumbCookie(crumbConn);
-      String quoteSummaryUrl = prepareUrl(ticker, crumbCookie.getCrumb());
-      HttpURLConnection dataConn = getHttpURLConnection(quoteSummaryUrl);
-      updateConnectionWithHeaders(crumbCookie.getCookie(), dataConn);
-      return getResult(dataConn, YahooTradeData.class);
+      // Get crumb (cookies captured here)
+      String crumb = getCrumb();
+      System.out.println("Crumb: " + crumb);
+      // Use crumb + cookies
+      String url = prepareUrl(ticker, crumb);
+      System.out.println("URL: " + url);
+      Request request = buildRequest(url);
+
+      try (Response response = client.newCall(request).execute()) {
+        return getResult(response, YahooTradeData.class);
+      }
     } catch (IOException e) {
       return new YahooTradeData();
     }
@@ -26,7 +33,7 @@ public class TradeDataService extends YahooService<YahooTradeData> implements IY
   protected String prepareUrl(String ticker, String crumb) {
     String modules = "fiftyTwoWeekHigh%2CfiftyTwoWeekLow%2CfromCurrency%2CfromExchange%2CheadSymbolAsString%2ClogoUrl%2ClongName%2CmarketCap%2CmessageBoardId%2CoptionsType%2CovernightMarketTime%2CovernightMarketPrice%2CovernightMarketChange%2CovernightMarketChangePercent%2CregularMarketTime%2CregularMarketChange%2CregularMarketChangePercent%2CregularMarketOpen%2CregularMarketPrice%2CregularMarketSource%2CregularMarketVolume%2CpostMarketTime%2CpostMarketPrice%2CpostMarketChange%2CpostMarketChangePercent%2CpreMarketTime%2CpreMarketPrice%2CpreMarketChange%2CpreMarketChangePercent%2CshortName%2CtoCurrency%2CtoExchange%2CunderlyingExchangeSymbol%2CunderlyingSymbol%2CstockStory%2CquartrId&formatted=true&imgHeights=50&imgLabels=logoUrl&imgWidths=50";
     return String.format(
-            "https://query1.finance.yahoo.com/v7/finance/quote?symbols=%s&fields=%s&enablePrivateCompany=true&overnightPrice=true&topPickThisMonth=true&lang=en-US&region=US&crumb=%s",
+            "https://query2.finance.yahoo.com/v7/finance/quote?symbols=%s&fields=%s&enablePrivateCompany=true&overnightPrice=true&topPickThisMonth=true&lang=en-US&region=US&crumb=%s",
             encode(ticker), modules, encode(crumb)
     );
   }

@@ -1,7 +1,8 @@
-package org.opensource.service.v1;
+package org.opensource.service.v2;
 
 import org.junit.jupiter.api.Test;
 import org.opensource.model.response.tradedata.YahooTradeData;
+import org.opensource.service.v2.TradeDataService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

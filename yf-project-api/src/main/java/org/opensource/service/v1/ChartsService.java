@@ -2,9 +2,9 @@ package org.opensource.service.v1;
 
 import org.opensource.model.response.charts.YahooChart;
 import org.opensource.model.web.CrumbCookie;
+import org.opensource.service.IYahooEndpointServiceExecutable;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 
 public class ChartsService extends YahooService<YahooChart> implements IYahooEndpointServiceExecutable {
@@ -23,7 +23,7 @@ public class ChartsService extends YahooService<YahooChart> implements IYahooEnd
   }
 
   @Override
-  protected String prepareUrl(String ticker, String crumb) throws UnsupportedEncodingException {
+  protected String prepareUrl(String ticker, String crumb) {
     String modules = "dividends,split";
     return String.format(
             "https://query1.finance.yahoo.com/v8/finance/chart/%s?range=max&interval=1d&events=%s&crumb=%s",

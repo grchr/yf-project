@@ -2,9 +2,9 @@ package org.opensource.service.v1;
 
 import org.opensource.model.response.profile.YahooCompanyProfile;
 import org.opensource.model.web.CrumbCookie;
+import org.opensource.service.IYahooEndpointServiceExecutable;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 
 public class CompanyProfileService extends YahooService<YahooCompanyProfile> implements IYahooEndpointServiceExecutable {
@@ -23,7 +23,7 @@ public class CompanyProfileService extends YahooService<YahooCompanyProfile> imp
   }
 
   @Override
-  protected String prepareUrl(String ticker, String crumb) throws UnsupportedEncodingException {
+  protected String prepareUrl(String ticker, String crumb) {
     String modules = "assetProfile%2CsecFilings&enablePrivateCompany=true&enableQSPExpandedEarnings=true&overnightPrice=true";
     return String.format(
             "https://query1.finance.yahoo.com/v10/finance/quoteSummary/%s?formatted=true&modules=%s&lang=en-US&region=US&crumb=%s",

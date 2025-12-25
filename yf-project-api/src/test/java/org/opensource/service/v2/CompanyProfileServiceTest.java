@@ -1,8 +1,9 @@
-package org.opensource.service.v1;
+package org.opensource.service.v2;
 
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.util.StringUtils;
 import org.opensource.model.response.profile.YahooCompanyProfile;
+import org.opensource.service.v2.CompanyProfileService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
