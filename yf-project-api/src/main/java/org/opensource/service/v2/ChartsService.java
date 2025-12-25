@@ -33,7 +33,7 @@ public class ChartsService extends YahooServiceSync<YahooChart> implements IYaho
   protected String prepareUrl(String ticker, String crumb) {
     String modules = "dividends,split";
     return String.format(
-            "https://query1.finance.yahoo.com/v8/finance/chart/%s?range=max&interval=1d&events=%s&crumb=%s",
+            "https://query2.finance.yahoo.com/v8/finance/chart/%s?range=max&interval=1d&events=%s&crumb=%s",
             encode(ticker), modules, encode(crumb)
     );
   }
