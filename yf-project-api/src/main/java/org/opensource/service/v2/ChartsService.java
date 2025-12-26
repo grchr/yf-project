@@ -2,15 +2,15 @@ package org.opensource.service.v2;
 
 import okhttp3.Request;
 import okhttp3.Response;
-import org.opensource.model.response.charts.YahooChart;
+import org.opensource.model.response.charts.YahooEventChart;
 import org.opensource.service.IYahooEndpointServiceExecutable;
 
 import java.io.IOException;
 
-public class ChartsService extends YahooServiceSync<YahooChart> implements IYahooEndpointServiceExecutable {
+public class ChartsService extends YahooServiceSync<YahooEventChart> implements IYahooEndpointServiceExecutable {
 
   @Override
-  public YahooChart execute(String ticker) {
+  public YahooEventChart execute(String ticker) {
 
     try {
       // Get crumb (cookies captured here)
@@ -22,10 +22,10 @@ public class ChartsService extends YahooServiceSync<YahooChart> implements IYaho
       Request request = buildRequest(url);
 
       try (Response response = client.newCall(request).execute()) {
-        return getResult(response, YahooChart.class);
+        return getResult(response, YahooEventChart.class);
       }
     } catch (IOException e) {
-      return new YahooChart();
+      return new YahooEventChart();
     }
   }
 

@@ -3,7 +3,7 @@ package org.opensource.service.v1;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.junit.jupiter.api.Test;
-import org.opensource.model.response.charts.YahooChart;
+import org.opensource.model.response.charts.YahooEventChart;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -16,7 +16,7 @@ public class ChartsServiceTest {
   @Test
   void chartServiceTest() {
     ChartsService chartService = new ChartsService();
-    YahooChart result = chartService.execute("BNP.PA");
+    YahooEventChart result = chartService.execute("BNP.PA");
     assertEquals(1, result.getChart().getResult().size());
     assertTrue(CollectionUtils.isNotEmpty(result.getChart().getResult().get(0).getTimestamp()));
     assertNotNull(result.getChart().getResult().get(0).getIndicators());

@@ -1,24 +1,24 @@
 package org.opensource.service.v1;
 
-import org.opensource.model.response.charts.YahooChart;
+import org.opensource.model.response.charts.YahooEventChart;
 import org.opensource.model.web.CrumbCookie;
 import org.opensource.service.IYahooEndpointServiceExecutable;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
-public class ChartsService extends YahooService<YahooChart> implements IYahooEndpointServiceExecutable {
+public class ChartsService extends YahooService<YahooEventChart> implements IYahooEndpointServiceExecutable {
 
-  public YahooChart execute(String ticker) {
+  public YahooEventChart execute(String ticker) {
     try {
       HttpURLConnection crumbConn = getHttpURLConnection(crumbUrl);
       CrumbCookie crumbCookie = getCrumbCookie(crumbConn);
       String quoteSummaryUrl = prepareUrl(ticker, crumbCookie.getCrumb());
       HttpURLConnection dataConn = getHttpURLConnection(quoteSummaryUrl);
       updateConnectionWithHeaders(crumbCookie.getCookie(), dataConn);
-      return getResult(dataConn, YahooChart.class);
+      return getResult(dataConn, YahooEventChart.class);
     } catch (IOException e) {
-      return new YahooChart();
+      return new YahooEventChart();
     }
   }
 
