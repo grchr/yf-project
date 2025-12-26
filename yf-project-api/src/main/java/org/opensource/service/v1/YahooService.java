@@ -23,6 +23,14 @@ import java.util.Map;
 public abstract class YahooService<T extends IYahooResponse> {
 
   protected final String crumbUrl = "https://query1.finance.yahoo.com/v1/test/getcrumb";
+  protected CrumbCookie lastUsedCrumbCookie;
+
+  protected YahooService() {
+  }
+
+  protected YahooService(CrumbCookie lastUsedCrumbCookie) {
+    this.lastUsedCrumbCookie = lastUsedCrumbCookie;
+  }
 
   protected abstract String prepareUrl(String ticker, String crumb);
 
@@ -79,4 +87,7 @@ public abstract class YahooService<T extends IYahooResponse> {
     return cookieHeader;
   }
 
+  public CrumbCookie getLastUsedCrumbCookie() {
+    return lastUsedCrumbCookie;
+  }
 }

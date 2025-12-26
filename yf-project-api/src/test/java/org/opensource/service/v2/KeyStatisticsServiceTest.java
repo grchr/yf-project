@@ -1,5 +1,6 @@
 package org.opensource.service.v2;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.opensource.model.response.keystats.YahooKeyStatistics;
 import org.opensource.service.v2.KeyStatisticsService;
@@ -7,6 +8,12 @@ import org.opensource.service.v2.KeyStatisticsService;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class KeyStatisticsServiceTest {
+
+  @BeforeEach
+  void setup() throws InterruptedException {
+    // Wait before each test to avoid rate limiting
+    Thread.sleep(1000);
+  }
 
   @Test
   void keyStatisticsServiceTest() {

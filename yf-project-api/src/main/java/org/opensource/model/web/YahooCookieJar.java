@@ -1,4 +1,4 @@
-package org.opensource.service.v2;
+package org.opensource.model.web;
 
 import okhttp3.Cookie;
 import okhttp3.CookieJar;

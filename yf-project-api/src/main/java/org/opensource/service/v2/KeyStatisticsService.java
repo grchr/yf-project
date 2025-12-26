@@ -2,6 +2,7 @@ package org.opensource.service.v2;
 
 import okhttp3.Request;
 import okhttp3.Response;
+import org.opensource.exceptions.YahooCrumbException;
 import org.opensource.model.response.keystats.YahooKeyStatistics;
 import org.opensource.service.IYahooEndpointServiceExecutable;
 
@@ -9,15 +10,23 @@ import java.io.IOException;
 
 public class KeyStatisticsService extends YahooServiceSync<YahooKeyStatistics> implements IYahooEndpointServiceExecutable {
 
+  public KeyStatisticsService() {
+    super();
+  }
+
+  public KeyStatisticsService(okhttp3.OkHttpClient client, String lastUsedCrumb) {
+    super(client, lastUsedCrumb);
+  }
+
   @Override
   public YahooKeyStatistics execute(String ticker) {
 
     try {
       // Get crumb (cookies captured here)
-      String crumb = getCrumb();
-      System.out.println("Crumb: " + crumb);
+      lastUsedCrumb = getCrumb();
+      System.out.println("Crumb: " + lastUsedCrumb);
       // Use crumb + cookies
-      String url = prepareUrl(ticker, crumb);
+      String url = prepareUrl(ticker, lastUsedCrumb);
       System.out.println("URL: " + url);
       Request request = buildRequest(url);
 
@@ -25,6 +34,9 @@ public class KeyStatisticsService extends YahooServiceSync<YahooKeyStatistics> i
         return getResult(response, YahooKeyStatistics.class);
       }
     } catch (IOException e) {
+      return new YahooKeyStatistics();
+    } catch (YahooCrumbException e) {
+      System.out.println("Failed to get crumb: " + e.getMessage());
       return new YahooKeyStatistics();
     }
   }

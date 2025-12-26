@@ -1,5 +1,6 @@
 package org.opensource.service.v1;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.util.StringUtils;
 import org.opensource.model.response.profile.YahooCompanyProfile;
@@ -8,6 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CompanyProfileServiceTest {
+
+  @BeforeEach
+  void setup() throws InterruptedException {
+    // Wait before each test to avoid rate limiting
+    Thread.sleep(1000);
+  }
 
   @Test
   void companyProfileServiceTest() {

@@ -1,5 +1,6 @@
 package org.opensource.service.v2;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.opensource.model.response.fundamentals.YahooFundamentals;
 import org.opensource.service.v2.FundamentalsService;
@@ -8,6 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class FundamentalsServiceTest {
+
+  @BeforeEach
+  void setup() throws InterruptedException {
+    // Wait before each test to avoid rate limiting
+    Thread.sleep(1000);
+  }
 
   @Test
   void fundamentalsServiceTest() {

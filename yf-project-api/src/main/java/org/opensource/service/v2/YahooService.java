@@ -2,7 +2,9 @@ package org.opensource.service.v2;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import org.apache.commons.lang3.StringUtils;
 import org.opensource.model.response.IYahooResponse;
+import org.opensource.service.v2.utils.ClientFactory;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -10,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * Abstract base class for Yahoo service implementations.
  * It is based on the OkHttpClient.
- * TODO: Create async version, put in place fallback executions for switching urls, remove system prints
+ * TODO: Create async version, put in place fallback executions for switching urls, remove system prints with SLF4J logging, handle exceptions, add supermodel and superservice
  * @param <T> the type of Yahoo response
  */
 public abstract class YahooService<T extends IYahooResponse> {
@@ -20,14 +22,23 @@ public abstract class YahooService<T extends IYahooResponse> {
   protected static final String CONNECTION_HEADER = "keep-alive";
   protected static final String HOME_URL = "https://finance.yahoo.com/";
   protected static final String CRUMB_URL = "https://query2.finance.yahoo.com/v1/test/getcrumb";
+  protected String lastUsedCrumb = "";
 
   protected final OkHttpClient client;
 
   protected YahooService() {
-    this.client = new OkHttpClient.Builder()
-            .cookieJar(new YahooCookieJar())
-            .followRedirects(true)
-            .build();
+    this.client = ClientFactory.newClient();
+  }
+
+  protected YahooService(OkHttpClient client, String lastUsedCrumb) {
+    if (client == null) {
+      this.client = ClientFactory.newClient();
+    } else {
+      this.client = client;
+    }
+    if (StringUtils.isNotEmpty(lastUsedCrumb)) {
+      this.lastUsedCrumb = lastUsedCrumb;
+    }
   }
 
   protected abstract String prepareUrl(String ticker, String crumb);
@@ -45,6 +56,18 @@ public abstract class YahooService<T extends IYahooResponse> {
 
   protected String encode(String value) {
     return URLEncoder.encode(value, StandardCharsets.UTF_8);
+  }
+
+  public String getLastUsedCrumb() {
+    return lastUsedCrumb;
+  }
+
+  public void setLastUsedCrumb(String lastUsedCrumb) {
+    this.lastUsedCrumb = lastUsedCrumb;
+  }
+
+  public OkHttpClient getClient() {
+    return client;
   }
 }
 

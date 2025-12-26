@@ -1,8 +1,13 @@
-package org.opensource.service.v2;
+package org.opensource.service.v2.utils;
 
 import okhttp3.OkHttpClient;
+import org.opensource.model.web.YahooCookieJar;
 
 public final class ClientFactory {
+
+  private ClientFactory() {
+    // Prevent instantiation
+  }
 
   public static OkHttpClient newClient() {
     return new OkHttpClient.Builder()

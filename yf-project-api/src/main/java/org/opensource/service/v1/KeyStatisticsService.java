@@ -1,5 +1,6 @@
 package org.opensource.service.v1;
 
+import org.apache.commons.lang3.StringUtils;
 import org.opensource.model.response.keystats.YahooKeyStatistics;
 import org.opensource.model.web.CrumbCookie;
 import org.opensource.service.IYahooEndpointServiceExecutable;
@@ -9,13 +10,23 @@ import java.net.HttpURLConnection;
 
 public class KeyStatisticsService extends YahooService<YahooKeyStatistics> implements IYahooEndpointServiceExecutable {
 
+  public KeyStatisticsService() {
+    super();
+  }
+
+  public KeyStatisticsService(CrumbCookie lastUsedCrumbCookie) {
+    super(lastUsedCrumbCookie);
+  }
+
   public YahooKeyStatistics execute(String ticker) {
     try {
-      HttpURLConnection crumbConn = getHttpURLConnection(crumbUrl);
-      CrumbCookie crumbCookie = getCrumbCookie(crumbConn);
-      String quoteSummaryUrl = prepareUrl(ticker, crumbCookie.getCrumb());
+      if (lastUsedCrumbCookie == null || StringUtils.isEmpty(lastUsedCrumbCookie.getCrumb()) || StringUtils.isEmpty(lastUsedCrumbCookie.getCookie())) {
+        HttpURLConnection crumbConn = getHttpURLConnection(crumbUrl);
+        lastUsedCrumbCookie = getCrumbCookie(crumbConn);
+      }
+      String quoteSummaryUrl = prepareUrl(ticker, lastUsedCrumbCookie.getCrumb());
       HttpURLConnection dataConn = getHttpURLConnection(quoteSummaryUrl);
-      updateConnectionWithHeaders(crumbCookie.getCookie(), dataConn);
+      updateConnectionWithHeaders(lastUsedCrumbCookie.getCookie(), dataConn);
       return getResult(dataConn, YahooKeyStatistics.class);
     } catch (IOException e) {
       return new YahooKeyStatistics();

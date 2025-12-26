@@ -1,5 +1,6 @@
 package org.opensource.service.v1;
 
+import org.apache.commons.lang3.StringUtils;
 import org.opensource.model.response.fundamentals.YahooFundamentals;
 import org.opensource.model.web.CrumbCookie;
 import org.opensource.service.IYahooEndpointServiceExecutable;
@@ -10,13 +11,23 @@ import java.time.Instant;
 
 public class FundamentalsService extends YahooService<YahooFundamentals> implements IYahooEndpointServiceExecutable {
 
+  public FundamentalsService() {
+    super();
+  }
+
+  public FundamentalsService(CrumbCookie lastUsedCrumbCookie) {
+    super(lastUsedCrumbCookie);
+  }
+
   public YahooFundamentals execute(String ticker) {
     try {
-      HttpURLConnection crumbConn = getHttpURLConnection(crumbUrl);
-      CrumbCookie crumbCookie = getCrumbCookie(crumbConn);
-      String quoteSummaryUrl = prepareUrl(ticker, crumbCookie.getCrumb());
+      if (lastUsedCrumbCookie == null || StringUtils.isEmpty(lastUsedCrumbCookie.getCrumb()) || StringUtils.isEmpty(lastUsedCrumbCookie.getCookie())) {
+        HttpURLConnection crumbConn = getHttpURLConnection(crumbUrl);
+        lastUsedCrumbCookie = getCrumbCookie(crumbConn);
+      }
+      String quoteSummaryUrl = prepareUrl(ticker, lastUsedCrumbCookie.getCrumb());
       HttpURLConnection dataConn = getHttpURLConnection(quoteSummaryUrl);
-      updateConnectionWithHeaders(crumbCookie.getCookie(), dataConn);
+      updateConnectionWithHeaders(lastUsedCrumbCookie.getCookie(), dataConn);
       return getResult(dataConn, YahooFundamentals.class);
     } catch (IOException e) {
       return new YahooFundamentals();

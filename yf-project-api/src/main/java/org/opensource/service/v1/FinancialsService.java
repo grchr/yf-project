@@ -1,5 +1,6 @@
 package org.opensource.service.v1;
 
+import org.apache.commons.lang3.StringUtils;
 import org.opensource.model.response.financials.YahooFinancials;
 import org.opensource.model.web.CrumbCookie;
 import org.opensource.service.IYahooEndpointServiceExecutable;
@@ -9,14 +10,24 @@ import java.net.HttpURLConnection;
 
 public class FinancialsService extends YahooService<YahooFinancials> implements IYahooEndpointServiceExecutable {
 
+  public FinancialsService() {
+    super();
+  }
+
+  public FinancialsService(CrumbCookie lastUsedCrumbCookie) {
+    super(lastUsedCrumbCookie);
+  }
+
   @Override
   public YahooFinancials execute(String ticker) {
     try {
-      HttpURLConnection crumbConn = getHttpURLConnection(crumbUrl);
-      CrumbCookie crumbCookie = getCrumbCookie(crumbConn);
-      String quoteSummaryUrl = prepareUrl(ticker, crumbCookie.getCrumb());
+      if (lastUsedCrumbCookie == null || StringUtils.isEmpty(lastUsedCrumbCookie.getCrumb()) || StringUtils.isEmpty(lastUsedCrumbCookie.getCookie())) {
+        HttpURLConnection crumbConn = getHttpURLConnection(crumbUrl);
+        lastUsedCrumbCookie = getCrumbCookie(crumbConn);
+      }
+      String quoteSummaryUrl = prepareUrl(ticker, lastUsedCrumbCookie.getCrumb());
       HttpURLConnection dataConn = getHttpURLConnection(quoteSummaryUrl);
-      updateConnectionWithHeaders(crumbCookie.getCookie(), dataConn);
+      updateConnectionWithHeaders(lastUsedCrumbCookie.getCookie(), dataConn);
       return getResult(dataConn, YahooFinancials.class);
     } catch (IOException e) {
       return new YahooFinancials();
