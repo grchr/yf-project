@@ -15,7 +15,7 @@ public class YahooFinancials implements IYahooResponse {
 	@Override
  	public String toString(){
 		return 
-			"YahooFundamentals{" + 
+			"YahooFinancials{" +
 			"quoteSummary = '" + quoteSummary + '\'' + 
 			"}";
 		}

@@ -2,6 +2,7 @@ package org.opensource.service.v2;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.opensource.exceptions.YahooServiceException;
 import org.opensource.exceptions.YahooSessionException;
@@ -15,6 +16,12 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ChartsServiceTest {
+
+  @BeforeEach
+  void setup() throws InterruptedException {
+    // Wait before each test to avoid rate limiting
+    Thread.sleep(1000);
+  }
 
   @Test
   void chartServiceTest() throws YahooServiceException {
