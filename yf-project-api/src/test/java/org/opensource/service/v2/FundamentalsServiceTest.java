@@ -2,6 +2,7 @@ package org.opensource.service.v2;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.opensource.exceptions.YahooServiceException;
 import org.opensource.model.response.fundamentals.YahooFundamentals;
 import org.opensource.service.v2.FundamentalsService;
 
@@ -17,7 +18,7 @@ public class FundamentalsServiceTest {
   }
 
   @Test
-  void fundamentalsServiceTest() {
+  void fundamentalsServiceTest() throws YahooServiceException {
     FundamentalsService fundamentalsService = new FundamentalsService();
     YahooFundamentals result = fundamentalsService.execute("BNP.PA");
     assertEquals(3, result.getTimeseries().getResult().size());

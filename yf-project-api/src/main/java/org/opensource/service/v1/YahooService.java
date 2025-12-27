@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.opensource.model.mapper.JsonMapper;
 import org.opensource.model.response.IYahooResponse;
 import org.opensource.model.web.CrumbCookie;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,6 +23,8 @@ import java.util.Map;
  * @param <T> the type of Yahoo response
  */
 public abstract class YahooService<T extends IYahooResponse> {
+
+  protected Logger logger = LoggerFactory.getLogger(YahooService.class);
 
   protected final String crumbUrl = "https://query1.finance.yahoo.com/v1/test/getcrumb";
   protected CrumbCookie lastUsedCrumbCookie;

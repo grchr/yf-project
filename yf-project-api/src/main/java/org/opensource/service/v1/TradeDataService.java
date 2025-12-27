@@ -1,6 +1,7 @@
 package org.opensource.service.v1;
 
 import org.apache.commons.lang3.StringUtils;
+import org.opensource.exceptions.YahooServiceException;
 import org.opensource.model.response.tradedata.YahooTradeData;
 import org.opensource.model.web.CrumbCookie;
 import org.opensource.service.IYahooEndpointServiceExecutable;
@@ -18,9 +19,10 @@ public class TradeDataService extends YahooService<YahooTradeData> implements IY
     super(lastUsedCrumbCookie);
   }
 
-  public YahooTradeData execute(String ticker) {
+  public YahooTradeData execute(String ticker) throws YahooServiceException {
     try {
       if (lastUsedCrumbCookie == null || StringUtils.isEmpty(lastUsedCrumbCookie.getCrumb()) || StringUtils.isEmpty(lastUsedCrumbCookie.getCookie())) {
+        logger.debug("Fetching new crumb and cookie for ticker: {}", ticker);
         HttpURLConnection crumbConn = getHttpURLConnection(crumbUrl);
         lastUsedCrumbCookie = getCrumbCookie(crumbConn);
       }
@@ -29,7 +31,7 @@ public class TradeDataService extends YahooService<YahooTradeData> implements IY
       updateConnectionWithHeaders(lastUsedCrumbCookie.getCookie(), dataConn);
       return getResult(dataConn, YahooTradeData.class);
     } catch (IOException e) {
-      return new YahooTradeData();
+      throw new YahooServiceException("Failed to retrieve data for ticker: " + ticker);
     }
   }
 

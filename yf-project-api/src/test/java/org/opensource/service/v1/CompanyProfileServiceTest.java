@@ -3,6 +3,7 @@ package org.opensource.service.v1;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.util.StringUtils;
+import org.opensource.exceptions.YahooServiceException;
 import org.opensource.model.response.profile.YahooCompanyProfile;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,7 +18,7 @@ public class CompanyProfileServiceTest {
   }
 
   @Test
-  void companyProfileServiceTest() {
+  void companyProfileServiceTest() throws YahooServiceException {
     CompanyProfileService companyProfileService = new CompanyProfileService();
     YahooCompanyProfile result = companyProfileService.execute("BNP.PA");
     assertEquals(1, result.getQuoteSummary().getResult().size());

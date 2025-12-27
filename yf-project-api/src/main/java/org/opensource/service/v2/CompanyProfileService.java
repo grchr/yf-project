@@ -3,7 +3,7 @@ package org.opensource.service.v2;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import org.opensource.exceptions.YahooCrumbException;
+import org.opensource.exceptions.YahooServiceException;
 import org.opensource.model.response.profile.YahooCompanyProfile;
 import org.opensource.service.IYahooEndpointServiceExecutable;
 
@@ -20,25 +20,20 @@ public class CompanyProfileService extends YahooServiceSync<YahooCompanyProfile>
   }
 
   @Override
-  public YahooCompanyProfile execute(String ticker) {
+  public YahooCompanyProfile execute(String ticker) throws YahooServiceException {
 
     try {
       // Get crumb (cookies captured here)
       lastUsedCrumb = getCrumb();
-      System.out.println("Crumb: " + lastUsedCrumb);
       // Use crumb + cookies
       String url = prepareUrl(ticker, lastUsedCrumb);
-      System.out.println("URL: " + url);
       Request request = buildRequest(url);
 
       try (Response response = client.newCall(request).execute()) {
         return getResult(response, YahooCompanyProfile.class);
       }
     } catch (IOException e) {
-      return new YahooCompanyProfile();
-    } catch (YahooCrumbException e) {
-      System.out.println("Failed to get crumb: " + e.getMessage());
-      return new YahooCompanyProfile();
+      throw new YahooServiceException("Failed to retrieve data for ticker: " + ticker);
     }
   }
 

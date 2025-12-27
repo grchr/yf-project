@@ -1,6 +1,7 @@
 package org.opensource.service.v1;
 
 import org.apache.commons.lang3.StringUtils;
+import org.opensource.exceptions.YahooServiceException;
 import org.opensource.model.response.keystats.YahooKeyStatistics;
 import org.opensource.model.web.CrumbCookie;
 import org.opensource.service.IYahooEndpointServiceExecutable;
@@ -18,9 +19,10 @@ public class KeyStatisticsService extends YahooService<YahooKeyStatistics> imple
     super(lastUsedCrumbCookie);
   }
 
-  public YahooKeyStatistics execute(String ticker) {
+  public YahooKeyStatistics execute(String ticker) throws YahooServiceException {
     try {
       if (lastUsedCrumbCookie == null || StringUtils.isEmpty(lastUsedCrumbCookie.getCrumb()) || StringUtils.isEmpty(lastUsedCrumbCookie.getCookie())) {
+        logger.debug("Fetching new crumb and cookie for ticker: {}", ticker);
         HttpURLConnection crumbConn = getHttpURLConnection(crumbUrl);
         lastUsedCrumbCookie = getCrumbCookie(crumbConn);
       }
@@ -29,7 +31,7 @@ public class KeyStatisticsService extends YahooService<YahooKeyStatistics> imple
       updateConnectionWithHeaders(lastUsedCrumbCookie.getCookie(), dataConn);
       return getResult(dataConn, YahooKeyStatistics.class);
     } catch (IOException e) {
-      return new YahooKeyStatistics();
+      throw new YahooServiceException("Failed to retrieve data for ticker: " + ticker);
     }
   }
 

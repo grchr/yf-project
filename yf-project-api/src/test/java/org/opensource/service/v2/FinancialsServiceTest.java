@@ -3,6 +3,7 @@ package org.opensource.service.v2;
 import org.apache.commons.collections4.CollectionUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.opensource.exceptions.YahooServiceException;
 import org.opensource.model.response.financials.YahooFinancials;
 import org.opensource.service.v2.FinancialsService;
 
@@ -18,7 +19,7 @@ public class FinancialsServiceTest {
   }
 
   @Test
-  void financialsServiceTest() {
+  void financialsServiceTest() throws YahooServiceException {
     FinancialsService financialsService = new FinancialsService();
     YahooFinancials result = financialsService.execute("BNP.PA");
     assertEquals(1, result.getQuoteSummary().getResult().size());

@@ -4,6 +4,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.opensource.exceptions.YahooServiceException;
 import org.opensource.model.response.charts.YahooEventChart;
 import org.opensource.model.response.profile.YahooCompanyProfile;
 
@@ -21,7 +22,7 @@ public class ChartsServiceTest {
 
 
   @Test
-  void chartServiceTest() {
+  void chartServiceTest() throws YahooServiceException {
     ChartsService chartService = new ChartsService();
     YahooEventChart result = chartService.execute("BNP.PA");
     assertEquals(1, result.getChart().getResult().size());
@@ -37,7 +38,7 @@ public class ChartsServiceTest {
   }
 
   @Test
-  void chartServiceTestSequentialRequest() {
+  void chartServiceTestSequentialRequest() throws YahooServiceException {
     ChartsService chartService = new ChartsService();
     YahooEventChart bnp = chartService.execute("BNP.PA");
     assertEquals(1, bnp.getChart().getResult().size());
@@ -58,7 +59,7 @@ public class ChartsServiceTest {
   }
 
   @Test
-  void chartServiceTestSequentialRequestsDataInjection() {
+  void chartServiceTestSequentialRequestsDataInjection() throws YahooServiceException {
     ChartsService bnpService = new ChartsService();
     YahooEventChart bnp = bnpService.execute("BNP.PA");
     assertEquals(1, bnp.getChart().getResult().size());

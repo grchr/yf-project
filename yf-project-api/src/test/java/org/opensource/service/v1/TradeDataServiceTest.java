@@ -2,6 +2,7 @@ package org.opensource.service.v1;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.opensource.exceptions.YahooServiceException;
 import org.opensource.model.response.tradedata.YahooTradeData;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,7 +17,7 @@ public class TradeDataServiceTest {
   }
 
   @Test
-  void tradeDataServiceTest() {
+  void tradeDataServiceTest() throws YahooServiceException {
     TradeDataService tradeDataService = new TradeDataService();
     YahooTradeData result = tradeDataService.execute("BNP.PA");
     assertEquals(1, result.getQuoteResponse().getResult().size());

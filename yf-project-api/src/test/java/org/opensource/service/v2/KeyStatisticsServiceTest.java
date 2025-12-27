@@ -2,6 +2,7 @@ package org.opensource.service.v2;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.opensource.exceptions.YahooServiceException;
 import org.opensource.model.response.keystats.YahooKeyStatistics;
 import org.opensource.service.v2.KeyStatisticsService;
 
@@ -16,7 +17,7 @@ public class KeyStatisticsServiceTest {
   }
 
   @Test
-  void keyStatisticsServiceTest() {
+  void keyStatisticsServiceTest() throws YahooServiceException {
     KeyStatisticsService keyStatisticsService = new KeyStatisticsService();
     YahooKeyStatistics result = keyStatisticsService.execute("BNP.PA");
     assertEquals(1, result.getQuoteSummary().getResult().size());

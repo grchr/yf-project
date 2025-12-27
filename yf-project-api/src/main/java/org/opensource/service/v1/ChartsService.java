@@ -1,6 +1,7 @@
 package org.opensource.service.v1;
 
 import org.apache.commons.lang3.StringUtils;
+import org.opensource.exceptions.YahooServiceException;
 import org.opensource.model.response.charts.YahooEventChart;
 import org.opensource.model.web.CrumbCookie;
 import org.opensource.service.IYahooEndpointServiceExecutable;
@@ -18,10 +19,10 @@ public class ChartsService extends YahooService<YahooEventChart> implements IYah
     super(lastUsedCrumbCookie);
   }
 
-  public YahooEventChart execute(String ticker) {
+  public YahooEventChart execute(String ticker) throws YahooServiceException {
     try {
       if (lastUsedCrumbCookie == null || StringUtils.isEmpty(lastUsedCrumbCookie.getCrumb()) || StringUtils.isEmpty(lastUsedCrumbCookie.getCookie())) {
-        System.out.println("Fetching new crumb and cookie...");
+        logger.debug("Fetching new crumb and cookie for ticker: {}", ticker);
         HttpURLConnection crumbConn = getHttpURLConnection(crumbUrl);
         lastUsedCrumbCookie = getCrumbCookie(crumbConn);
       }
@@ -30,7 +31,7 @@ public class ChartsService extends YahooService<YahooEventChart> implements IYah
       updateConnectionWithHeaders(lastUsedCrumbCookie.getCookie(), dataConn);
       return getResult(dataConn, YahooEventChart.class);
     } catch (IOException e) {
-      return new YahooEventChart();
+      throw new YahooServiceException("Failed to retrieve data for ticker: " + ticker);
     }
   }
 

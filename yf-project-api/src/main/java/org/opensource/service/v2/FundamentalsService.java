@@ -2,7 +2,7 @@ package org.opensource.service.v2;
 
 import okhttp3.Request;
 import okhttp3.Response;
-import org.opensource.exceptions.YahooCrumbException;
+import org.opensource.exceptions.YahooServiceException;
 import org.opensource.model.response.fundamentals.YahooFundamentals;
 import org.opensource.service.IYahooEndpointServiceExecutable;
 
@@ -20,25 +20,20 @@ public class FundamentalsService extends YahooServiceSync<YahooFundamentals> imp
   }
 
   @Override
-  public YahooFundamentals execute(String ticker) {
+  public YahooFundamentals execute(String ticker) throws YahooServiceException {
 
     try {
       // Get crumb (cookies captured here)
       lastUsedCrumb = getCrumb();
-      System.out.println("Crumb: " + lastUsedCrumb);
       // Use crumb + cookies
       String url = prepareUrl(ticker, lastUsedCrumb);
-      System.out.println("URL: " + url);
       Request request = buildRequest(url);
 
       try (Response response = client.newCall(request).execute()) {
         return getResult(response, YahooFundamentals.class);
       }
     } catch (IOException e) {
-      return new YahooFundamentals();
-    } catch (YahooCrumbException e) {
-      System.out.println("Failed to get crumb: " + e.getMessage());
-      return new YahooFundamentals();
+      throw new YahooServiceException("Failed to retrieve data for ticker: " + ticker);
     }
   }
 

@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * Abstract base class for Yahoo service implementations.
  * It is based on the OkHttpClient.
- * TODO: Create async version, put in place fallback executions for switching urls, remove system prints with SLF4J logging, handle exceptions, add supermodel and superservice
+ * TODO: Create async version, put in place fallback executions for switching urls, add supermodel and superservice
  * @param <T> the type of Yahoo response
  */
 public abstract class YahooService<T extends IYahooResponse> {
@@ -23,7 +23,6 @@ public abstract class YahooService<T extends IYahooResponse> {
   protected static final String HOME_URL = "https://finance.yahoo.com/";
   protected static final String CRUMB_URL = "https://query2.finance.yahoo.com/v1/test/getcrumb";
   protected String lastUsedCrumb = "";
-
   protected final OkHttpClient client;
 
   protected YahooService() {
