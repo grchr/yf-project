@@ -5,7 +5,7 @@
 
   <groupId>com.github.grchr</groupId>
   <artifactId>yf-project</artifactId>
-  <version>0.0.12</version>
+  <version>0.0.13</version>
   <packaging>pom</packaging>
 
   <modules>
