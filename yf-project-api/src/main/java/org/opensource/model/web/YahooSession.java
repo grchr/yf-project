@@ -9,30 +9,27 @@ import org.opensource.exceptions.YahooSessionException;
 
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class YahooSession {
 
   protected static final String HOME_URL = "https://finance.yahoo.com/";
   protected static final String CRUMB_URL = "https://query2.finance.yahoo.com/v1/test/getcrumb";
 
-
   private OkHttpClient client;
   private AtomicReference<String> crumb;
-  private AtomicBoolean open;
-  private AtomicBoolean crumbFetching;
+  private final ReentrantLock crumbLock = new ReentrantLock();
+  private CompletableFuture<String> pendingCrumbFetch;
 
   protected YahooSession() {
     this.client = ClientFactory.newClient();
     this.crumb = new AtomicReference<>();
-    this.crumbFetching = new AtomicBoolean(false);
   }
 
   protected YahooSession(OkHttpClient client) {
     this.client = client;
     this.crumb = new AtomicReference<>();
-    this.crumbFetching = new AtomicBoolean(false);
   }
 
   public OkHttpClient client() {
@@ -40,39 +37,59 @@ public class YahooSession {
   }
 
   public String crumb() throws YahooSessionException {
-    if (StringUtils.isEmpty(crumb.get())) {
-      crumb.set(fetchCrumb());
+    if (StringUtils.isNotEmpty(crumb.get())) {
+      return crumb.get();
     }
-    return crumb.get();
+    crumbLock.lock();
+    try {
+      // Double-check pattern - crumb might have been fetched while waiting for lock
+      if (StringUtils.isNotEmpty(crumb.get())) {
+        return crumb.get();
+      }
+      // Check if an async fetch is in progress
+      if (pendingCrumbFetch != null && !pendingCrumbFetch.isDone()) {
+        try {
+          // Wait for the async fetch to complete
+          return pendingCrumbFetch.join();
+        } catch (Exception e) {
+          // If async fetch failed, try sync fetch
+          return fetchCrumbSync();
+        }
+      }
+      // No async fetch in progress, do sync fetch
+      return fetchCrumbSync();
+    } finally {
+      crumbLock.unlock();
+    }
   }
 
   public CompletableFuture<String> crumbAsync() {
-    String currentCrumb = crumb.get();
-    if (StringUtils.isNotEmpty(currentCrumb)) {
-      return CompletableFuture.completedFuture(currentCrumb);
+    if (StringUtils.isNotEmpty(crumb.get())) {
+      return CompletableFuture.completedFuture(crumb.get());
     }
-    if (!crumbFetching.compareAndSet(false, true)) {
-      // Another fetch is in progress, wait for it to complete
-      return CompletableFuture.supplyAsync(() -> {
-        while (crumbFetching.get()) {
-          try {
-            Thread.sleep(10); // Wait briefly
-          } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            throw new YahooAsyncRequestException("Interrupted while waiting for crumb", e);
-          }
-        }
-        return crumb.get();
-      });
+    crumbLock.lock();
+    try {
+      // Double-check pattern
+      if (StringUtils.isNotEmpty(crumb.get())) {
+        return CompletableFuture.completedFuture(crumb.get());
+      }
+      // If a fetch is already in progress, return the same future
+      if (pendingCrumbFetch != null && !pendingCrumbFetch.isDone()) {
+        return pendingCrumbFetch;
+      }
+      // Start a new async fetch
+      pendingCrumbFetch = fetchCrumbAsync();
+      return pendingCrumbFetch;
+    } finally {
+      crumbLock.unlock();
     }
-
-    return fetchCrumbAsync()
-            .whenComplete((result, throwable) -> crumbFetching.set(false));
   }
 
-  private String fetchCrumb() throws YahooSessionException {
+  private String fetchCrumbSync() throws YahooSessionException {
     getHomePage();
-    return retrieveCrumb();
+    String fetchedCrumb = retrieveCrumb();
+    this.crumb.set(fetchedCrumb);
+    return fetchedCrumb;
   }
 
   private CompletableFuture<String> fetchCrumbAsync() {
@@ -80,7 +97,16 @@ public class YahooSession {
             .thenCompose(v -> retrieveCrumbAsync())
             .whenComplete((result, throwable) -> {
               if (result != null) {
-                crumb.set(result);
+                this.crumb.set(result);
+              }
+              // Clear pending fetch reference after completion
+              crumbLock.lock();
+              try {
+                if (pendingCrumbFetch != null && pendingCrumbFetch.isDone()) {
+                  pendingCrumbFetch = null;
+                }
+              } finally {
+                crumbLock.unlock();
               }
             });
   }
@@ -92,20 +118,18 @@ public class YahooSession {
         throw new YahooSessionException("Failed to load yahoo finance home page, response code: " + response.code());
       }
     } catch (IOException e) {
-      throw new YahooSessionException("Failed to load yahoo finance home page");
+      throw new YahooSessionException("Failed to load yahoo finance home page", e);
     }
   }
 
   private CompletableFuture<Void> getHomePageAsync() {
     CompletableFuture<Void> future = new CompletableFuture<>();
     Request yahooRequest = YahooRequestFactory.createYahooRequest(HOME_URL);
-
     YahooCallback<Void> callback = new YahooCallback<>(
             future,
-            response -> null, // No response processing needed, just success
+            response -> null,
             "Load Yahoo Finance home page"
     );
-
     client.newCall(yahooRequest).enqueue(callback);
     return future;
   }
@@ -118,14 +142,13 @@ public class YahooSession {
       }
       return response.body() != null ? response.body().string().replace("\"", "") : "";
     } catch (IOException e) {
-      throw new YahooSessionException("Failed to retrieve crumb");
+      throw new YahooSessionException("Failed to retrieve crumb", e);
     }
   }
 
   private CompletableFuture<String> retrieveCrumbAsync() {
     CompletableFuture<String> future = new CompletableFuture<>();
     Request crumbRequest = YahooRequestFactory.createYahooRequest(CRUMB_URL);
-
     YahooCallback<String> callback = new YahooCallback<>(
             future,
             response -> {
@@ -137,7 +160,6 @@ public class YahooSession {
             },
             "Retrieve crumb"
     );
-
     client.newCall(crumbRequest).enqueue(callback);
     return future;
   }
