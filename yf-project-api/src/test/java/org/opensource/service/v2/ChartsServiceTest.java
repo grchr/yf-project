@@ -4,7 +4,10 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.junit.jupiter.api.Test;
 import org.opensource.exceptions.YahooServiceException;
+import org.opensource.exceptions.YahooSessionException;
 import org.opensource.model.response.charts.YahooEventChart;
+import org.opensource.model.web.YahooSession;
+import org.opensource.model.web.YahooSessionFactory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -48,8 +51,9 @@ public class ChartsServiceTest {
   }
 
   @Test
-  void chartServiceTestSequentialRequestsDataInjection() throws YahooServiceException {
-    ChartsService chartService = new ChartsService();
+  void chartServiceTestSequentialRequestsDataInjection() throws YahooServiceException, YahooSessionException {
+    YahooSession session = YahooSessionFactory.getYahooSession();
+    ChartsService chartService = new ChartsService(session);
     YahooEventChart aapl = chartService.execute("AAPL");
     assertEquals(1, aapl.getChart().getResult().size());
     assertTrue(CollectionUtils.isNotEmpty(aapl.getChart().getResult().get(0).getTimestamp()));
@@ -57,29 +61,28 @@ public class ChartsServiceTest {
     assertNotNull(aapl.getChart().getResult().get(0).getMeta());
     assertTrue(MapUtils.isNotEmpty(aapl.getChart().getResult().get(0).getEvents().getDividends()));
     assertTrue(MapUtils.isNotEmpty(aapl.getChart().getResult().get(0).getEvents().getSplits()));
-    String applCrumb = chartService.getLastUsedCrumb();
     System.out.println(aapl);
-    ChartsService msftService = new ChartsService();
-    YahooEventChart msft = msftService.execute("MSFT");
+    String crumbAfterAapl = session.crumb();
+    YahooEventChart msft = chartService.execute("MSFT");
     assertEquals(1, msft.getChart().getResult().size());
     assertTrue(CollectionUtils.isNotEmpty(msft.getChart().getResult().get(0).getTimestamp()));
     assertNotNull(msft.getChart().getResult().get(0).getIndicators());
     assertNotNull(msft.getChart().getResult().get(0).getMeta());
     assertTrue(MapUtils.isNotEmpty(msft.getChart().getResult().get(0).getEvents().getDividends()));
     assertTrue(MapUtils.isNotEmpty(msft.getChart().getResult().get(0).getEvents().getSplits()));
-    String msftCrumb = msftService.getLastUsedCrumb();
-    assertNotEquals(applCrumb, msftCrumb);
     System.out.println(msft);
-    ChartsService injectedChartService = new ChartsService(msftService.getClient(), msftService.getLastUsedCrumb());
-    YahooEventChart googl = injectedChartService.execute("GOOGL");
-    assertEquals(1, googl.getChart().getResult().size());
-    assertTrue(CollectionUtils.isNotEmpty(googl.getChart().getResult().get(0).getTimestamp()));
-    assertNotNull(googl.getChart().getResult().get(0).getIndicators());
-    assertNotNull(googl.getChart().getResult().get(0).getMeta());
-    assertTrue(MapUtils.isNotEmpty(googl.getChart().getResult().get(0).getEvents().getDividends()));
-    assertTrue(MapUtils.isNotEmpty(googl.getChart().getResult().get(0).getEvents().getSplits()));
-    String googlCrumb = injectedChartService.getLastUsedCrumb();
-    assertEquals(msftCrumb, googlCrumb);
-    System.out.println(googl);
+    String crumbAfterMsft = session.crumb();
+    assertEquals(crumbAfterAapl, crumbAfterMsft);
+    YahooSession newSession = YahooSessionFactory.getYahooSession();
+    ChartsService chartServiceNewSession = new ChartsService(newSession);
+    YahooEventChart bnp = chartServiceNewSession.execute("BNP.PA");
+    assertEquals(1, bnp.getChart().getResult().size());
+    assertTrue(CollectionUtils.isNotEmpty(bnp.getChart().getResult().get(0).getTimestamp()));
+    assertNotNull(bnp.getChart().getResult().get(0).getIndicators());
+    assertNotNull(bnp.getChart().getResult().get(0).getMeta());
+    assertTrue(MapUtils.isNotEmpty(bnp.getChart().getResult().get(0).getEvents().getDividends()));
+    assertTrue(MapUtils.isNotEmpty(bnp.getChart().getResult().get(0).getEvents().getSplits()));
+    System.out.println(bnp);
+    assertNotEquals(newSession.crumb(), crumbAfterMsft);
   }
 }

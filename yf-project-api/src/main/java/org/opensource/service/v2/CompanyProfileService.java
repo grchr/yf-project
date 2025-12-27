@@ -4,7 +4,11 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.opensource.exceptions.YahooServiceException;
+import org.opensource.exceptions.YahooSessionException;
 import org.opensource.model.response.profile.YahooCompanyProfile;
+import org.opensource.model.web.YahooRequestFactory;
+import org.opensource.model.web.YahooSession;
+import org.opensource.model.web.YahooSessionFactory;
 import org.opensource.service.IYahooEndpointServiceExecutable;
 
 import java.io.IOException;
@@ -15,25 +19,27 @@ public class CompanyProfileService extends YahooServiceSync<YahooCompanyProfile>
     super();
   }
 
-  public CompanyProfileService(OkHttpClient client, String lastUsedCrumb) {
-    super(client, lastUsedCrumb);
+  public CompanyProfileService(YahooSession session) {
+    super(session);
   }
 
   @Override
   public YahooCompanyProfile execute(String ticker) throws YahooServiceException {
 
     try {
-      // Get crumb (cookies captured here)
-      lastUsedCrumb = getCrumb();
-      // Use crumb + cookies
-      String url = prepareUrl(ticker, lastUsedCrumb);
-      Request request = buildRequest(url);
+      if (this.session == null) {
+        this.session = YahooSessionFactory.getYahooSession();
+      }
+      String url = prepareUrl(ticker, session.crumb());
+      Request request = YahooRequestFactory.createYahooRequest(url);
 
-      try (Response response = client.newCall(request).execute()) {
+      try (Response response = session.client().newCall(request).execute()) {
         return getResult(response, YahooCompanyProfile.class);
       }
     } catch (IOException e) {
       throw new YahooServiceException("Failed to retrieve data for ticker: " + ticker);
+    } catch (YahooSessionException e) {
+      throw new YahooServiceException("Failed to retrieve crumb from session for ticker: " + ticker);
     }
   }
 

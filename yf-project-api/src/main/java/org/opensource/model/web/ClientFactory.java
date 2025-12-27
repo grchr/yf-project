@@ -1,4 +1,4 @@
-package org.opensource.service.v2.utils;
+package org.opensource.model.web;
 
 import okhttp3.OkHttpClient;
 import org.opensource.model.web.YahooCookieJar;

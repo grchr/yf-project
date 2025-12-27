@@ -3,10 +3,8 @@ package org.opensource.model.web;
 import okhttp3.Cookie;
 import okhttp3.CookieJar;
 import okhttp3.HttpUrl;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,5 +31,9 @@ public class YahooCookieJar implements CookieJar {
       }
     }
     return valid;
+  }
+
+  public void clear() {
+    cookies.clear();
   }
 }
