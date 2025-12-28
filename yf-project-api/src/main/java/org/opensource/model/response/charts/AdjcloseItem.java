@@ -6,9 +6,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class AdjcloseItem{
 
 	@JsonProperty("adjclose")
-	private List<Object> adjclose;
+	private List<Double> adjclose;
 
-	public List<Object> getAdjclose(){
+	public List<Double> getAdjclose(){
 		return adjclose;
 	}
 
