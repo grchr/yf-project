@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.github.grchr</groupId>
         <artifactId>yf-project</artifactId>
-        <version>0.0.13</version>
+        <version>0.0.14</version>
     </parent>
 
     <artifactId>yf-project-bom</artifactId>

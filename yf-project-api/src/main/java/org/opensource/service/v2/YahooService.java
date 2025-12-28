@@ -9,7 +9,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * Abstract base class for Yahoo service implementations.
  * It is based on the OkHttpClient.
- * TODO: Create async version, put in place fallback executions for switching urls, add supermodel and superservice
+ * TODO: Consider moving v1 in different release folder, put in place fallback executions for switching urls
  * @param <T> the type of Yahoo response
  */
 public abstract class YahooService<T extends IYahooResponse> {

@@ -19,7 +19,7 @@ details on your rights to use the actual data downloaded.**
 **yf-project** offers a way to download market data from [Yahoo!Ⓡ finance](https://finance.yahoo.com) in your Java project.
 It offers synchronous and asynchronous methods. It is split in 2 modules: yf-project-app and yf-project-api.
 The yf-project-app is based on retrieving data from the yahoo finance web page via targeted field reading. It offers access to current values (key statistics and trading information, cash flows, balance sheets, income statements) as well as TTM values in some cases. It will probably not be maintained in the future.
-The yf-project-api is based on retrieving data from the yahoo finance api endpoints. It contains more raw data, including historical data. Async support to be added.
+The yf-project-api is based on retrieving data from the yahoo finance api endpoints. It contains more raw data, including historical data.
 
 To use the yf-project-app in your project add the dependency using the bom set up:
 ```xml
@@ -28,7 +28,7 @@ To use the yf-project-app in your project add the dependency using the bom set u
             <dependency>
                 <groupId>com.github.grchr</groupId>
                 <artifactId>yf-project-bom</artifactId>
-                <version>0.0.13</version>
+                <version>0.0.14</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -51,7 +51,7 @@ To use the yf-project-api in your project add the dependency using the bom set u
             <dependency>
                 <groupId>com.github.grchr</groupId>
                 <artifactId>yf-project-bom</artifactId>
-                <version>0.0.13</version>
+                <version>0.0.14</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
