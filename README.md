@@ -28,7 +28,7 @@ To use the yf-project-app in your project add the dependency using the bom set u
             <dependency>
                 <groupId>com.github.grchr</groupId>
                 <artifactId>yf-project-bom</artifactId>
-                <version>0.0.14</version>
+                <version>0.0.15</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -51,7 +51,7 @@ To use the yf-project-api in your project add the dependency using the bom set u
             <dependency>
                 <groupId>com.github.grchr</groupId>
                 <artifactId>yf-project-bom</artifactId>
-                <version>0.0.14</version>
+                <version>0.0.15</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
