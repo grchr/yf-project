@@ -7,7 +7,7 @@ import java.util.Random;
 public class TestUtils {
 
   public static String getRandomStockToTest() {
-    List<String> stockSymbols = Arrays.asList("AAPL", "ADBE", "TSLA", "MSFT", "NVDA", "AME", "C", "IBM");
+    List<String> stockSymbols = Arrays.asList("AAPL", "ADBE", "TSLA", "MSFT", "NVDA", "AME", "BNP.PA", "IBM");
 
     // Generate a random index based on the size of the list
     Random random = new Random();
